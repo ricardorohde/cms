@@ -1280,7 +1280,7 @@ function loadURL(url, container) {
             //console.log("ajax request successful")
         },
         error: function(xhr, ajaxOptions, thrownError) {
-            container.html('<h4 class="ajax-loading-error"><i class="fa fa-warning txt-color-orangeDark"></i> Error 404! Page not found.</h4>');
+            container.html('<h4 class="ajax-loading-error"><i class="fa fa-warning txt-color-orangeDark"></i> Erro 404! Página não encontrada.</h4>');
             drawBreadCrumb();
         },
         async: false

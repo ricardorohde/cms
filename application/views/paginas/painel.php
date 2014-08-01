@@ -29,7 +29,7 @@
     <nav>
         <ul>
             <li>
-                <a href="index.php?/contato" title="Mensagens">
+                <a href="index.php?/contato/contato" title="Mensagens">
                     <i class="fa fa-lg fa-fw fa-inbox"></i>  
                     <span class="menu-item-parent">Mensagens</span>
                     <span class="badge pull-right inbox-badge">14</span>

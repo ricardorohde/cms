@@ -30,6 +30,7 @@
     <body class="smart-style-2 menu-on-top">
         <?php $this->load->view('/paginas/' . $view); ?>
 
+        <script src="./js/ajax.js"></script>
         <script src="./js/libs/jquery-2.0.2.min.js"></script>
         <script src="./js/libs/jquery-ui-1.10.3.min.js"></script>
         <script src="./js/plugin/colorpicker/bootstrap-colorpicker.min.js"></script>
