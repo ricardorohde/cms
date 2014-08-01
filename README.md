@@ -18,4 +18,4 @@ Dentre as funções:
 * Cadastro e edição de diretores e diretorias
 * Envio de email para responder às questões levantadas via site
 
-Para mais informações, envie um email para <fale_com_lopez@hotmail.com>
+Para mais informações, envie um email para fale_com_lopez@hotmail.com
