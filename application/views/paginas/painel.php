@@ -26,20 +26,12 @@
 
 <!-- Barra lateral, onde contém o nome do usuário logado e os links -->
 <aside id="left-panel">
-    <div class="login-info">
-        <span>
-            <img src="img/avatars/avatar.png" alt="Eu" title="<?php echo $nome_usuario ?>" class="online" />
-            <a href="javascript:void(0);" id="show-shortcut">
-                <?php echo $nome_usuario; ?>
-            </a>
-        </span>
-    </div>
     <nav>
         <ul>
-            <li id="inbox">
-                <a href="index.php?/contato" title="Caixa de Entrada">
+            <li>
+                <a href="index.php?/contato" title="Mensagens">
                     <i class="fa fa-lg fa-fw fa-inbox"></i>  
-                    <span class="menu-item-parent">Caixa de Entrada</span>
+                    <span class="menu-item-parent">Mensagens</span>
                     <span class="badge pull-right inbox-badge">14</span>
                 </a>
             </li>
@@ -56,13 +48,15 @@
                     </li>
                     <li>
                         <a href="index.php?/noticias/nova_noticia" title="Nova notícia">
-                            <i class="fam-add"></i> Nova Notícia</a>
+                            <i class="fam-add"></i> Nova Notícia
+                        </a>
                     </li>
                 </ul>
             </li>
             <li>
                 <a href="#" title="Avisos">
-                    <i class="fa fa-lg fa-fw fa-clipboard"></i> Avisos
+                    <i class="fa fa-lg fa-fw fa-clipboard"></i> 
+                    <span class="menu-item-parent">Avisos</span>
                 </a>
                 <ul>
                     <li id="novo_aviso">
@@ -72,7 +66,7 @@
                     </li>
                     <li id="avisos_cadastrados">
                         <a href="index.php?/avisos/avisos_cadastrados" title="Avisos Cadastrados">
-                          <i class="fam-newspaper"></i> Avisos Cadastrados  
+                            <i class="fam-newspaper"></i> Avisos Cadastrados  
                         </a>
                     </li>
                 </ul>
@@ -85,17 +79,20 @@
             </li>
             <li id="calendario">
                 <a href="index.php?/calendario" title="Calendário de Eventos">
-                    <i class="fa fa-lg fa-fw fa-calendar-o"></i>  <span class="menu-item-parent">Calendário</span>
+                    <i class="fa fa-lg fa-fw fa-calendar-o"></i> 
+                    <span class="menu-item-parent">Calendário</span>
                 </a>
             </li>
             <li id="temas">
                 <a href="index.php?/temas" title="Temas do Site">
-                    <i class="fa fa-lg fa-fw fa-desktop"></i>  <span class="menu-item-parent">Temas do Site</span>
+                    <i class="fa fa-lg fa-fw fa-desktop"></i> 
+                    <span class="menu-item-parent">Temas do Site</span>
                 </a>
             </li>
             <li id="mensagem_dia">
                 <a href="index.php?/mensagem_diaria" title="Mensagem do dia">
-                    <i class="fa fa-lg fa-fw fa-file-text-o"></i> Mensagem do Dia
+                    <i class="fa fa-lg fa-fw fa-file-text-o"></i> 
+                    <span class="menu-item-parent">Mensagem do Dia</span>
                 </a>
             </li>
             <li>
@@ -125,12 +122,14 @@
             </li>
             <li>
                 <a href="#">
-                    <i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Meu Perfil</span>
+                    <i class="fa fa-lg fa-fw fa-user"></i> 
+                    <span class="menu-item-parent">Meu Perfil</span>
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <i class="fa fa-lg fa-fw fa-cogs"></i>  <span class="menu-item-parent">Configurações</span>
+                    <i class="fa fa-lg fa-fw fa-cogs"></i> 
+                    <span class="menu-item-parent">Configurações</span>
                 </a>
                 <ul>
                     <li>
@@ -171,8 +170,7 @@
 
     <!-- Montagem do breadcrumb, onde aparecerá a página onde o usuário está -->
     <div id="ribbon">
-        <ol class="breadcrumb">
-        </ol>
+        <ol class="breadcrumb"></ol>
     </div>
     <!--*********************************************************************-->
 
@@ -180,4 +178,12 @@
     <div id="content">
     </div>
     <!-- Fim da inserção do conteúdo -->
+</div>
+<div class="page-footer">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <span class="txt-color-white">Sistema de Gerência de Conteúdo - Clube Campestre Pentáurea 2014</span>
+        </div>
+    </div>
+    <!-- end row -->
 </div>

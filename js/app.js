@@ -32,8 +32,8 @@ $(document).ready(function() {
         $.anchor_nav.jarvismenu({
             accordion: true,
             speed: $.menu_speed,
-            closedSign: '[+]',
-            openedSign: '[-]'
+            closedSign: '',
+            openedSign: ''
         });
     } else {
         alert("Error - menu anchor does not exist");
@@ -1280,9 +1280,7 @@ function loadURL(url, container) {
             //console.log("ajax request successful")
         },
         error: function(xhr, ajaxOptions, thrownError) {
-            container.html('<h4 style="margin-top:10px; display:block; text-align:left"><i class="fa fa-warning txt-color-orangeDark"></i> Error 404! Page not found.</h4>');
-            //container.hide().html('<h1><i class="fa fa-cog fa-spin"></i> Loading...</h1>').load("ajax/error404.html").fadeIn('slow');
-
+            container.html('<h4 class="ajax-loading-error"><i class="fa fa-warning txt-color-orangeDark"></i> Error 404! Page not found.</h4>');
             drawBreadCrumb();
         },
         async: false
@@ -1297,7 +1295,7 @@ function drawBreadCrumb() {
     $("#ribbon ol.breadcrumb").empty();
     $("#ribbon ol.breadcrumb").append($("<li><i class='fa fa-lg fa-fw fa-home'></i> Início</li>"));
     $('nav li.active > a').each(function() {
-        $("#ribbon ol.breadcrumb").append($("<li></li>").html($.trim($(this).clone().children(".badge").remove().end().html())));
+        $("#ribbon ol.breadcrumb").append($("<li></li>").html($.trim($(this).clone().children(".badge").remove().end().text())));
     });
 
     //console.log("breadcrumb created");

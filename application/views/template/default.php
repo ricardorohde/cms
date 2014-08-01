@@ -8,19 +8,14 @@
         <meta name="MobileOptimized" content="320">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="./css/colorpicker.css">
         <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/jarvis-widgets.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/smart-forms.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/animated.css">
-
-        <link rel="stylesheet" type="text/css" media="screen" href="css/TableTools.css">
-
-        <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui-1.10.3.custom.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/notifications.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/colorpallet.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="css/icones.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css">
+        <link rel="stylesheet" type="text/css" href="./css/colorpicker.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/TableTools.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui-1.10.3.custom.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/colorpallet.css">
         <link rel="stylesheet" type="text/css" media="screen" href="./js/alertify/alertify.core.css">
         <link rel="stylesheet" type="text/css" media="screen" href="./js/alertify/alertify.default.css">
         <link rel="stylesheet" type="text/css" media="all" href="./js/fancybox/jquery.fancybox.css" />
@@ -32,7 +27,7 @@
             }
         </style>
     </head>
-    <body class="no-right-panel">
+    <body class="smart-style-2 menu-on-top">
         <?php $this->load->view('/paginas/' . $view); ?>
 
         <script src="./js/libs/jquery-2.0.2.min.js"></script>
