@@ -1,0 +1,434 @@
+/****************************************************************************************************************************************************
+ *	LISTAS
+ ****************************************************************************************************************************************************/
+ .lst-passo-a-passo .last-button {max-width: 260px;}
+
+.lst-tp1 li {background:url("/portal/layout/imagens/geral/bgr-sprint-list.png") 0px 0px no-repeat;padding-left:21px;padding-bottom:10px}
+.lst-tp2 {width:710px}
+.lst-tp2 > li {padding-top:23px;margin-top:21px;background:url("/portal/layout/imagens/geral/bgr-horizontal-dott.png") top left repeat-x}
+.lst-tp2 > li:first-child {padding-top:0px;margin-top:0;background:none}
+.lst-tp2 .sep-content:before, 
+.lst-tp2 .sep-content:after {content:""; display:table}
+.lst-tp2 .sep-content:after {clear:both}
+.lst-tp2 .sep-content {zoom:1;background:url("/portal/layout/imagens/geral/bgr-vertical-dott.png") 501px 0px repeat-y}
+.lst-tp2 li .sep-content .content-tp1 .ttl-tp3 {padding-bottom:13px;width:360px;margin-top: -4px;float: left}
+.lst-tp2 li .sep-content .content-tp2 .lnk-tp1 {float: right;margin-right:10px}
+.lst-tp2 li .sep-content .content-tp1 .lst-tp1 {width:360px;float: left}
+.lst-tp2 li .sep-content .content-tp1 img {float: left}
+.lst-tp2 li img {margin-right:20px}
+.lst-tp2 li .content-tp1 {width:500px;float: left}
+.lst-tp2 li .content-tp2 {width:205px;float: right}
+.lst-tp2 li .content-tp2 span {margin-bottom:15px}
+
+.lnk-ext {background-image:url("/portal/layout/imagens/geral/ico-ext.png"); background-repeat:no-repeat; color:#00539F; cursor:pointer; display:inline-block; font-size:13px; line-height:18px; margin-top:10px; padding-left:33px; text-decoration:none}
+.lnk-ext:first-child {margin-top:0}
+.lnk-ext small {color:#4D4E53; display:inline-block; font-size:12px}
+.lnk-ext span {font-size:13px;display:block}
+.lnk-ext:hover {text-decoration:none}
+.lnk-ext:hover span {text-decoration:underline}
+.lnk-ext.lnk-ext-exe {background-position:0 0}
+.lnk-ext.lnk-ext-zip {background-position:-700px 0}
+.lnk-ext.lnk-ext-pdf {background-position:-1400px 0}
+.lnk-ext.lnk-ext-msi {background-position:-2100px 0}
+.lnk-ext.lnk-ext-jpg {background-position:-2800px 0}
+.lstLnk li{margin:0 0 13px 40px}
+.lst-dados .cl {clear:both}
+.lst-dados-titulo {float:left;clear:left;text-align:right;font:bold 1em Arial; padding-top:16px; width:180px}
+.lst-dados-titulo ul {width:210px}
+.lst-dados .ano {text-align:right;font-size:20px;width:180px;margin-top:32px;height:23px;display: block;}
+.lst-dados-cont {float:left;padding:16px 0 0 40px;width:460px}
+.lst-dados li:first-child {margin-top:0}
+.expansivel-tp1-content hr {border-width:1px 0 0;clear:both;display:block;height:1px;width:100%;border-style:dotted;margin-bottom:40px}
+.expansivel-tp1-content p.before-btn {float: left; width:460px}
+.expansivel-tp1-content ul.before-btn {float: left; width:445px}
+.expansivel-tp1-content .btn-cont {float:right;width:210px;padding-left:40px}
+.lst-info-tp1,
+.lst-info-tp2 {margin:0 0 0 5px; padding:0 0 0 10px}
+.lst-info-tp1 li:first-child,
+.lst-info-tp2 li:first-child {margin-top:15px}
+.lst-info-tp1 li,
+.lst-info-tp2 li {margin-top:11px; list-style:disc outside none}
+.lst-info-tp1 ul {padding-left:15px}
+.lst-info-tp2 {color:#4d4e53; font-size:0.846em}
+.lst-bullet-tp1 {margin:0; padding:0}
+.lst-bullet-tp1 li {float:left; list-style:none}
+.lst-bullet-tp1 a {background-image:url("../img/sprite-top-footer.png"); background-position:-662px -124px; height:17px; float:left; text-indent:-9999px; width:17px}
+.lt-ie8 .lst-bullet-tp1 a {line-height:0; text-indent:0}
+.lst-bullet-tp1 a:hover {background-position:-645px -124px}
+.lst-bullet-tp1 .lst-bullet-tp1-active a {background-position:-628px -124px}
+.lst-bullet-tp2 > li {background: url("/wsTrabalheConosco/imagens/bullets.png") 0 3px no-repeat; margin-top:10px; padding-left:20px}
+.lst-bullet-materia1 > li {background: url("/wsTrabalheConosco/imagens/bullets.png") 340px 3px no-repeat; margin-top:10px; padding-left:20px}
+.lst-bullet-tp2 > li a {text-decoration:underline}
+.lst-bullet-tp2 > li .btn a {text-decoration:none}
+.lst-bullet-tp3 > li {font-weight:bold; margin-top:14px}
+.lst-bullet-tp3 > li ul {margin-left:20px}
+.lst-bullet-tp3 > li {font-weight:normal}
+.lst-bullet-tp3 > li:first-child {margin-top:0}
+ul .lst-bullet-tp3 > li:first-child {margin-top:14px}
+.lst-cards li {padding-left:23px;padding-bottom:20px;float:left}
+.lst-cards li:first-child {padding-left:0px}
+.lst-cards li a {text-decoration: none}
+.lst-cards li .lnk:hover {text-decoration: underline; color:#FFF}
+.lst-cards.last li {padding-bottom:0px}
+.lst-cards2{margin-left:-23px}
+.lst-cards2 li {padding:0 0 20px 23px;float:left}
+.lst-cards2 li a {text-decoration: none}
+.lst-cards2 li .lnk:hover * {text-decoration: underline !important; color:#FFF}
+.lst-tp3 {background:url("/portal/layout/imagens/geral/bgr-horizontal-dott.png") bottom left repeat-x;padding-top:16px;margin-bottom:10px}
+.lst-tp3 li {float:left;width:146px;padding-right:30px;padding-bottom:30px}
+.lst-tp3 li strong {display:block;padding-bottom:3px}
+.lst-tp5 {margin:-17px 0 0 -40px}
+.lst-tp5 > li {width:315px;float:left;margin:17px 0 0 40px}
+.lst-box-tp18 {margin:-40px 0 0 -40px}
+.lst-box-tp18 > li {width:210px;float:left;margin:40px 0 0 40px}
+.lst-chk-filtros li {width: 210px; float:left; margin-left:40px}
+.lst-chk-filtros li:first-child {margin-left:0}
+.chk-filtroA {text-align:left}
+.chk-filtroB {text-align:center}
+.chk-filtroC {text-align:right}
+.chk-filtro-aux {margin-top: 30px;margin-bottom: 25px}
+.chk-filtro {display:inline-block!important; height:23px!important; padding-left:18px!important; background:url("/wsTrabalheConosco/imagens/bg-chk-filtro.png") no-repeat 0 3px}
+.chk-filtro:hover {background-position:0 -41px}
+.chk-filtro.ativo {background-position:0 -19px}
+.chk-filtro input {display:none}
+.chk-filtro label {color:#393939;line-height:25px}
+.visualizacao {height:30px;text-align:right;width:100%;padding-top:16px;background:url("/portal/layout/imagens/geral/bg-expansivel-top.png") no-repeat center top}
+.visualizacao.border-bottom {padding:0 0 21px;background:url("/portal/layout/imagens/geral/bg-expansivel-top.png") no-repeat center bottom}
+.visualizacao li {float:right;display:inline-block;height:30px;font-size:13px;width:auto}
+.visualizacao li.label {padding-right:8px;line-height:27px;vertical-align:middle}
+.visualizacao .toggle-view input {display:none}
+.visualizacao .btn-view {background:transparent url("/wsTrabalheConosco/imagens/btn-toggle-visualizacao.png") no-repeat; width:34px; height:29px; border:none}
+.visualizacao .btn-view-box {background-position:0 0}
+.visualizacao .btn-view-box:hover {background-position:0 -60px}
+.visualizacao .btn-view-box.ativo {background-position:0 -30px}
+.visualizacao .btn-view-lista {background-position:right -30px}
+.visualizacao .btn-view-lista:hover {background-position:right -60px}
+.visualizacao .btn-view-lista.ativo {background-position:right 0}
+.visualizacao .btn-view-lista-first {background-position:left -90px}
+.visualizacao .btn-view-lista-first:hover {background-position:left -150px}
+.visualizacao .btn-view-lista-first.ativo {background-position:left -120px}
+.visualizacao .btn-view-calendar {background-position:right -120px}
+.visualizacao .btn-view-calendar:hover {background-position:right -150px}
+.visualizacao .btn-view-calendar.ativo {background-position:right -90px}
+#view-box ul.conteudo-2 {margin:-38px 0 0 -36px}
+#view-box ul.conteudo-2 > li {margin:38px 0 0 36px}
+.conteudo-6{float: left;width: 100%}
+.conteudo-6 .lstCol{width:163px;margin-left: 19px;float: left}
+.conteudo-6 .lstCol:first-child{margin-left:0px}
+.conteudo-6 .lstHeader{padding: 0 20px 10px 0;height: 45px;background:url("/portal/layout/imagens/geral/seta-passos.png") no-repeat right bottom}
+.conteudo-6 .lstHeaderLast {background:none;border-bottom:1px solid #bfbfbf}
+.conteudo-6 .lstHeader strong{
+	float: left;
+	margin-right: 10px;
+	font-size: 42px;
+	font-weight: normal!important;
+	display: inline-block;
+	color: #cc092f;
+}
+.conteudo-6 .lstHeader span{padding-top:12px;display: inline-block}		
+.conteudo-6 .itemChk{background: url("/portal/layout/imagens/geral/bgr-sprint-list.png") no-repeat scroll 0 19px transparent; padding: 15px 0 0 20px}
+.box-content-line{width:670px}
+.box-content-line .cont-line{width:314px;float:left}
+.box-content-line .cont-line:first-child{padding-right:40px!important}
+.box-content-line span{display:block}
+.box-content-line .clearfix{padding-top:41px;margin-top:35px}
+.box-content-line .clearfix:first-child{padding-top:0;margin-top:0}
+.lst-duvidas h3{font-size:13px;font-weight:400}
+.lst-duvidas ul{margin-top:5px; }
+.lst-duvidas ul li input{line-height: normal;margin:3px 0 0 0}
+.lst-duvidas span {padding-left:10px}
+.lst-info-cards {display:block}
+.lst-info-cards li, .lst-info-cards img, .lst-info-cards p {float:left}
+.lst-info-cards li {padding: 0 0 0 20px}
+.lst-info-cards li:first-child {padding:0}
+.lst-info-cards p {padding: 0 0 0 10px}
+.lst-tp6 li {border-bottom: 1px dotted #BFBFBF;padding: 18px 0 20px;display: block;font-size:13px}
+.lt-ie8 .lst-tp6 li{display: inline-block}
+.lst-tp6 a {cursor: pointer;display:block;text-decoration:none;color:#00539F;background: url("/portal/layout/imagens/geral/seta-link2.png") no-repeat right -27px}
+.lst-tp6 li:hover {cursor: pointer}
+.lst-tp6 li:hover a{text-decoration:underline;color:#488AE6}
+.lst-tp6 li.on a {color:#CC092F;font-weight:bold;background-position:right -54px;cursor:pointer}
+.lst-tp62 li {padding: 16px 0 0 0}
+.lst-tp6 span, .lst-tp62 span {font-weight:bold}
+.lst-tp6:hover a {background-position:right -27px}
+.lst-tp6 li:hover a {background-position:right top}
+.lst-tp6 li.on:hover a {background-position:right -54px;text-decoration:none}
+.lst-info-capi {padding-bottom:32px}
+.lst-info-capi li:first-child {margin-right:32px;max-width:300px}
+.lst-info-capi li {float:left;max-width:370px}
+.lst-info-capi span {color:#CC092F;font-weight:bold;font-size:30px}
+.lst-info-capi > li p:first-child {padding: 0}
+
+.lst-calendar-views li {float: left; margin-left: 10px}
+.lst-calendar-views li:first-child {margin-left: 0}
+.lst-calendar-views .btn-tp1 {width: 70px}
+.lst-calendar-views .btn-tp1 a {display: block; text-align: center}
+.lst-calendar-views .btn-tp1.active {background:#EDEDED;border-radius:3px; border-color:#CACACA #E1E1E1 #EDEDED #E1E1E1; border-style:solid; border-width:1px; box-shadow:inset 0 1px 2px #E1E1E1; color:#1F1F1F}
+.lst-calendar-views .btn-tp1.active a {background: transparent}
+.lst-controls-calendar li {float: right; margin-left: 5px}
+.lst-controls-calendar .label-data {display: inline-block; line-height: 24px; padding-right: 5px}
+/* lista de leilões */
+.lst-leiloes-tp1 > li {margin-top: 16px; padding-top: 16px; border-top: 1px dashed #e1e1e1}
+.lst-leiloes-tp1 > li:first-child {margin-top: 0; padding-top: 0; border-top: none}
+.lst-leiloes-tp1 .box-leilao-tp1 {overflow: hidden}
+.lst-leiloes-tp1 .lst-lnks {padding-top: 16px}
+.lst-leiloes-tp1 .lst-lnks > li {float: left; margin-left: 40px}
+.lst-leiloes-tp1 .lst-lnks > li:first-child {margin-left: 0}
+.lst-leiloes-tp1 .lnk-img {float: left; margin-right: 20px}
+.lst-leiloes {border-bottom:1px solid #BFBFBF}
+.lst-leiloes .lst-leiloes-img {float:left; margin-right:10px}
+.lst-leiloes .lst-leiloes-content {overflow:hidden}
+.lst-leiloes .lst-leiloes-title {text-transform:uppercase}
+.lst-leiloes li {border-top:1px dashed #BFBFBF; padding:16px 0; zoom:1}
+.lst-leiloes li:first-child {padding-top:0; border:0}
+/* lista de leilões */
+.barra-lnks-noticia {padding-top:32px; border-top:1px dashed #BFBFBF}
+.barra-lnks-noticia .lstUtil {float: left; margin-left: 0}
+.barra-lnks-noticia .arquivo-noticia {width:360px; float: left; margin: 0 40px}
+.barra-lnks-noticia .lst-share {float: right}
+.lt-ie9 .box-modal .barra-lnks-noticia .lst-share {position:relative}
+.lst-num-tp2 .infoNum:first-child{margin-top:0px}
+.lst-num-tp2 .infoNum{margin-top: 16px}
+.lst-num-tp2 .numberA{font-size: 21px;font-weight: bold}
+.lst-num-tp2 .numberB{font-size: 18px}
+.lst-info-tp1 li:first-child,
+.lst-info-tp2 li:first-child {margin-top:13px}
+.lst-info-tp1 li,
+.lst-info-tp2 li {margin-top:11px}
+.lst-bullet-tp2 > li {margin-top:14px}
+/* Lista de links */
+.lst-links li {margin-top:14px;background:none !important}
+.lst-links li:first-child {margin-top:0px}
+.lst-links li a {color:#00539F; text-decoration:none;font-size:1em}
+.lst-links li a:hover {color:#488AE6; text-decoration:underline;}
+.lst-links li .lnk-tp1:hover{text-decoration: underline}
+/* Lista de Imagens (Novo padrão) */
+.lst-image-tp2 > li {*zoom: 1;background:url("/portal/layout/imagens/geral/bgr-horizontal-dott.png") bottom left repeat-x; padding:16px 0 18px}
+.lst-image-tp2 > li:first-child {padding-top:0}
+.lst-image-tp2 .lst-image-tp2-image {float:left; margin-right:20px}
+.lst-image-tp2 .lst-image-tp2-content {overflow:hidden}
+.lst-image-tp2 .lst-image-tp2-action {margin-top:14px}
+.lst-image-tp2 .lst-image-tp2-descriptions {float:left; padding-right:20px; width:340px}
+.lst-image-tp2 .lst-image-tp2-actions {float:right; text-align:right; width:190px}
+.lst-image-tp2 .lst-image-tp2-actions > div {background:url("/portal/layout/imagens/geral/bgr-vertical-dott.png") top left repeat-y; height:80px; min-height:80px}
+.lst-image-tp2 .lst-image-tp2-actions > div > div {margin-left:20px; width:auto}
+.lst-image-tp2 .lst-image-tp2-actions .btn,
+.lst-image-tp2 .lst-image-tp2-actions .lnk-tp1 {margin-top:16px}
+.lst-image-tp2 .lst-image-tp2-actions .lnk-tp1 {margin-right:9px}
+.lst-image-tp2 .lst-image-tp2-actions .btn:first-child,
+.lst-image-tp2 .lst-image-tp2-actions .lnk-tp1:first-child,
+.lt-ie9 .lst-image-tp2 .lst-image-tp2-actions :first-child + .btn {margin-top:0}
+.lst-image-tp2 .lst-image-tp2-descriptions p:first-child {padding-top:0}
+.lst-image-tp2 .lst-image-tp2-descriptions .lst-bullet-tp2 li:first-child {margin-top:0}
+.lst-steps li {background:url("../img/bgr-lst-steps.png") 100% 100% no-repeat; color:#BFBFBF; float:left; min-height:50px; position:relative; overflow:hidden}
+.lst-steps li strong {color:#BFBFBF; font:italic 42px/44px Georgia, "serif"; left:1px; position:absolute; top:-3px}
+.lst-steps li > div {height:46px; min-height:46px; margin-left:36px; padding-right:18px;font-size:13px}
+.lst-steps.lst-steps-5 li {margin-left:18px; width:127px}
+.lst-steps.lst-steps-5 li:first-child {width:130px}
+.lst-steps.lst-steps-5 li > div {width:72px}
+.lst-steps.lst-steps-4 li {margin-left:18px; width:164px}
+.lst-steps.lst-steps-4 li > div {width:110px}
+.lst-steps.lst-steps-3 li {margin-left:40px; width:210px}
+.lst-steps.lst-steps-3 li > div {width:156px}
+.lst-steps.lst-steps-2 li {margin-left:40px; width:335px}
+.lst-steps.lst-steps-2 li > div {width:281px}
+.lst-steps li:first-child {margin-left:0}
+.lst-steps li.lst-steps-current {color:#393939}
+.lst-steps li.lst-steps-current strong {color:#CC092F}
+.lst-steps.lst-steps-5 li + li + li + li + li,
+.lst-steps.lst-steps-4 li + li + li + li,
+.lst-steps.lst-steps-3 li + li + li,
+.lst-steps.lst-steps-2 li + li,
+.lst-steps li.lst-steps-last {background-position:-18px 100%; padding-right:0}
+.lst-passo-a-passo li h4,
+.lst-passo-a-passo li p {padding-left:32px}
+.lst-passo-a-passo li p {padding-top:6px; max-width:392px; min-height:47px}
+.lst-passo-a-passo li strong {color:#CC092F; font:italic 50px/52px Georgia, "serif"; float:left; position:relative; left:12px; top:-8px}
+.lt-ie8 .lst-passo-a-passo li strong {line-height:58px}
+.lst-passo-a-passo li strong span {font-size:20px}
+.lst-passo-a-passo li ul.nav-buttons {clear:both; padding-top:16px; overflow:hidden}
+.lst-passo-a-passo li ul.nav-buttons li {float:right; margin-left:18px}
+.lst-passo-a-passo .lst-passo-a-passo-fix {float: left; width: 420px;}
+.lst-passo-a-passo .lst-passo-a-passo-fix p{width: 240px; float: left}
+.lst-passo-a-passo .lst-passo-a-passo-fix .btn-tp3 {float: right;margin-top: 10px;}
+.lst-tp4 {margin:0 0 -40px -40px;font-size:13px!important}
+.lst-tp4 > li {margin:0 0 38px 39px; width:195px;}
+.lst-tp4 > li img {float:left; margin-right:15px}
+.lst-tp4 > li .lst-tp4-content {display:block; text-decoration:none}
+.lst-tp4 > li .lst-tp4-content > div {float:left; height:55px; min-height:55px; width:117px}
+.lst-tp4 > li .lst-tp4-content > div p:first-child {margin-top:-2px; padding-top:0}
+.lst-tp4 > li .lst-tp4-content > div strong {display:block}
+.lst-tp4 > li a.lst-tp4-content:hover > div {cursor:pointer; text-decoration:underline}
+.lst-tp4 > li .vertical-align {overflow: hidden;}
+.lst-tp7 {margin-top:16px}
+.lst-tp7 dt {font-weight:bold; margin:0}
+.lst-tp7 dd {margin:0}
+.lst-tp8 {width:710px; overflow:hidden; margin-right:-40px; margin-top:-16px; margin-bottom:-16px}
+.lst-tp8 li {width:335px; border-top:1px dashed #BFBFBF; margin-bottom:16px; margin-left:16px; margin-top:-1px; padding-top:16px; zoom:1}
+.lst-tp8 a img {margin:0 20px; float: left}
+.lst-tp-esp img{ float:left; margin:0 20px}
+.lst-tp8 div {overflow:hidden}
+.lst-modal-at{ padding-bottom:16px;}
+.lst-modal-at li{ float:left; margin-right:10px;}
+.lst-modal-at2{ padding-top:13px;}
+.lst-modal-at2 li{ padding-bottom:5px;}
+/****************************************************************************************************************************************************
+ *	LISTAS
+ ****************************************************************************************************************************************************/
+/**************************************************************************************************************************************************** 
+ *	GRID
+ ****************************************************************************************************************************************************/
+.grid-container {padding-top:16px; width:100%}
+.grid-container2 {padding-top:16px; width:979px}
+.lihnha-cinza {border:solid 1px #cccccc; width:959px; height:0px; margin-top:-2px;}
+.grid-container .grid-row {padding-top:16px}
+.grid-container .grid-row:before, 
+.grid-container .grid-row:after {content:""; display:table}
+.grid-container .grid-row:after {clear:both}
+.grid-container .grid-row {zoom:1}
+.grid-container .grid-a,
+.grid-container .grid-b,
+.grid-container .grid-c,
+.grid-container .grid-d,
+.grid-container .grid-e,
+.grid-container .grid-f{display:inline-block; float:left; margin-left:40px}
+.grid-container .grid-a {width:210px}
+.grid-container .grid-b {width:335px}
+.grid-container .grid-c {width:460px}
+.grid-container .grid-d {width:100%}
+.grid-container .grid-e {margin-left:38px; width:149px}
+.grid-container .grid-f {margin-left:15px; width:168px}
+.grid-container .grid-padding-a {margin-left:250px}
+.grid-container .grid-padding-b {margin-left:375px}
+.grid-container .grid-padding-c {margin-left:500px}
+.grid-container .grid-padding-e {margin-left:76px}
+.box-expandable-tp1 .grid-a {width:196px}
+.box-expandable-tp1 .grid-b {width:315px}
+.box-expandable-tp1 .grid-c {width:430px}
+.box-expandable-tp1 .grid-d {width:670px}
+.box-expandable-tp1 .grid-e {width:139px}
+.expansivel-tp2 .grid-a {width:204px}
+.expansivel-tp2 .grid-b {width:326px}
+.expansivel-tp2 .grid-c {width:450px}
+.expansivel-tp2 .grid-d {width:694px}
+.expansivel-tp2 .grid-e {width:145px}
+.grid-container .grid-row .grid-a:first-child,
+.grid-container .grid-row .grid-b:first-child,
+.grid-container .grid-row .grid-c:first-child,
+.grid-container .grid-row .grid-d:first-child,
+.grid-container .grid-row .grid-e:first-child,
+.grid-container .grid-row .ttl-tp1 + .grid-a,
+.grid-container .grid-row .ttl-tp2 + .grid-a,
+.grid-container .grid-row .ttl-tp3 + .grid-a,
+.grid-container .grid-row .txt-tp1 + .grid-a,
+.grid-container .grid-row .txt-tp2 + .grid-a,
+.grid-container .grid-row .txt-tp3 + .grid-a,
+.grid-container .grid-row .ttl-tp1 + .grid-b,
+.grid-container .grid-row .ttl-tp2 + .grid-b,
+.grid-container .grid-row .ttl-tp3 + .grid-b,
+.grid-container .grid-row .txt-tp1 + .grid-b,
+.grid-container .grid-row .txt-tp2 + .grid-b,
+.grid-container .grid-row .txt-tp3 + .grid-b,
+.grid-container .grid-row .ttl-tp1 + .grid-c,
+.grid-container .grid-row .ttl-tp2 + .grid-c,
+.grid-container .grid-row .ttl-tp3 + .grid-c,
+.grid-container .grid-row .txt-tp1 + .grid-c,
+.grid-container .grid-row .txt-tp2 + .grid-c,
+.grid-container .grid-row .txt-tp3 + .grid-c,
+.grid-container .grid-row .ttl-tp1 + .grid-d,
+.grid-container .grid-row .ttl-tp2 + .grid-d,
+.grid-container .grid-row .ttl-tp3 + .grid-d,
+.grid-container .grid-row .txt-tp1 + .grid-d,
+.grid-container .grid-row .txt-tp2 + .grid-d,
+.grid-container .grid-row .txt-tp3 + .grid-d,
+.grid-container .grid-row .ttl-tp1 + .grid-e,
+.grid-container .grid-row .ttl-tp2 + .grid-e,
+.grid-container .grid-row .ttl-tp3 + .grid-e,
+.grid-container .grid-row .txt-tp1 + .grid-e,
+.grid-container .grid-row .txt-tp2 + .grid-e,
+.grid-container .grid-row .txt-tp3 + .grid-e,
+.grid-container .grid-row .grid-left {clear:left; margin-left:0}
+.grid-container.grid-border,
+.grid-container .grid-row.grid-border {border-bottom:1px solid #BFBFBF; border-top:1px solid #BFBFBF}
+.grid-container.grid-border-top,
+.grid-container .grid-row.grid-border-top {border-top:1px solid #BFBFBF}
+.grid-container.grid-border-bottom,
+.grid-container .grid-row.grid-border-bottom,
+.grid-container .grid-a.grid-border-bottom,
+.grid-container .grid-b.grid-border-bottom,
+.grid-container .grid-c.grid-border-bottom,
+.grid-container .grid-d.grid-border-bottom,
+.grid-container.grid-border-bottom-pb0 {border-bottom:1px solid #BFBFBF}	
+.grid-container.grid-border-dashed-top,
+.grid-container .grid-row.grid-border-dashed-top,
+.grid-container .grid-a.grid-border-dashed-top,
+.grid-container .grid-b.grid-border-dashed-top,
+.grid-container .grid-c.grid-border-dashed-top,
+.grid-container .grid-d.grid-border-dashed-top{border-top:1px dashed #BFBFBF}
+.grid-container.grid-border-dashed-bottom,
+.grid-container .grid-row.grid-border-dashed-bottom,
+.grid-container .grid-a.grid-border-dashed-bottom,
+.grid-container .grid-b.grid-border-dashed-bottom,
+.grid-container .grid-c.grid-border-dashed-bottom,
+.grid-container .grid-d.grid-border-dashed-bottom,
+.grid-container .grid-border-dashed-bottom-pb0 {border-bottom:1px dashed #BFBFBF}
+.grid-container .grid-row.grid-border-bottom,
+.grid-container .grid-row.grid-border-dashed-bottom,
+.grid-container .grid-row.grid-border,
+.grid-container .grid-a.grid-border-dashed-bottom,
+.grid-container .grid-b.grid-border-dashed-bottom,
+.grid-container .grid-c.grid-border-dashed-bottom,
+.grid-container .grid-d.grid-border-dashed-bottom{padding-bottom:16px}
+.grid-container .grid-row.grid-border-top,
+.grid-container .grid-row.grid-border-dashed-top,
+.grid-container .grid-row.grid-border {margin-top:16px}
+.grid-container.grid-border-bottom,
+.grid-container.grid-border-dashed-bottom,
+.grid-container.grid-border {padding-bottom:32px}
+.grid-container.grid-border,
+.grid-container.grid-border-top,
+.grid-container.grid-border-dashed-top{margin-top:32px}
+
+.grid-container .grid-a > p:first-child,
+.grid-container .grid-a > .lst-bullet-tp2:first-child > li:first-child,
+.grid-container .grid-a > .lst-info-tp1:first-child > li:first-child,
+.grid-container .grid-a > .grid-row:first-child,
+.grid-container .grid-b > p:first-child,
+.grid-container .grid-b > .lst-bullet-tp2:first-child > li:first-child,
+.grid-container .grid-b > .lst-info-tp1:first-child > li:first-child,
+.grid-container .grid-b > .grid-row:first-child,
+.grid-container .grid-c > p:first-child,
+.grid-container .grid-c > .lst-bullet-tp2:first-child > li:first-child,
+.grid-container .grid-c > .lst-info-tp1:first-child > li:first-child,
+.grid-container .grid-c > .grid-row:first-child,
+.grid-container .grid-d > p:first-child,
+.grid-container .grid-d > .lst-bullet-tp2:first-child > li:first-child,
+.grid-container .grid-d > .lst-info-tp1:first-child > li:first-child,
+.grid-container .grid-d > .grid-row:first-child,
+.grid-container .grid-e > p:first-child,
+.grid-container .grid-e > .lst-bullet-tp2:first-child > li:first-child,
+.grid-container .grid-e > .lst-info-tp1:first-child > li:first-child,
+.grid-container .grid-e > .grid-row:first-child {margin-top:-2px; padding-top:0}
+
+.lt-ie8 .grid-container .grid-a > p:first-child,
+.lt-ie8 .grid-container .grid-a > .lst-bullet-tp2:first-child > li:first-child,
+.lt-ie8 .grid-container .grid-a > .lst-info-tp1:first-child > li:first-child,
+.lt-ie8 .grid-container .grid-a > .grid-row:first-child,
+.lt-ie8 .grid-container .grid-b > p:first-child,
+.lt-ie8 .grid-container .grid-b > .lst-bullet-tp2:first-child > li:first-child,
+.lt-ie8 .grid-container .grid-b > .lst-info-tp1:first-child > li:first-child,
+.lt-ie8 .grid-container .grid-b > .grid-row:first-child,
+.lt-ie8 .grid-container .grid-c > p:first-child,
+.lt-ie8 .grid-container .grid-c > .lst-bullet-tp2:first-child > li:first-child,
+.lt-ie8 .grid-container .grid-c > .lst-info-tp1:first-child > li:first-child,
+.lt-ie8 .grid-container .grid-c > .grid-row:first-child,
+.lt-ie8 .grid-container .grid-d > p:first-child,
+.lt-ie8 .grid-container .grid-d > .lst-bullet-tp2:first-child > li:first-child,
+.lt-ie8 .grid-container .grid-d > .lst-info-tp1:first-child > li:first-child,
+.lt-ie8 .grid-container .grid-d > .grid-row:first-child,
+.lt-ie8 .grid-container .grid-e > p:first-child,
+.lt-ie8 .grid-container .grid-e > .lst-bullet-tp2:first-child > li:first-child,
+.lt-ie8 .grid-container .grid-e > .lst-info-tp1:first-child > li:first-child,
+.lt-ie8 .grid-container .grid-e > .grid-row:first-child {margin-top:0;}
+
+	
