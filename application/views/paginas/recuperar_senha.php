@@ -1,10 +1,15 @@
 <script>
     $(document).ready(function(){
-        $("#login-header-space").html('<h4 class="hidden-mobile">Já é registrado?</h4><a href="<?php echo app_baseurl().'login'?>" class="btn btn-danger">Fazer login</a>');
+        
+        busca_captcha();
+        
+        $("#login-header-space").html('<a href="<?php echo app_baseurl().'login'?>" class="btn btn-danger">Fazer login</a>');
         $("#recuperacao").submit(function(e){
             e.preventDefault();
-            email = $("#email").val();
+            
+            email   = $("#email").val();
             captcha = $("#resposta-captcha").val();
+            
             $.ajax({
                 url: "<?php echo app_baseurl().'recuperar_senha/verificar'?>",
                 type: "POST",
@@ -13,48 +18,47 @@
                 success: function(sucesso){
                     if(sucesso == 3)
                     {
-                        alertify.success("<strong>E-mail enviado. Verifique sua caixa de entrada</strong>");
+                        msg_sucesso('E-mail enviado. Verifique sua caixa de entrada');
                         $("#email").val("");
                         $("#resposta-captcha").val("");
                         busca_captcha();
                     }
                     else if(sucesso == 0)
                     {
-                        alertify.error("<strong>Erro no captcha. Digite novamente</strong>");
+                        msg_erro('Erro no captcha. Digite novamente');
                         $("#resposta-captcha").val("").focus();
                         busca_captcha();
                     }
                     else if(sucesso == 1)
                     {
-                        alertify.alert("Não há e-mail correspondente na base de dados. Verifique o endereço de email");
+                        msg_erro("Não há e-mail correspondente na base de dados. Verifique o endereço de email");
                         $("#email").val("").focus();
                         $("#resposta-captcha").val("");
                         busca_captcha();
                     }
                     else if(sucesso == 2)
                     {
-                        alertify.error("Não foi possível enviar os dados para o email. Tente novamente mais tarde");
+                        msg_erro("Não foi possível enviar os dados para o email. Tente novamente mais tarde");
                     }
                     else
                     {
-                        alertify.log('Erro desconhecido');
+                        msg_erro('Erro desconhecido');
                         $("#resposta-captcha").val("");
                         busca_captcha();
                     }
                 },
-                error: function(erro){
-                    alertify.log("<strong>Ocorreu um erro. Tente mais tarde</strong>");
+                error: function(){
+                    msg_erro("Ocorreu um erro. Tente mais tarde");
                 }
             });
         });
     });
     function busca_captcha()
     {
-        $.get("<?php echo app_baseurl().'recuperar_senha/captcha'?>", function(e){
-           $("#captcha").html(e);
-        });
+        url = "<?php echo app_baseurl().'recuperar_senha/captcha'?>"
+        
+        loadAjax(url, $("#captcha"));
     }
-    window.onload(busca_captcha());
 </script>
 <div class="well no-padding">
     <form id="recuperacao" class="smart-form client-form">

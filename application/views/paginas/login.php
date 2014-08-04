@@ -17,17 +17,14 @@
                     }
                     else
                     {
-                        alertify.log('<strong>Usuário ou senha incorretos</strong>');
+                        msg_erro('Usuário ou senha incorretos');
                         $("#usuario").focus();
                         $("#senha").val("");
                     }
                 },
-                error: function(erro)
+                error: function()
                 {
-                    $("#erro").html
-                    (
-                        alertify.error('error', 'Infelizmente ocorreu um erro. Tente novamente mais tarde')
-                    );
+                    msg_erro('Infelizmente ocorreu um erro. Tente novamente mais tarde');
                 }
             });
         });

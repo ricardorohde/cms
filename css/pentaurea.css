@@ -1,0 +1,9 @@
+/**
+ * PENTAUREA.CSS
+ *
+ * Arquivo que contém os estilos personalizados do pentáurea
+ */
+.elemento-topo {
+    display: inline-block;        
+    margin-top: 7px;
+}

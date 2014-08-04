@@ -7,11 +7,11 @@
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/icones.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="./css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="./css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="./css/smartadmin-production.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="./css/smartadmin-skins.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="./css/icones.css">
         <link rel="stylesheet" type="text/css" href="./css/colorpicker.css">
         <link rel="stylesheet" type="text/css" media="screen" href="css/TableTools.css">
         <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui-1.10.3.custom.css">

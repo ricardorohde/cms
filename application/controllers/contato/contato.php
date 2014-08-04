@@ -1,5 +1,5 @@
 <?php
-    
+
     /**
      * Contato.php
      * 
@@ -9,8 +9,8 @@
      * @abstract    Classe desenvolvida para realizar a gerência das mensagens
      *              que são enviadas pelo formulário do site
      */
-    class Contato extends MY_Controller
-    {
+    class Contato extends MY_Controller {
+
         /**
          * __construct()
          * 
@@ -25,7 +25,6 @@
             $this->load->model('contato_model');
         }
         //**********************************************************************
-
 
         /**
          * index()
@@ -50,17 +49,15 @@
         {
             $id_contato = $this->input->post('id');
             $marcado = $this->contato_model->marcar_lido($id_contato);
-            if($marcado == 1)
+            if ($marcado == 1)
             {
                 echo "Mensagem marcada como Lida";
-            }
-            else
+            } else
             {
                 echo "Ocorreu um erro - Tente novamente";
             }
         }
         //**********************************************************************
-
 
         /**
          * buscar_contatos()
@@ -72,31 +69,31 @@
          */
         function buscar_contatos($offset = 0)
         {
-            /** Define o limite da busca **/
+            /** Define o limite da busca * */
             $limite = 7;
-            
-            /** Recebe as mensagens que estão cadastradas **/
-            $this->dados['contatos'] = $this->contato_model->lista_contatos($limite, $offset);
-            
-            if(!$this->dados['contatos'] and $offset > 0)
-            {
-                $offset                     = $offset - 7;
-                $this->dados['contatos']    = $this->contato_model->lista_contatos($limite, $offset);
-            }
-            
-            /** Configurações da paginação **/
-            $config['uri_segment']  = 4;
-            $config['base_url']     = app_baseUrl() . 'contato/contato/buscar_contatos';
-            $config['per_page']     = $limite;
-            $config['total_rows']   = $this->contato_model->conta_contatos();
 
-            /** 
+            /** Recebe as mensagens que estão cadastradas * */
+            $this->dados['contatos'] = $this->contato_model->lista_contatos($limite, $offset);
+
+            if (!$this->dados['contatos'] and $offset > 0)
+            {
+                $offset = $offset - 7;
+                $this->dados['contatos'] = $this->contato_model->lista_contatos($limite, $offset);
+            }
+
+            /** Configurações da paginação * */
+            $config['uri_segment'] = 4;
+            $config['base_url'] = app_baseUrl() . 'contato/contato/buscar_contatos';
+            $config['per_page'] = $limite;
+            $config['total_rows'] = $this->contato_model->conta_contatos();
+
+            /**
              * Realiza a criação do links e salva o offset em uma variável. Este
              * valor será usado na página onde as notícias serão exibidas
-             **/
+             * */
             $this->pagination->initialize($config);
-            
-            $this->dados['paginacao']   = $this->pagination->create_links();
+
+            $this->dados['paginacao'] = $this->pagination->create_links();
             $this->dados['verificador'] = $offset;
 
             $this->load->view('paginas/paginados/contato/contato_paginado', $this->dados);
@@ -112,11 +109,11 @@
         function verificar_mensagem($id)
         {
             $this->dados['mensagem'] = $this->busca_mensagem($id);
-            
+
             $this->load->view('paginas/contato/abrir_mensagem', $this->dados);
         }
         //**********************************************************************
-        
+
         /**
          * responder_mensagem()
          * 
@@ -130,7 +127,7 @@
             $this->load->view('paginas/contato/responder_mensagem', $this->dados);
         }
         //**********************************************************************
-        
+
         /**
          * busca_mensagem()
          * 
@@ -143,6 +140,72 @@
         private function busca_mensagem($id)
         {
             return $this->contato_model->buscar_contato($id);
+        }
+        //**********************************************************************
+
+        /**
+         * enviar_resposta()
+         * 
+         * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @abstract    Função desenvolvida para enviar a mensagem do usuário
+         */
+        function enviar_resposta()
+        {
+            $mensagem   = $this->input->post('mensagem');
+            $email      = $this->input->post('email');
+            $nome       = $this->input->post('nome');
+            
+            
+            /** 
+             * Rotina desenvolvida para retirar o email do array que está 
+             * inserido
+             **/
+            $x = count($email);
+            
+            for($i = 0; $i < $x; $i++)
+            {
+                $email = $email[$i];
+            }
+
+            $msg_completa = "
+                <!DOCTYPE html>
+                <html lang='pt-br'>
+                    <head>
+                        <meta charset='utf-8'>
+                    </head>
+                    <body>
+                        $mensagem
+                    </body>
+                </html>
+            ";
+            
+            $this->load->library('envio_email');
+            
+            $mail = $this->envio_email->load_mailer();
+            
+            $mail->isSMTP();
+            $mail->isHTML(true);
+            $mail->Host         = "smtp.live.com";
+            $mail->SMTPAuth     = true;
+            $mail->Username     = 'pentaureaclube@hotmail.com';
+            $mail->Password     = 'SECRETARIA';
+            $mail->SMTPSecure   = 'tls';
+            $mail->From         = 'pentaureaclube@hotmail.com';
+            $mail->FromName     = 'Central de Antendimento - Pentáurea Clube';
+            
+            $mail->addAddress($email, $nome);
+            
+            $mail->Subject  = 'Central de Antendimento - Pentáurea Clube';
+            $mail->Body     = $msg_completa;
+            
+            if(!$mail->send())
+            {
+                echo 'Ocorreu um erro ao enviar o E-mail <br /> Mailer Error: '.$mail->ErrorInfo;
+            }
+            else
+            {
+                echo 1;
+            }
         }
         //**********************************************************************
     }
