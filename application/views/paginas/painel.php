@@ -59,12 +59,12 @@
                     <span class="menu-item-parent">Avisos</span>
                 </a>
                 <ul>
-                    <li id="novo_aviso">
+                    <li>
                         <a href="index.php?/avisos/novo_aviso" title="Novo Aviso">
                             <i class="fam-add"></i> Novo Aviso
                         </a>
                     </li>
-                    <li id="avisos_cadastrados">
+                    <li>
                         <a href="index.php?/avisos/avisos_cadastrados" title="Avisos Cadastrados">
                             <i class="fam-newspaper"></i> Avisos Cadastrados  
                         </a>

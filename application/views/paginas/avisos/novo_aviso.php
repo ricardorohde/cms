@@ -139,7 +139,7 @@
                             </fieldset>
 
                             <footer>
-                                <button class="btn btn-primary" type="submit"><i class="fam-accept"></i> Salvar Notícia</button>
+                                <button class="btn btn-primary" type="submit"><i class="fam-accept"></i> Salvar aviso</button>
                                 <button class="btn btn-warning" type="reset"><i class="fam-error"></i>Limpar Formulário</button>
                             </footer>
                         </form>
