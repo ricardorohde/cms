@@ -17,12 +17,7 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a href="javascript:void(0);">
-                    <i class="fa fa-eye"></i> Marcar Como Lida
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0);">
+                <a href="javascript:excluir_mensagem();">
                     <i class="fa fa-bitbucket"></i> Excluir definitivamente
                 </a>
             </li>
@@ -48,6 +43,7 @@
         foreach ($mensagem as $row)
         {
             ?>
+            <input type="hidden" id="id_mensagem" value="<?php echo $row->id?>">
             <div id="imprimir">
                 <form id="enviar_email" class="form-horizontal">
                     <div class="inbox-info-bar no-padding">
@@ -121,7 +117,10 @@
     }
 ?>
 <script type="text/javascript">
+    /** Chamada da função runAllForms() **/
     runAllForms();
+    
+    /** Esconde um elemento via jquery **/
     $(".select2-search-choice-close").hide();
 
     /**
@@ -158,6 +157,5 @@
                 return false;
             }
         });
-
     });
 </script>

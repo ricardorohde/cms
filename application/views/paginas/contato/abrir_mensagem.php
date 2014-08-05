@@ -14,24 +14,13 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a href="javascript:void(0);">
-                    <i class="fa fa-eye"></i> Mover para lidas
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0);">
-                    <i class="fa fa-trash-o"></i> Mover para Excluídas
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
                 <a href="javascript:imprimir($('#impressao'));">
                     <i class="fa fa-print"></i> Imprimir esta Mensagem
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0);">
-                    <i class="fa fa-bitbucket"></i> Excluir definitivamente
+                <a href="javascript:excluir_mensagem();">
+                    <i class="fa fa-bitbucket"></i> Excluir mensagem
                 </a>
             </li>
         </ul>
@@ -56,6 +45,7 @@
         foreach($mensagem as $row)
         {
             ?>
+            <input type="hidden" id="id_mensagem" value="<?php echo $row->id?>">
             <div id="impressao">
                 <div class="inbox-info-bar">
                     <div class="row">

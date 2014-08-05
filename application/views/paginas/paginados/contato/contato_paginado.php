@@ -64,7 +64,7 @@
     }
 ?>
 <script>
-    var offset = <?php echo $verificador; ?>
+    offset = <?php echo $verificador; ?>
 
     $("#inbox-table input[type='checkbox']").change(function() {
         $(this).closest('tr').toggleClass("highlight", this.checked);
@@ -76,42 +76,56 @@
             valor.push($(this).val());
         });
         $.SmartMessageBox({
-            title: "<i class='fa fa-warning txt-color-orangeDark'></i> Deseja realmente excluir?",
-            content: 'Esta ação não poderá ser desfeita',
-            buttons: '[Não][Sim]'
-        }, function(confirmar) {
-            if (confirmar == "Sim")
+            title: "<i class='fa fa-times txt-color-red'></i> Atenção",
+            content: "Deseja excluir estas mensagens? <small>(a ação não pode ser desfeita)</small>",
+            buttons: "[Sim][Não]"
+        }, function(e) {
+            if (e == "Sim")
             {
                 $.ajax({
-                    url: "<?php echo app_baseurl().'contato/teste' ?>",
+                    url: "<?php echo app_baseurl().'contato/contato/excluir_mensagem' ?>",
                     type: "POST",
                     cache: false,
-                    data: {valor: valor},
+                    data: {id: valor},
                     dataType: "html",
                     success: function(sucesso) {
-                        alert(sucesso);
+                        if(sucesso == 1)
+                        {
+                            msg_sucesso('Mensagens excluidas');
+                            buscar();
+                            contarMarcados();
+                        }
+                        else
+                        {
+                            msg_erro('Não foi possível excluir');
+                        }
+                    },
+                    error: function()
+                    {
+                        msg_erro('Ocorreu um erro. tente novamente');
                     }
                 });
-                $('#inbox-table td input:checkbox:checked').parents("tr").rowslide();
+            }
+            else
+            {
+                return false;
             }
         });
     });
 
-    var contarMarcados = function() {
+    /** Função desenvolvida para verificar se existem checkbox marcadas **/
+    function contarMarcados() {
         var n = $("input:checked").length;
         if (n === 0)
         {
             $("#excluir_definitivo").addClass('disabled');
-            $("#mover_lidas").addClass('disabled');
-            $("#mover_excluidas").addClass('disabled');
         }
         else
         {
             $("#excluir_definitivo").removeClass('disabled');
-            $("#mover_lidas").removeClass('disabled');
-            $("#mover_excluidas").removeClass('disabled');
         }
-    };
+    }
+    //**************************************************************************
     contarMarcados();
     $("input[type=checkbox]").on("click", contarMarcados);
 
@@ -124,6 +138,7 @@
         
         url_lerMensagem = "<?php echo app_baseUrl() . 'contato/contato/verificar_mensagem/' ?>" + id_mensagem;
         
+        marcar_lida(id_mensagem);
         loadAjax(url_lerMensagem, $('#mensagens'));
     });
 </script>
