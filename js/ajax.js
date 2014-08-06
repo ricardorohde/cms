@@ -79,3 +79,41 @@ function msg_erro(msg)
     });
 }
 //******************************************************************************
+
+/**
+ * limpar_campos()
+ * 
+ * Função desenvolvida para limpar campos de formulários
+ * 
+ * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+ * @param       {string} form O nome do formulário que se deseja limpar
+ */
+function limpar_campos(form)
+{
+    form.find("input, textarea, radio, select, checkbox").val("");
+}
+//******************************************************************************
+
+/**
+ * abrirPopup()
+ * 
+ * Função desenvolvida para abrir uma janela popup, geralmente usada para edição
+ * de dados
+ * 
+ * @param {type} url    Contém a url que será aberta
+ * @param {type} w      Contém o width da página
+ * @param {type} h      Contém o heigth da página
+ */
+function abrirPopup(url, w, h)
+{
+    var newW = w + 100;
+    var newH = h + 100;
+    var left = (screen.width - newW) / 2;
+    var top = (screen.height - newH) / 2;
+    var newwindow = window.open(url, 'name', 'width=' + newW + ',height=' + newH + ',left=' + left + ',top=' + top);
+    newwindow.resizeTo(newW, newH);
+    newwindow.moveTo(left, top);
+    newwindow.focus();
+    return false;
+}
+//******************************************************************************

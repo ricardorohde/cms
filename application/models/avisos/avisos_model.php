@@ -143,6 +143,48 @@
             return $this->BD->update($this->_tabela, $data);
         }
         //**********************************************************************
+        
+        /**
+         * buscar()
+         * 
+         * Função desenvolvida para buscar um aviso
+         * 
+         * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access      public
+         * @param       int $id Contém o ID do aviso a ser buscado
+         * @return      array Retorna um array contendo os dados do aviso
+         */
+        function buscar($id)
+        {
+            $this->BD->where('id', $id);
+            
+            return $this->BD->get($this->_tabela)->result();
+        }
+        //**********************************************************************
+        
+        /**
+         * atualizar()
+         * 
+         * Função desenvolvida para atualizar um aviso
+         * 
+         * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access      public
+         * @param       array $dados Contém os dados que serão atualizados
+         * @return      bool Retorna TRUE se atualizar e FALSE se não atualizar
+         */
+        function atualizar($dados)
+        {
+            /** Faz a associação entre os campos e os dados **/
+            $data = array(
+                'data_expiracao'    =>$dados['data_expiracao'],
+                'mensagem'          =>$dados['mensagem']
+            );
+            
+            $this->BD->where('id', $dados['id']);
+            
+            return $this->BD->update($this->_tabela, $data);
+        }
+        //**********************************************************************
     }
     /** End of File avisos_model.php **/
     /** Location ./application/models/avisos/avisos_model.php **/

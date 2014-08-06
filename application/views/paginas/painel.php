@@ -53,23 +53,11 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="#" title="Avisos">
+            <li>    
+                <a href="index.php?/avisos/avisos_cadastrados" title="Avisos">
                     <i class="fa fa-lg fa-fw fa-clipboard"></i> 
                     <span class="menu-item-parent">Avisos</span>
                 </a>
-                <ul>
-                    <li>
-                        <a href="index.php?/avisos/novo_aviso" title="Novo Aviso">
-                            <i class="fam-add"></i> Novo Aviso
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.php?/avisos/avisos_cadastrados" title="Avisos Cadastrados">
-                            <i class="fam-newspaper"></i> Avisos Cadastrados  
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li id="galerias">
                 <a href="index.php?/galerias/galerias" title="Galerias">

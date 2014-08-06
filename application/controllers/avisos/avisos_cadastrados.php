@@ -1,4 +1,5 @@
 <?php
+    
     /**
      * avisos_cadastrados
      * 
@@ -127,6 +128,74 @@
             $id = $this->input->post('id');
             
             echo $this->avisos->ativar($id);
+        }
+        //**********************************************************************
+        
+        /**
+         * salvar_aviso()
+         * 
+         * Função desenvolvida para salvar o aviso
+         * 
+         * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @param       array   $dados  Recebe os dados do aviso
+         * @param       string  $tamanho_string Recebe a mensagem e verifica se 
+         *              existe alguma palavra. Retira todas as tags HTML para
+         *              verificação.
+         * @return      0   Retorna 0 se não houver palavras na mensagem
+         * @return      1   Retorna 1 se o aviso for salvo
+         * @return      2   Retorna 2 se o aviso não for salvo
+         */
+        function salvar_aviso()
+        {
+            $dados['mensagem']          = $this->input->post('mensagem');
+            $dados['data_expiracao']    = $this->input->post('data_expiracao');
+
+            if($this->avisos->salvar($dados) == 1)
+            {
+                echo 1;
+            }
+            else
+            {
+                echo 2;
+            }
+        }
+        //**********************************************************************
+        
+        /**
+         * editar_aviso()
+         * 
+         * Função desenvolvida para editar um aviso cadastrado.
+         * 
+         * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access      public
+         * @param       int $id Contém o ID do aviso a ser editado
+         */
+        function editar_aviso($id)
+        {
+            $this->dados['aviso']   = $this->avisos->buscar($id);
+            $this->template         = 'template/popup';
+            $this->view             = 'popup/editar_avisos';
+            
+            $this->LoadView();
+        }
+        //**********************************************************************
+        
+        /**
+         * atualizar_aviso()
+         * 
+         * Função desenvolvida para fazer a atualização de um aviso
+         * 
+         * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access      public
+         * @return      bool Retorna TRUE se atualizar e FALSE se não atualizar
+         */
+        function atualizar_aviso()
+        {
+            $dados['id']                = $this->input->post('id');
+            $dados['data_expiracao']    = $this->input->post('data_expiracao');
+            $dados['mensagem']          = $this->input->post('mensagem');
+            
+            echo $this->avisos->atualizar($dados);
         }
         //**********************************************************************
     }

@@ -106,6 +106,7 @@
      * É utilizada para setar a paginação
      */
     var offset = 0;
+    //**************************************************************************
 
     /*
      * Chama a função que busca os temas
@@ -113,16 +114,18 @@
     $(document).ready(function() {
         buscar_temas();
     });
+    //**************************************************************************
 
     /*
      * Função desenvolvida para buscar os temas via ajax
      */
     function buscar_temas()
     {
-        $.get('<?php echo app_baseurl().'temas/busca_temas' ?>/' + offset + '', function(e) {
-            $("#todos_temas").html(e);
-        });
+        url = '<?php echo app_baseurl().'temas/busca_temas/' ?>' + offset;
+        
+        loadAjax(url, $("#todos_temas"));
     }
+    //**************************************************************************
 
     /*
      * Função desenvolvida para inicializar os calendários do novo tema
@@ -144,6 +147,7 @@
             $('#from').datepicker('option', 'maxDate', selectedDate);
         }
     });
+    //**************************************************************************
 
     /*
      * Função desenvolvida para setar o fancybox para abrir o gerenciador de arquivos
@@ -155,11 +159,13 @@
         'autoScale': false,
         'autoSize': false
     });
+    //**************************************************************************
 
     /*
      * Função utilizada para unicializar o colorPicker
      */
     $('#cor').colorpicker();
+    //**************************************************************************
 
     /*
      * Função desenvolvida para salvar um novo tema no site
@@ -220,8 +226,5 @@
             }
         });
     });
-
-    /*
-     * Função desenvolvida para atualizar um tema
-     */
+    //**************************************************************************
 </script>

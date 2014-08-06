@@ -70,7 +70,7 @@
                                                                     <?php
                                                                 }
                                                                 ?>
-                                                                <a href="#" data-id="<?php echo $row->id ?>" rel="tooltip" data-placement="top" title="Editar aviso">
+                                                                <a href="<?php echo app_baseurl().'avisos/avisos_cadastrados/editar_aviso/'.$row->id?>" rel="tooltip" data-placement="top" title="Editar aviso" onclick="return abrirPopup(this.href, 640, 480)">
                                                                     <i class="fam-comment-edit"></i>
                                                                 </a>
                                                                 &nbsp;

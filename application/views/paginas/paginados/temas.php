@@ -61,6 +61,7 @@
                                                             <td>
                                                                 <a href="#" rel="tooltip" data-original-title="<img width='180' src='<?php echo $row->imagem_banner; ?>'>" data-html="true">
                                                                     <?php echo $row->imagem_banner; ?>
+                                                                </a>
                                                             </td>
                                                             <td>
                                                                 <a href="<?php echo app_baseurl() . 'temas/editar_tema/' . $row->id ?>" rel="tooltip" title="Alterar" onclick="return abrirPopup(this.href, 640, 480)">
@@ -164,23 +165,7 @@
             }
         });
     });
-
-    /*
-     * Função desenvolvida para abrir a janela popup que será usada na edução do
-     * tema
-     */
-    function abrirPopup(url, w, h)
-    {
-        var newW = w + 100;
-        var newH = h + 100;
-        var left = (screen.width - newW) / 2;
-        var top = (screen.height - newH) / 2;
-        var newwindow = window.open(url, 'name', 'width=' + newW + ',height=' + newH + ',left=' + left + ',top=' + top);
-        newwindow.resizeTo(newW, newH);
-        newwindow.moveTo(left, top);
-        newwindow.focus();
-        return false;
-    }
+    //**************************************************************************
 
     /*
      * Função desenvolvida para desativar uma função
