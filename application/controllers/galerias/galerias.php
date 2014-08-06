@@ -3,20 +3,23 @@
     /**
      * Galerias.php
      * 
-     * @package     MY_Controller
-     * @subpackage  galerias
+     * Esta classe prove a criação de novas galerias fotográficas, sendo que as 
+     * aparecerão dinamicamente no site. A intenção deste módulo é promover a 
+     * fácil utilização para criação e edição de galerias de fotos.
+     * 
+     * @package     CI_Controller
+     * @subpackage  MY_Controller
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @abstract    Esta classe prove a criação de novas galerias fotográficas, sendo que as 
-     *              aparecerão dinamicamente no site. A intenção deste módulo é promover a 
-     *              fácil utilização para criação e edição de galerias de fotos
+     * @version     v1.2.0
      */
     class Galerias extends MY_Controller
     {
         /**
          * __construct()
          * 
+         * Contrução da Classe Galerias
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Contrução da Classe Galerias
          * @access      public
          */
         public function __construct($requer_autenticacao = TRUE)
@@ -31,9 +34,9 @@
         /**
          * index()
          * 
+         * Função principal do controller
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Esta função é utilizada para chamar os dados preliminares
-         *              da visão - galerias
          * @access      public
          */
         function index()
@@ -48,8 +51,10 @@
         /**
          * salvar_galeria()
          * 
+         * Função desenvolvida para salvar os dados preliminares da galeria
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função desenvolvida para salvar os dados preliminares da galeria
+         * @access      public
          * @return      bool retorna 1 se salvar e 0 se não salvar
          */
         function salvar_galeria()
@@ -64,12 +69,15 @@
         /**
          * busca_galerias()
          * 
+         * Função que exibe as galerias cadastradas
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função que exibe as galerias cadastradas
+         * @access      public
          */
         function busca_galerias()
         {
             $this->dados['galerias'] = $this->galerias_model->busca_galerias();
+            
             $this->load->view('paginas/paginados/galerias/galerias', $this->dados);
         }
         //**********************************************************************

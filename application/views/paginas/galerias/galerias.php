@@ -47,34 +47,23 @@
                 }
                 else
                 {
-                    $.smallBox({
-                        title: "<i class='glyphicon glyphicon-remove'></i> Erro",
-                        content: "<strong>Não foi possível criar a galeria</strong>",
-                        color: "#d8c74e",
-                        iconSmall: "fa fa-thumbs-down bounce animated",
-                        timeout: 5000
-                    });
+                    msg_erro('Não foi possível criar a galeria');
                 }
             },
             error: function() {
-                $.smallBox({
-                    title: "<i class='glyphicon glyphicon-remove'></i> Erro",
-                    content: "<strong>Ocorreu um erro. Tente novamente</strong>",
-                    color: "#d8c74e",
-                    iconSmall: "fa fa-thumbs-down bounce animated",
-                    timeout: 5000
-                });
+                msg_erro('Ocorreu um erro. Tente novamente');
             }
         });
     });
 
+    /** Função desenvolvida para buscar as galerias cadastradas **/
     function buscar()
     {
-        $.get("<?php echo app_baseUrl() . 'galerias/galerias/busca_galerias' ?>", function(b) {
-            $("#galerias_cadastradas").html(b);
-        });
+        url = "<?php echo app_baseUrl() . 'galerias/galerias/busca_galerias' ?>";
+        loadAjax(url, $("#galerias_cadastradas"));
     }
-
+    
+    /** Chamada da função buscar no Onload **/
     window.onload(buscar());
 </script>
 <div class="row">
@@ -107,37 +96,36 @@
                         </li>
                     </ul>
                 </header>
-                <div class="no-padding">
-                    <div class="widget-body">
+                <div>
+                    <div class="widget-body no-padding">
                         <div id="myTabContent" class="tab-content">
                             <div class="tab-pane fade active in padding-10 no-padding-bottom" id="todas_galerias">
-                                <div class="row no-space" id="galerias_cadastradas">
-                                </div>
+                                <!-- Receberá as galerias cadastradas via ajax -->
+                                <div class="row no-space" id="galerias_cadastradas"></div>
+                                <!--*****************************************-->
                             </div>
-                            <div class="tab-pane fade padding-10 no-padding-bottom" id="nova_galeria">
-                                <div class="row no-space">
-                                    <div class="row padding-10">
-                                        <form class="smart-form" id="dados_galeria">
-                                            <section>
-                                                <label class="label"><strong>Nome da Galeria:</strong></label>
-                                                <label class="input">
-                                                    <input type="text" id="nome_galeria" maxlength="50" required>
-                                                </label>  
-                                            </section>
-                                            <section>
-                                                <label class="label"><strong>Data de Realização:</strong></label>
-                                                <label class="input">
-                                                    <input type="text" id="data" maxlength="10" required data-mask="99/99/9999">
-                                                </label>
-                                            </section>
-                                            <footer>
-                                                <button class="btn btn-primary" type="submit"><i class="fam-disk"></i> Salvar e Proseguir</button>
-                                                <button id="reset" class="btn btn-warning" type="reset"><i class="fam-arrow-left"></i> Voltar às Galerias</button>
-                                            </footer>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="tab-pane fade no-padding-bottom" id="nova_galeria">
+                                <form class="smart-form" id="dados_galeria">
+                                    <fieldset>
+                                        <section>
+                                            <label class="label"><strong>Nome da Galeria:</strong></label>
+                                            <label class="input">
+                                                <input type="text" id="nome_galeria" maxlength="50" required>
+                                            </label>  
+                                        </section>
+                                        <section>
+                                            <label class="label"><strong>Data de Realização:</strong></label>
+                                            <label class="input">
+                                                <input type="text" id="data" maxlength="10" required data-mask="99/99/9999">
+                                            </label>
+                                        </section>
+                                    </fieldset>
+                                    <footer>
+                                        <button class="btn btn-primary" type="submit"><i class="fam-disk"></i> Salvar e Proseguir</button>
+                                        <button id="reset" class="btn btn-warning" type="reset"><i class="fam-arrow-left"></i> Voltar às Galerias</button>
+                                    </footer>
+                                </form>
+                            </div>    
                         </div>
                     </div>
                 </div>

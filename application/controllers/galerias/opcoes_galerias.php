@@ -3,22 +3,27 @@
     /**
      * Opcoes_galerias
      * 
-     * @package     MY_Controller
-     * @subpackage  opcoes_galerias
+     * Classe desenvolvida para aplicar determinadas configurações a uma 
+     * determinada galeria.
+     * 
+     * @package     CI_Controller
+     * @subpackage  MY_Controller
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @abstract    Classe desenvolvida para aplicar determinadas configurações
-     *              a uma determinada galeria
+     * @version     v1.3.0
      */
     class Opcoes_galerias extends MY_Controller
     {
         /**
          * __construct()
+         * 
+         * Realiza a construção da classe
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Construtor da classe
+         * @access      public
          */
-        public function __construct($requer_autenticacao = TRUE)
+        public function __construct()
         {
-            parent::__construct($requer_autenticacao);
+            parent::__construct(TRUE);
             $this->load->model('galerias_model');
         }
         //**********************************************************************
@@ -26,8 +31,10 @@
         /**
          * index()
          * 
+         * Função principal do controller
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função principal do controller
+         * @access      public
          */
         function index()
         {
@@ -46,12 +53,13 @@
         /**
          * buscar_fotos()
          * 
+         * Função que busca as imagens para exibição
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função que busca as imagens para exibição
+         * @access      public
          * @param       int $id_galeria Contém o id da galeria que buscaremos as
          *              fotos
          * @return      array   Retorna um array contendo o endereço das fotos
-         * @access      public
          */
         function buscar_fotos($id_galeria)
         {
@@ -64,10 +72,12 @@
         /**
          * excluir_foto()
          * 
+         * Função utilizada para excluir uma foto. Se a imagem for excluida do 
+         * BD, exclui a foto do disco. Se excluir a foto do disco, define uma 
+         * nova capa para a galeria.
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função utilizada para excluir uma foto. Se a imagem for
-         *              excluida do BD, exclui a foto do disco. Se excluir a foto
-         *              do disco, define uma nova capa para a galeria
+         * @access      public
          * @return      bool Retorna 1 se excluir a foto e 0 se não excluir
          */
         function excluir_foto()
@@ -108,10 +118,11 @@
         /**
          * excluir_galeria()
          * 
+         * Função desenvolvida para excluir uma galeria inteira. Esta exclusão 
+         * inclui a exclusão das fotos no banco de dados e no disco também
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função desenvolvida para excluir uma galeria inteira. 
-         *              Esta exclusão inclui a exclusão das fotos no banco de dados
-         *              e no disco também
+         * @access      public
          * @return      bool Retorna TRUE se excluir e FALSE se não excluir
          */
         function excluir_galeria()
@@ -177,21 +188,22 @@
         /**
          * upload()
          * 
+         * Função desenvolvida para upload de imagem. Verifica se existe uma 
+         * pasta com o nome da galeria. Caso não haja, cria a mesma. Durante o 
+         * upload das imagens, as mesmas são redimencionadas para o tamanho de 
+         * 640x480, com qualidade de 75%
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função desenvolvida para upload de imagem. Verifica se
-         *              existe uma pasta com o nome da galeria. Caso não haja,
-         *              cria a mesma. Durante o upload das imagens, as mesmas são
-         *              redimencionadas para o tamanho de 640x480, com qualidade
-         *              de 75%
+         * @access      public
          */
         function upload()
         {
             /** seta o arquivo php.ini para permitir grandes quantidades de arquivos **/
-            ini_set('upload_max_filesize', '100M');
-            ini_set('post_max_size', '1024M');
+            ini_set('max_execution_time','300');
             ini_set('max_input_time', '300');
-            ini_set('max_file_uploads', '40');
-            ini_set('max_execution_time', '300');
+            ini_set('post_max_size', '100M');
+            ini_set('upload_max_filesize', '10M');
+            ini_set('max_file_uploads', '40');            
             
             /** Recebe o ID da galeria **/
             $dados['id_galeria'] = $this->input->post('id_galeria');
@@ -264,8 +276,10 @@
         /**
          * redimensionar_imagens()
          * 
+         * Função para redimensionar a imagem que foi feita o upload
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função para redimensionar a imagem que foi feita o upload
+         * @param       string $dados Contém o endereço da imagem a ser redimencionada
          * @access      private
          */
         private function redimensionar_imagem($dados)
@@ -294,6 +308,5 @@
         }
         //**********************************************************************
     }
-
     /** End of file opcoes_galerias.php **/
     /** location ./application/controllers/opcoes_galerias.php **/
