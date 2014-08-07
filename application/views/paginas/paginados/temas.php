@@ -25,79 +25,73 @@
                             </span>
                             <h2>Temas do Site</h2>
                         </header>
-                        <div class="no-padding">
-                            <div class="widget-body">
-                                <div id="myTabContent" class="tab-content">
-                                    <div class="tab-pane fade active in no-padding-bottom">
-                                        <div class="row no-space">
-                                            <table class="table table-condensed table-striped table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Cor</th>
-                                                        <th>Data Inicial</th>
-                                                        <th>Data Final</th>
-                                                        <th>Imagem</th>
-                                                        <th>Ações</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                        <div>
+                            <div class="widget-body no-padding">
+                                <table class="table table-condensed table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Cor</th>
+                                            <th>Data Inicial</th>
+                                            <th>Data Final</th>
+                                            <th>Imagem</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        foreach ($temas as $row)
+                                        {
+                                            ?>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $row->id; ?>
+                                                </td>
+                                                <td style="background-color: <?php echo $row->cor_principal; ?>">
+                                                </td>
+                                                <td>
+                                                    <?php echo date('d/m/Y', strtotime($row->data_inicio)); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo date('d/m/Y', strtotime($row->data_expiracao)); ?>
+                                                </td>
+                                                <td>
+                                                    <a href="#" rel="tooltip" data-original-title="<img width='180' src='<?php echo $row->imagem_banner; ?>'>" data-html="true">
+                                                        <?php echo $row->imagem_banner; ?>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="<?php echo app_baseurl() . 'temas/editar_tema/' . $row->id ?>" rel="tooltip" title="Alterar" onclick="return abrirPopup(this.href, 640, 480)">
+                                                        <i class="fam-pencil"></i>
+                                                    </a>
+                                                    <a class="excluir" href="#" rel="tooltip" title="Excluir" data-id="<?php echo $row->id; ?>">
+                                                        <i class="fam-cross"></i>
+                                                    </a>
                                                     <?php
-                                                    foreach ($temas as $row)
+                                                    if ($row->status == 1)
                                                     {
                                                         ?>
-                                                        <tr>
-                                                            <td>
-                                                                <?php echo $row->id; ?>
-                                                            </td>
-                                                            <td style="background-color: <?php echo $row->cor_principal; ?>">
-                                                            </td>
-                                                            <td>
-                                                                <?php echo date('d/m/Y', strtotime($row->data_inicio)); ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php echo date('d/m/Y', strtotime($row->data_expiracao)); ?>
-                                                            </td>
-                                                            <td>
-                                                                <a href="#" rel="tooltip" data-original-title="<img width='180' src='<?php echo $row->imagem_banner; ?>'>" data-html="true">
-                                                                    <?php echo $row->imagem_banner; ?>
-                                                                </a>
-                                                            </td>
-                                                            <td>
-                                                                <a href="<?php echo app_baseurl() . 'temas/editar_tema/' . $row->id ?>" rel="tooltip" title="Alterar" onclick="return abrirPopup(this.href, 640, 480)">
-                                                                    <i class="fam-pencil"></i>
-                                                                </a>
-                                                                <a class="excluir" href="#" rel="tooltip" title="Excluir" data-id="<?php echo $row->id; ?>">
-                                                                    <i class="fam-cross"></i>
-                                                                </a>
-                                                                <?php
-                                                                if ($row->status == 1)
-                                                                {
-                                                                    ?>
-                                                                    <a class="marcar" href="#" rel="tooltip" title="Inativar" data-id='<?php echo $row->id ?>' data-status='<?php echo $row->status ?>'>
-                                                                        <i class="fam-exclamation"></i>
-                                                                    </a>
-                                                                    <?php
-                                                                }
-                                                                else
-                                                                {
-                                                                    ?>
-                                                                    <a class="marcar" href="#" rel="tooltip" title="Ativar" data-id='<?php echo $row->id ?>' data-status='<?php echo $row->status ?>'>
-                                                                        <i class="fam-accept"></i>
-                                                                    </a>
-                                                                    <?php
-                                                                }
-                                                                ?>
-                                                            </td>
-                                                        </tr>
+                                                        <a class="marcar" href="#" rel="tooltip" title="Inativar" data-id='<?php echo $row->id ?>' data-status='<?php echo $row->status ?>'>
+                                                            <i class="fam-exclamation"></i>
+                                                        </a>
+                                                        <?php
+                                                    }
+                                                    else
+                                                    {
+                                                        ?>
+                                                        <a class="marcar" href="#" rel="tooltip" title="Ativar" data-id='<?php echo $row->id ?>' data-status='<?php echo $row->status ?>'>
+                                                            <i class="fam-accept"></i>
+                                                        </a>
                                                         <?php
                                                     }
                                                     ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

@@ -31,7 +31,7 @@
          * @return      bool retorna TRUE se salvar e FALSE se não salvar
          */
         function salvar($dados)
-        {
+        {   
             $data = array(
                 'mensagem'  => $dados['mensagem'],
                 'autor'     => $dados['autor']
@@ -79,5 +79,75 @@
             $this->BD->where('id', $id);
             return $this->BD->delete($this->_tabela);
         }
+        //**********************************************************************
+        
+        /**
+         * marcar()
+         * 
+         * Função desenvolvida para marcar uma mensagem como ativa ou inativa
+         * 
+         * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access      public
+         * @param       array $dados Contém os dados que serão atualizados
+         * @return      bool Retorna TRUE se atualizar e FALSE se não atualizar
+         */
+        function marcar($dados)
+        {
+            if($dados['acao'] == 'inativar')
+            {
+                $data = array('status' => 0);
+            }
+            else
+            {
+                $data = array('status' => 1);
+            }
+            
+            $this->BD->where('id', $dados['id']);
+            return $this->BD->update($this->_tabela, $data);
+        }
+        //**********************************************************************
+        
+        /**
+         * buscar_mensagem()
+         * 
+         * 
+         * Função desenvolvida para buscar uma mensagem para que a mesma possa 
+         * ser editada.
+         * 
+         * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access      public
+         * @param       int $id Contém o ID da mensagem a ser buscada
+         * @return      array Retorna um array com os dados da mensagem
+         */
+        function buscar_mensagem($id)
+        {
+            $this->BD->where('id', $id);
+            return $this->BD->get($this->_tabela)->result();
+        }
+        //**********************************************************************
+        
+        /**
+         * atualizar()
+         * 
+         * Função desenvolvida para atualizar uma mensagem cadastrada
+         * 
+         * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access      public
+         * @param       array $dados Contém os dados que serão atualizados
+         * @return      bool Retorna TRUE se atualizar e FALSE se não atualizar
+         */
+        function atualizar($dados)
+        {
+            /** Associa os campos da tabela aos dados **/
+            $data = array(
+                'autor'     => $dados['autor'],
+                'mensagem'  => $dados['mensagem']
+            );
+            
+            $this->BD->where('id', $dados['id']);
+            return $this->BD->update($this->_tabela, $data);
+        }
+        //**********************************************************************
     }
-?>
+    /** End of File mensagens_model.php **/
+    /** Location ./application/models/mensagens_model.php **/

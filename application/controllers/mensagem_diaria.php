@@ -1,43 +1,56 @@
 <?php
+    
     /**
-     * @package     MY_Controller
-     * @subpackage  mensagem_diaria
+     * mensagem_diaria
+     * 
+     * Classe desenvolvida para gerenciar as transações das Mensagens diárias
+     * 
+     * @package     CI_Controller
+     * @subpackage  MY_Controller
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @abstract    Classe desenvolvida para gerenciar as transações das Mensagens diárias
+     * @version     v1.0.0
      */
     class Mensagem_diaria extends MY_Controller
     {
         /**
-         * @name        __contruct()
+         * __contruct()
+         * 
+         * Função desenvolvida para contrução da classe
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função desenvolvida para contrução da classe
-         * @param       bool $requer_autenticacao, se TRUE, indica que para acessar a página é necessário estar logado
+         * @access      public
          */
-        public function __construct($requer_autenticacao = TRUE)
+        public function __construct()
         {
-            parent::__construct($requer_autenticacao);
+            parent::__construct(TRUE);
             
             $this->load->model('mensagens_model');
         }
-        /**********************************************************************/
+        //**********************************************************************
         
         /**
-         * @name        index()
+         * index()
+         * 
+         * Função principal do controller, que chamará a visão para o usuário
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função principal do controller, que chamará a visão para o usuário
+         * @access      public
          */
         function index()
         {
             $this->load->view('paginas/mensagem_diaria');
         }
-        /**********************************************************************/
+        //**********************************************************************
         
         /**
-         * @name        salvar_mensagem()
+         * salvar_mensagem()
+         * 
+         * Função que passara a nova mensagem para a função salvar.
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função que passara a nova mensagem para a função salvar.
-         * @param       string $dados['mensagem'] recebe a mensagem que foi digitada e passada via post
-         * @param       string $dados['autor'] recebe o autor que foi digitado e passado via post
+         * @access      public
+         * @param       string $dados['mensagem']   recebe a mensagem que foi digitada e passada via post
+         * @param       string $dados['autor']      recebe o autor que foi digitado e passado via post
          * @return      integer retorna 1 se salvar a mensagem e 0 se não salvar
          */
         function salvar_mensagem()
@@ -47,12 +60,15 @@
             
             echo $this->mensagens_model->salvar($dados);
         }
-        /**********************************************************************/
+        //**********************************************************************
         
         /**
-         * @name        busca_mensagens()
+         * busca_mensagens()
+         * 
+         * Fução desenvolvida para buscar as mensagens cadastradas
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Fução desenvolvida para buscar as mensagens cadastradas
+         * @access      public
          * @param       int $offset define o ofsset da pesquisa sql
          * @param       int $limite define o limite da pesquisa sql
          */
@@ -79,12 +95,16 @@
             
             $this->load->view('paginas/paginados/mensagens', $this->dados);
         }
-        /**********************************************************************/
+        //**********************************************************************
         
         /**
-         * @name        excluir_mensagem()
+         * excluir_mensagem()
+         * 
+         * Função desenvolvida para receber um id de uma noticia e passar para 
+         * uma função no model excluir.
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função desenvolvida para receber um id de uma noticia e passar para uma função no model excluir
+         * @access      public
          * @param       int $id recebe o id da mensagem passado por post
          * @return      bool retorna TRUE se excluir e FALSE se não excluir
          */
@@ -101,5 +121,65 @@
                 echo 0;
             }
         }
+        //**********************************************************************
+        
+        /**
+         * marcar_mensagem()
+         * 
+         * Função desenvolvida para marcar uma mensagem como ativa ou inativa
+         * 
+         * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access      public
+         * @return      bool Retorna TRUE se marcar e FALSE se não marcar
+         */
+        function marcar_mensagem()
+        {
+            $dados['acao']  = $this->input->post('acao');
+            $dados['id']    = $this->input->post('id');
+            
+            echo $this->mensagens_model->marcar($dados);
+        }
+        //**********************************************************************
+        
+        /**
+         * editar()
+         * 
+         * Função desenvolvida para edição de uma mensagem diária
+         * 
+         * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access      public
+         * @param       int $id Contém o ID da mensagem que será editada
+         */
+        function editar($id)
+        {
+            $this->dados['mensagem'] = $this->mensagens_model->buscar_mensagem($id);
+            
+            $this->view     = 'popup/editar_mensagem';
+            $this->template = 'template/popup';
+            
+            $this->LoadView();
+        }
+        //**********************************************************************
+        
+        /**
+         * salvar_alteracao()
+         * 
+         * Função desenvolvida para salvar alterações realizadas em uma mensagem
+         * diária.
+         * 
+         * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access      public
+         * @return      bool Retorna TRUE se atualizar e FALSE se não atualizar
+         */
+        function salvar_alteracao()
+        {
+            $dados['id']        = $this->input->post('id');
+            $dados['autor']     = $this->input->post('autor');
+            $dados['mensagem']  = $this->input->post('mensagem');
+            
+            echo $this->mensagens_model->atualizar($dados);
+        }
+        //**********************************************************************
     }
-?>
+    /** End of File mensagem_diaria.php **/
+    /** Location ./application/controllers/mensagem_diaria.php **/

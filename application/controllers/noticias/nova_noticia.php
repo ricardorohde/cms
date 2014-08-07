@@ -35,7 +35,7 @@
          */
         function index()
         {
-            $this->load->view('/paginas/noticias/nova_noticia', $this->dados);
+            $this->load->view('/paginas/noticias/nova_noticia');
         }
         //**********************************************************************
 
