@@ -1,5 +1,3 @@
-
-
 <!-- Div que receberá os valores via ajax -->
 <div id="configuracao_email"></div>
 <!--*************************************************************************-->
