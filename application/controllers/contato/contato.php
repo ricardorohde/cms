@@ -5,7 +5,7 @@
      * Arquivo que contém a classe contato
      * 
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @version     v0.10.1
+     * @version     v1.11.0
      */
 
     /**
@@ -162,6 +162,10 @@
             $email      = $this->input->post('email');
             $nome       = $this->input->post('nome');
             
+            /**
+             * Recebe as configurações de envio de email
+             */
+            $config_email = $this->buscar_configEmail();
             
             /** 
              * Rotina desenvolvida para retirar o email do array que está 
@@ -191,14 +195,15 @@
             $mail = $this->envio_email->load_mailer();
             
             $mail->isSMTP();
-            $mail->isHTML(true);
-            $mail->Host         = "smtp.live.com";
+            $mail->isHTML(true);            
             $mail->SMTPAuth     = true;
-            $mail->Username     = 'pentaureaclube@hotmail.com';
-            $mail->Password     = 'SECRETARIA';
-            $mail->SMTPSecure   = 'tls';
-            $mail->From         = 'pentaureaclube@hotmail.com';
-            $mail->FromName     = 'Central de Antendimento - Pentáurea Clube';
+            $mail->Host         = $config_email['smtp_host'];
+            $mail->Port         = $config_email['smtp_port'];
+            $mail->Username     = $config_email['smtp_userName'];
+            $mail->Password     = $config_email['smtp_password'];
+            $mail->SMTPSecure   = $config_email['smtp_secure'];
+            $mail->From         = $config_email['smtp_from'];
+            $mail->FromName     = $config_email['smtp_fromName'];
             
             $mail->addAddress($email, $nome);
             
@@ -284,6 +289,37 @@
             $id = $this->input->post('id');
             
             echo $this->contato->marcar_lido($id);
+        }
+        //**********************************************************************
+        
+        /**
+         * buscar_configEmail()
+         * 
+         * Função desenvolvida para buscar as configurações de email salvas no
+         * banco de dados.
+         * 
+         * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access      Private
+         * @return      array Retorna um array contendo as configurações de email
+         */
+        private function buscar_configEmail()
+        {
+            $this->load->model('email_model');
+            
+            $config = $this->email_model->buscar();
+            
+            foreach ($config as $row)
+            {
+                $email['smtp_host']     = $row->smtp_host;
+                $email['smtp_port']     = $row->smtp_port;
+                $email['smtp_userName'] = $row->smtp_userName;
+                $email['smtp_password'] = $row->smtp_password;
+                $email['smtp_secure']   = $row->smtp_secure;
+                $email['smtp_from']     = $row->smtp_from;
+                $email['smtp_fromName'] = $row->smtp_fromName;
+            }
+            
+            return $email;
         }
         //**********************************************************************
     }
