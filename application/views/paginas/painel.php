@@ -2,17 +2,10 @@
 <header id="header">
     <div id="logo-group">
         <span id="logo">
-            <img src="img/logo.png" alt="ClubSystem Softwares" title="ClubSystem Softwares" />
+            <img src="img/logo.png" alt="Clube Campestre Pentáurea" title="Clube Campestre Pentáurea">
         </span>
     </div>
     <div class="pull-right">
-        <div id="hide-menu" class="btn-header transparent pull-right btn-logout">
-            <span>
-                <a href="javascript:usuariovoid(0);" rel="tooltip" data-placement="left" data-title="Mostrar/ Esconder Menu">
-                    <i class="fa fa-align-justify"></i>
-                </a>
-            </span>
-        </div>
         <div class="btn-header transparent pull-right btn-logout">
             <span>
                 <a class="logout" href="<?php echo app_baseurl() . 'login/logout' ?>" rel="tooltip" data-placement="left" title="Fazer Logoff">
@@ -136,7 +129,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="index.php?/config/configuracoes_email">
                             <i class="fam-email-edit"></i> Envio de Email
                         </a>
                     </li>
