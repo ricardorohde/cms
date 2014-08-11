@@ -170,6 +170,11 @@
          */
         function atualiza_noticia()
         {
+            /** Inicialização das variáveis que receberão as mensagens de erro **/
+            $erro_imagem        = '';
+            $erro_salvamento    = '';
+            $sucesso            = '';
+            
             /** Dados da notícia **/
             $dados['id']                = $this->input->post('id');
             $dados['titulo_noticia']    = $this->input->post('titulo_noticia');
@@ -184,54 +189,58 @@
             $exclude = array("\\");
             $dados['imagem_noticia'] = str_replace($exclude, "/", $dados['imagem_noticia']);
 
-            /** Retira o endereço do HOST, para poder redimensionar a imagem **/
-            $exclude = array("http://" . $_SERVER['HTTP_HOST']);
+            /** Exclui o HOST, para que a imagem de capa possa ser redimencionada **/
+            $exclude = array("http://".$_SERVER['HTTP_HOST']);
             $dados['imagem_noticia'] = str_replace($exclude, "", $dados['imagem_noticia']);
 
-            /** 
-             * Chamada da library que realiza o redimensionamento e passa algumas
-             * configurações como parâmetro
-             **/
+            /** Carrega a library para manipulação de imagem e seta as configurações para esta manipulação **/
             $this->load->library('image_lib');
+            
             $config['image_library']    = 'GD2';
             $config['maintain_ratio']   = FALSE;
             $config['create_thumb']     = FALSE;
             
-            if ($dados['posicionamento'] == 1)
+            if($dados['posicionamento'] == 1)
             {
-                $config['width']        = 640;
-                $config['height']       = 480;
+                $config['width']    = 640;
+                $config['height']   = 480;
             }
-            elseif ($dados['posicionamento'] == 2)
+            elseif($dados['posicionamento'] == 2)
             {
-                $config['width']        = 200;
-                $config['height']       = 100;
+                $config['width']    = 200;
+                $config['height']   = 100;
             }
-            $config['quality']          = "75%";
-            $config['source_image']     = ".." . $dados['imagem_noticia'];
+            
+            $config['quality']         = "75%";
+            $config['source_image']    = ".." . $dados['imagem_noticia'];
 
             $this->image_lib->initialize($config);
+            
             if (!$this->image_lib->resize())
             {
-                $retorno = array('erro_imagem' => 2);
+                $erro_imagem = 2;
             }
-            else
-            {
                 $dados['imagem_noticia'] = "http://" . $_SERVER['HTTP_HOST'] . $dados['imagem_noticia'];
                 $id_noticia = $this->noticias_model->atualiza_noticia($dados);
                 if ($id_noticia == 0 || $id_noticia == FALSE)
                 {
-                    $retorno = array('erro_salvamento' => 0);
+                    $erro_salvamento = 0;
+                    
                 }
                 else
                 {
-                    $retorno = array('sucesso' => 1);
+                    $sucesso = 1;
                 }
-            }
+            
+            $retorno = array(
+                'erro_imagem'       => $erro_imagem,
+                'erro_salvamento'   => $erro_salvamento,
+                'sucesso'           => $sucesso
+            );
+            
             echo json_encode($retorno);
         }
         //**********************************************************************
     }
-    
     /** End of File noticias_cadastradas.php **/
     /** Location ./application/controllers/noticias/noticias_cadastradas.php **/

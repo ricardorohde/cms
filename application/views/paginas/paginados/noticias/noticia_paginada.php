@@ -33,7 +33,7 @@
                         <td><?php echo $row->autor; ?></td>
                         <td>
                             <div align="center">
-                                <a href="index.php?/painel#index.php?/noticias_cadastradas/editar/<?php echo $row->id; ?>" class="editar" rel="tooltip" data-placement="top" title="Editar Noticia">
+                                <a href="index.php?/painel#index.php?/noticias/noticias_cadastradas/editar/<?php echo $row->id; ?>" class="editar" rel="tooltip" data-placement="top" title="Editar Noticia">
                                     <i class="fam-pencil"></i>
                                 </a>
                                 <?php

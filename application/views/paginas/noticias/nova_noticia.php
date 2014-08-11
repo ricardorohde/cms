@@ -56,7 +56,7 @@
         language: "pt_BR",
         content_css: "css/bootstrap.css",
         theme: "modern",
-        height: 300,
+        height: 400,
         filemanager_title: "MasterAdmin - Gerenciador de Arquivos",
         plugins: ["advlist autolink link image lists charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code insertdatetime media nonbreaking", "table contextmenu directionality emoticons paste textcolor filemanager"],
         image_advtab: true,
@@ -145,8 +145,8 @@
                                 </section>
                                 <section>
                                     <label class="label"><strong>Corpo da Notícia:</strong></label>
-                                    <label class="texarea">
-                                        <textarea class="edit" id="corpo_noticia"></textarea>
+                                    <label class="textarea">
+                                        <textarea class="edit span12" id="corpo_noticia"></textarea>
                                     </label>
                                     <input type="hidden" id="usuario" value="<?php echo $_SESSION['user']->nome_usuario ?>" />
                                 </section>
