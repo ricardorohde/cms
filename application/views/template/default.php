@@ -19,6 +19,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="./js/alertify/alertify.core.css">
         <link rel="stylesheet" type="text/css" media="screen" href="./js/alertify/alertify.default.css">
         <link rel="stylesheet" type="text/css" media="all" href="./js/fancybox/jquery.fancybox.css" />
+        <link rel="stylesheet" type="text/css" media="all" href="./css/pentaurea.css" />
         <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
         <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
         <style>

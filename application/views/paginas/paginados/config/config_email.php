@@ -14,7 +14,7 @@
                 
                 <div class="">
                     <div class="widget-body no-padding">
-                        <form class="smart-form">
+                        <form id="atualizar_config" class="smart-form">
                             <?php
                                 foreach($config as $row)
                                 {
@@ -94,7 +94,10 @@
                                 }
                             ?>
                             <footer>
-                                <button class="btn">Atualizar configurações</button>
+                                <button class="btn btn-default">Atualizar configurações</button>
+                                <a class="btn btn-danger" data-action='editar' id='editar_informacoes'>
+                                    Editar informações
+                                </a>
                             </footer>
                         </form>
                     </div>
@@ -104,3 +107,22 @@
         </article>
     </div>
 </section>
+
+<script type="text/javascript">
+    $('#atualizar_config').find('input, button').prop('disabled', true);
+    
+    $('#editar_informacoes').click(function(e){
+        e.preventDefault();
+        
+        if($(this).data('action') == 'editar')
+        {
+            $(this).html('Cancelar edição').data('action', 'cancelar');
+            $('#atualizar_config').find('input, button').prop('disabled', false);
+        }
+        else
+        {
+            $(this).html('Editar Informações').data('action', 'editar');
+            $('#atualizar_config').find('input, button').prop('disabled', true);
+        }
+    });
+</script>

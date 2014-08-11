@@ -22,7 +22,7 @@
         corpo_noticia = $("#corpo_noticia").val();
         usuario = $("#usuario").val();
         $.ajax({
-            url: "<?php echo app_baseUrl() . 'noticias/salva_noticia'; ?>",
+            url: "<?php echo app_baseUrl() . 'noticias/nova_noticia/salva_noticia'; ?>",
             type: "POST",
             data: {titulo_noticia: titulo_noticia, resumo_noticia: resumo_noticia, imagem_noticia: imagem_noticia, tipo_noticia: tipo_noticia, posicionamento: posicionamento, corpo_noticia: corpo_noticia, usuario: usuario},
             dataType: "json",
