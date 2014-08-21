@@ -42,13 +42,9 @@
         <script src="./js/plugin/select2/select2.min.js"></script>
         <script src="./js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
         <script src="./js/alertify/alertify.min.js"></script>
-        <script src="./js/blockUI.js"></script>
         <script src="./js/tinymce/tinymce.min.js" type="text/javascript"></script>
         <script src="./js/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
         <script src="./js/fancybox/jquery.fancybox.js" type="text/javascript"></script>
-        <!--[if IE 7]>
-                <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-        <![endif]-->
         <script src="./js/app.js"></script>
         <script type="text/javascript">
             /** Inicialização dos tooltips e popovers **/
@@ -66,22 +62,11 @@
             
             /** Configurações utilizadas no ajax **/
             $(document).ajaxStart(function() {
-                $.blockUI({
-                    css: {
-                        border: 'none',
-                        padding: '15px',
-                        backgroundColor: '#000',
-                        'border-radius': '10px',
-                        '-webkit-border-radius': '10px',
-                        '-moz-border-radius': '10px',
-                        opacity: .5,
-                        color: '#fff'},
-                    message: 'Processando Pedido...'
-                });
+                $('.carregando').fadeIn('fast');
             });
             
             $(document).ajaxComplete(function() {
-                $.unblockUI();
+                $('.carregando').fadeOut('slow');
             });
             
             $.ajaxSetup({

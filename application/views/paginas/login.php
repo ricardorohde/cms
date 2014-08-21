@@ -2,6 +2,9 @@
     $(document).ready(function() {
         $("#login").submit(function(e) {
             e.preventDefault();
+
+            $('#entrar').button('loading');
+            
             login = $("#usuario").val();
             senha = $("#senha").val();
             $.ajax({
@@ -18,6 +21,7 @@
                     else
                     {
                         msg_erro('Usuário ou senha incorretos');
+                        $('#entrar').button('reset');
                         $("#usuario").focus();
                         $("#senha").val("");
                     }
@@ -25,6 +29,7 @@
                 error: function()
                 {
                     msg_erro('Infelizmente ocorreu um erro. Tente novamente mais tarde');
+                    $('#entrar').button('reset');
                 }
             });
         });
@@ -64,7 +69,7 @@
             </section>
         </fieldset>
         <footer>
-            <button type="submit" class="btn btn-primary">
+            <button id="entrar" type="submit" class="btn btn-primary" data-loading-text="Acessando o sistema...">
                 Fazer login
             </button>
         </footer>

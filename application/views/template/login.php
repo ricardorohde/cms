@@ -38,35 +38,15 @@
         <script src="./js/libs/jquery-ui-1.10.3.min.js"></script>
         <script src="./js/bootstrap/bootstrap.min.js"></script>
         <script src="./js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
-        <script src="./js/blockUI.js"></script>
         <!--[if IE 7]>
-                <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+                <h1>O seu navegador está desatualizado. Favor atualizá-lo em www.microsoft.com/download</h1>
         <![endif]-->
         <!-- MAIN APP JS FILE -->
         <script src="./js/app.js"></script>
         <script src="./js/ajax.js"></script>
         <script src="./js/notification/SmartNotification.min.js"></script>
         <script type="text/javascript">
-            /** Configurações utilizadas no ajax **/
-            $(document).ajaxStart(function() {
-                $.blockUI({
-                    css: {
-                        border: 'none',
-                        padding: '15px',
-                        backgroundColor: '#000',
-                        'border-radius': '10px',
-                        '-webkit-border-radius': '10px',
-                        '-moz-border-radius': '10px',
-                        opacity: .5,
-                        color: '#fff'},
-                    message: 'Processando Pedido...'
-                });
-            });
-            
-            $(document).ajaxComplete(function() {
-                $.unblockUI();
-            });
-            
+        	//Configurações do ajax
             $.ajaxSetup({
                 error: function(xhr){
                     if (xhr.status === 0) {
