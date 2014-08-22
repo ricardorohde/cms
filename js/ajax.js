@@ -117,3 +117,28 @@ function abrirPopup(url, w, h)
     return false;
 }
 //******************************************************************************
+
+/**
+ * show_loading()
+ * 
+ * Função desenvolvida para exibir o elemento Loading
+ * 
+ * @author	:	Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+ */
+function show_loading()
+{
+	$('.carregando').fadeIn('fast');
+}
+//******************************************************************************
+
+/**
+ * hide_loading()
+ * 
+ * Função desenvolvida para esconder o elemento Loading
+ * 
+ * @author	:	Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+ */
+function hide_loading()
+{
+	$('.carregando').fadeOut('slow');
+}

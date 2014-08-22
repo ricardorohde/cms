@@ -31,8 +31,8 @@
     <body class="smart-style-2 menu-on-top">
         <?php $this->load->view('/paginas/' . $view); ?>
 
-        <script src="./js/ajax.js"></script>
         <script src="./js/libs/jquery-2.0.2.min.js"></script>
+        <script src="./js/ajax.js"></script>
         <script src="./js/libs/jquery-ui-1.10.3.min.js"></script>
         <script src="./js/plugin/colorpicker/bootstrap-colorpicker.min.js"></script>
         <script src="./js/bootstrap/bootstrap.min.js"></script>
@@ -62,11 +62,11 @@
             
             /** Configurações utilizadas no ajax **/
             $(document).ajaxStart(function() {
-                $('.carregando').fadeIn('fast');
+                show_loading();
             });
             
             $(document).ajaxComplete(function() {
-                $('.carregando').fadeOut('slow');
+                hide_loading();
             });
             
             $.ajaxSetup({
@@ -91,18 +91,19 @@
                 buttonFocus: "none"
             });
             //******************************************************************
-            
+
+            /**
+             * Função desenvolvida para fazer o logoff do sistema
+             */
             $('.logout').click(function(e) {
-                //get the link
+                //Recebe o link da página de logoff
                 $.loginURL = $(this).attr('href');
 
-                // ask verification
+                // Realiza o questionamento se o usuário deseja sair
                 $.SmartMessageBox({
                     title: "<i class='fa fa-sign-out txt-color-orangeDark'></i> Deseja sair <span class='txt-color-orangeDark'><strong>" + $('#show-shortcut').text() + "</strong></span> ?",
                     content: "Você pode melhorar a segurança fechando esta aba após realizar o logoff",
                     buttons: '[Não][Sim]'
-
-
                 }, function(ButtonPressed) {
                     if (ButtonPressed == "Sim") {
                         $.root_.addClass('animated fadeOutUp');
