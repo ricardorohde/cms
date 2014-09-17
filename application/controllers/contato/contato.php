@@ -1,22 +1,27 @@
-<?php
-    /**
-     * contato.php
-     * 
-     * Arquivo que contém a classe contato
-     * 
-     * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @version     v1.11.0
-     */
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	/**
+	 * Content Manegement System
+	 * 
+	 * Sistema desenvolvido para facilitar a inserção e atualização de dados no
+	 * site do Pentáurea Clube
+	 * 
+	 * @package		CMS
+	 * @author		Masterkey Informática
+	 * @copyright	Copyright (c) 2010 - 2014, Masterkey Informática LTDA
+	 */
 
     /**
-     * Classe Contato.
+     * Contato
      * 
      * Classe desenvolvida para realizar a gerência das mensagens que são 
      * enviadas pelo formulário do site.
      * 
-     * @package     CI_Controller
-     * @subpackage  MY_Controller
+     * @package     Controllers
+     * @subpackage  Contato
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+     * @access		Public
+     * @version     v1.2.0
+     * @since		15/09/2014
      */
     class Contato extends MY_Controller {
 
@@ -27,12 +32,10 @@
          * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
          * @access      public
-         * @param       bool $requer_autenticacao Se for setado com TRUE, indica
-         *              que, para acessar a classe, é necessário fazer login
          */
-        public function __construct($requer_autenticacao = TRUE)
+        public function __construct()
         {
-            parent::__construct($requer_autenticacao);
+            parent::__construct(TRUE);
             
             $this->load->model('contato_model', 'contato');
         }
@@ -63,7 +66,7 @@
          */
         function buscar_contatos($offset = 0)
         {
-            /** Define o limite da busca * */
+            /** Define o limite da busca **/
             $limite = 7;
 
             /** Recebe as mensagens que estão cadastradas * */

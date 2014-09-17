@@ -1,80 +1,123 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	/**
+	 * Content Manegement System
+	 * 
+	 * Sistema desenvolvido para facilitar a inserção e atualização de dados no
+	 * site do Pentáurea Clube
+	 * 
+	 * @package		CMS
+	 * @author		Masterkey Informática
+	 * @copyright	Copyright (c) 2010 - 2014, Masterkey Informática LTDA
+	 */
+	
+	/**
+	 * MY_Controller
+	 * 
+	 * Subclasse padrão do sistema. Todas as variáveis protegidas que serão
+     * utilizadas pelos controllers são definidas aqui, além de algumas funções
+     * globais. Todas os controllers devem extender a esta classe
+	 * 
+	 * @package		Core
+	 * @author 		Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+	 * @access		Public
+	 * @version		v1.1.0
+	 * @since		15/09/2014
+	 *
+	 */
     class MY_Controller extends CI_Controller
     {
-        /*
-         * Classe MY_Controller - Este controller pricipal é o que irá controlar
-         * todos os outros "sub-controllers" no decorrer da execução do sistema
-         */
-        
-        /*
-         * Definições de variáveis protegidas, que serão usadas pelos outros 
-         * controllers, desde que instanciem este controller
-         */
-
-        protected $template;
+    	/**
+    	 * Variável que receberá o template que será exibido ao usuário final
+    	 * 
+    	 * @var string
+    	 */
+		protected $template;
+		
+		/**
+		 * Variável que receberá os dados que serão exibidos aos usuário final
+		 *
+		 * @var	string
+		 */
         protected $dados;
+        
+        /**
+         * Variável que recebe a visão que será inserida no template
+         *
+         * @var	string
+         */
         protected $view;
+        
+        /**
+         * Variável que recebe o título que a página requisitada receberá
+         *
+         * @var	string
+         */
         protected $titulo;
 
-        //----------------------------------------------------------------------
-
-        /*
-         * Construção da classe com o método parent, além da definição de variá_
-         * veis protegidas. Na contrução da classe, definimos um template padrão
-         * para todas as páginas e verificamos se há necessidade de estar em uma
-         * página com autenticação
+        /**
+         * __construct()
+         * 
+         * Realiza a construção da classe
+         * 
+         * @author		Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+	 	 * @access		Public
+	 	 * @param		Bool $requer_autenticacao É utilizada para controlar as 
+         *              páginas que necessitam de login		
          */
         public function __construct($requer_autenticacao = TRUE)
         {
             parent::__construct();
+            
             session_start();
-            $this->template = 'template/default';
-            $this->titulo = 'Gerenciador de Conteúdo';
+            
+            $this->template	= 'template/default';
+            $this->titulo 	= 'Gerenciador de Conteúdo';
+            
             $this->verifica_login($requer_autenticacao);
             
-            $config['full_tag_open'] = '<ul class="pagination">';
-            $config['full_tag_close'] = '</ul>';
-            $config['first_link'] = 'Primeiro';
-            $config['first_tag_open'] = '<li>';
-            $config['first_tag_close'] = '</li>';
-            $config['last_link'] = 'Último';
-            $config['last_tag_open'] = '<li>';
-            $config['last_tag_close'] = '</li>';
-            $config['next_link'] = 'Próximo &rarr;';
-            $config['next_tag_open'] = '<li>';
-            $config['next_tag_close'] = '</li>';
-            $config['prev_link'] = '&larr; Anterior';
-            $config['prev_tag_open'] = '<li>';
-            $config['prev_tag_close'] = '</li>';
-            $config['cur_tag_open'] = '<li class="active"><a>';
-            $config['cur_tag_close'] = '</a></li>';
-            $config['num_tag_open'] = '<li>';
-            $config['num_tag_close'] = '</li>';
-            $this->pagination->initialize($config);
+            /** Realiza o load da configuração de paginação e a inicializa **/
+            
+			$this->config->load('custom/paginacao', true);
+			$config_paginacao = $this->config->item('custom/paginacao');
+			
+            $this->pagination->initialize($config_paginacao);
         }
-        /**********************************************************************/
+        //**********************************************************************
 
-        /*
-         * A função LoadView é a função que receberá as visões e os dados e os
-         * lançará no template padrão, renderizando assim toda a página
+        /**
+         * LoadView()
+         * 
+         * Função responsável por fazer a integração entre a view os dados 
+         * e o template
+         * 
+         * @author		Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access		Public
          */
         public function LoadView()
         {
-            $this->dados['view'] = $this->view;
-            $this->dados['titulo'] = $this->titulo;
+            $this->dados['view']	= $this->view;
+            $this->dados['titulo'] 	= $this->titulo;
+            
             if(isset($_SESSION['user']))
             {
                 $this->dados['nome_usuario'] = $_SESSION['user']->nome_usuario;
             }
+            
             $this->load->view($this->template, $this->dados);
         }
+        //**********************************************************************
 
-        /**********************************************************************/
-
-        /*
-         * Função que irá verificar se o susário efetuou login ou não. Caso não
-         * efetuar o login e tentar acessar uma página restrita, o mesmo será
-         * redirecionado para a página de login
+        /**
+         * verifica_login()
+         * 
+         * Verifica se a página solicitada necessita de login efetuado. Se o 
+         * usuário não tiver efetuado o login, o redireciona para a página 
+         * principal, para que possa efetuar o mesmo
+         * 
+         * @author		Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access		Public
+         * @param       Bool $requer_autenticacao É utilizada para controlar as 
+         *              páginas que necessitam de login
          */
         public function verifica_login($requer_autenticacao)
         {
@@ -88,4 +131,5 @@
         }
         /**********************************************************************/
     }
-?>
+	/** End of File MY_Controller.php **/
+    /** Location ./application/core/MY_Controller.php **/

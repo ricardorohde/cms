@@ -25,11 +25,6 @@
                         $("#usuario").focus();
                         $("#senha").val("");
                     }
-                },
-                error: function()
-                {
-                    msg_erro('Infelizmente ocorreu um erro. Tente novamente mais tarde');
-                    $('#entrar').button('reset');
                 }
             });
         });

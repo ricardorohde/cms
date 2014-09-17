@@ -90,7 +90,9 @@ function msg_erro(msg)
  */
 function limpar_campos(form)
 {
-    form.find("input, textarea, radio, select, checkbox").val("");
+    form.find("input, textarea").val("");
+    form.find('radio, checkbox').prop('checked', false);
+    form.find('select').prop('selected', false);
 }
 //******************************************************************************
 
@@ -127,7 +129,7 @@ function abrirPopup(url, w, h)
  */
 function show_loading()
 {
-	$('.carregando').fadeIn('fast');
+    $('.carregando').fadeIn('fast');
 }
 //******************************************************************************
 
@@ -140,5 +142,5 @@ function show_loading()
  */
 function hide_loading()
 {
-	$('.carregando').fadeOut('slow');
+    $('.carregando').fadeOut('slow');
 }

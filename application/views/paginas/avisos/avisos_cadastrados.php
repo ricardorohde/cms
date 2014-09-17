@@ -124,7 +124,7 @@
             mensagem        = $('#mensagem').val();
 
             $.ajax({
-                url: '<?php echo app_baseurl().'avisos/novo_aviso/salvar_aviso' ?>',
+                url: '<?php echo app_baseurl().'avisos/avisos_cadastrados/salvar_aviso' ?>',
                 type: 'POST',
                 data: {mensagem: mensagem, data_expiracao: data_expiracao},
                 dataType: 'html',

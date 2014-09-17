@@ -1,15 +1,26 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	/**
+	 * Content Manegement System
+	 * 
+	 * Sistema desenvolvido para facilitar a inserção e atualização de dados no
+	 * site do Pentáurea Clube
+	 * 
+	 * @package		CMS
+	 * @author		Masterkey Informática
+	 * @copyright	Copyright (c) 2010 - 2014, Masterkey Informática LTDA
+	 */
     
     /**
      * avisos_cadastrados
      * 
      * Classe desenvolvida para gerenciar os avisos cadastrados.
      * 
-     * @package     CI_Controller
-     * @subpackage  MY_Conntroller
+     * @package     Controllers
+     * @subpackage  Avisos
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @version     v0.1.1
-     * @todo        Função para edição dos avisos cadastrados
+     * @access		Public
+     * @version     v1.1.0
+     * @since		15/09/2014
      */
     class Avisos_cadastrados extends MY_Controller
     {
@@ -20,12 +31,12 @@
          * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
          * @access      public
-         * @param       bool $requer_autenticacao Se TRUE, é necessário estar
-         *              logado para acessar a classe
          */
-        public function __construct($requer_autenticacao = TRUE)
+        public function __construct()
         {
-            parent::__construct($requer_autenticacao);
+            parent::__construct(TRUE);
+            
+            //Realiza o LOAD do model necessário
             $this->load->model('avisos/avisos_model', 'avisos');
         }
         //**********************************************************************
@@ -55,8 +66,10 @@
          */
         function busca_cadastrados($offset = 0)
         {
+        	/** Definie o Limite da pesquisa **/
             $limite = 20;
             
+            /** Recebe os avisos cadastrados **/
             $this->dados['avisos'] = $this->avisos->busca_avisos($limite, $offset);
             
             if(!$this->dados['avisos'] && $offset > 0)

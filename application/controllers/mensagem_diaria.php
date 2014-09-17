@@ -1,14 +1,25 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	/**
+	 * Content Manegement System
+	 * 
+	 * Sistema desenvolvido para facilitar a inserção e atualização de dados no
+	 * site do Pentáurea Clube
+	 * 
+	 * @package		CMS
+	 * @author		Masterkey Informática
+	 * @copyright	Copyright (c) 2010 - 2014, Masterkey Informática LTDA
+	 */
     
     /**
-     * mensagem_diaria
+     * Mensagem_diaria
      * 
      * Classe desenvolvida para gerenciar as transações das Mensagens diárias
      * 
-     * @package     CI_Controller
-     * @subpackage  MY_Controller
+     * @package     Controllers
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @version     v1.0.0
+     * @access		Public
+     * @version     v1.1.0
+     * @since		15/09/2014
      */
     class Mensagem_diaria extends MY_Controller
     {
@@ -24,7 +35,8 @@
         {
             parent::__construct(TRUE);
             
-            $this->load->model('mensagens_model');
+            /** Realiza o LOAD do model necessário **/
+            $this->load->model('mensagens_model', 'mensagens');
         }
         //**********************************************************************
         
@@ -51,14 +63,14 @@
          * @access      public
          * @param       string $dados['mensagem']   recebe a mensagem que foi digitada e passada via post
          * @param       string $dados['autor']      recebe o autor que foi digitado e passado via post
-         * @return      integer retorna 1 se salvar a mensagem e 0 se não salvar
+         * @return      bool retorna TRUE se salvar a mensagem e FALSE se não salvar
          */
         function salvar_mensagem()
         {
             $dados['mensagem']  = $this->input->post('mensagem');
             $dados['autor']     = $this->input->post('autor');
             
-            echo $this->mensagens_model->salvar($dados);
+            echo $this->mensagens->salvar($dados);
         }
         //**********************************************************************
         
@@ -70,24 +82,25 @@
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
          * @access      public
          * @param       int $offset define o ofsset da pesquisa sql
-         * @param       int $limite define o limite da pesquisa sql
          */
         function busca_mensagens($offset = 0)
         {
+        	//Recebe o limite da consulta sql
             $limite = 20;
             
-            $this->dados['mensagens'] = $this->mensagens_model->buscar($limite, $offset);
+            //Recebe os dados vindos do banco de dados
+            $this->dados['mensagens'] = $this->mensagens->buscar($limite, $offset);
             
             if(!$this->dados['mensagens'] and $offset > 0)
             {
                 $offset = $offset - $limite;
-                $this->dados['mensagens'] = $this->mensagens_model->buscar($limite, $offset);
+                $this->dados['mensagens'] = $this->mensagens->buscar($limite, $offset);
             }
             
             /** Configurações da paginação **/
             $config['base_url']     = app_baseurl().'mensagem_diaria/busca_mensagens';
             $config['per_page']     = $limite;
-            $config['total_rows']   = $this->mensagens_model->contar_mensagens();
+            $config['total_rows']   = $this->mensagens->contar_mensagens();
             
             $this->pagination->initialize($config);
             
@@ -105,21 +118,13 @@
          * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
          * @access      public
-         * @param       int $id recebe o id da mensagem passado por post
          * @return      bool retorna TRUE se excluir e FALSE se não excluir
          */
         function excluir_mensagem()
         {
             $id = $this->input->post('id');
             
-            if($this->mensagens_model->excluir($id) == 1)
-            {
-                echo 1;
-            }
-            else
-            {
-                echo 0;
-            }
+            echo $this->mensagens->excluir($id);
         }
         //**********************************************************************
         
@@ -137,7 +142,7 @@
             $dados['acao']  = $this->input->post('acao');
             $dados['id']    = $this->input->post('id');
             
-            echo $this->mensagens_model->marcar($dados);
+            echo $this->mensagens->marcar($dados);
         }
         //**********************************************************************
         
@@ -150,9 +155,9 @@
          * @access      public
          * @param       int $id Contém o ID da mensagem que será editada
          */
-        function editar($id)
+        function editar($id = NULL)
         {
-            $this->dados['mensagem'] = $this->mensagens_model->buscar_mensagem($id);
+            $this->dados['mensagem'] = $this->mensagens->buscar_mensagem($id);
             
             $this->view     = 'popup/editar_mensagem';
             $this->template = 'template/popup';
@@ -177,7 +182,7 @@
             $dados['autor']     = $this->input->post('autor');
             $dados['mensagem']  = $this->input->post('mensagem');
             
-            echo $this->mensagens_model->atualizar($dados);
+            echo $this->mensagens->atualizar($dados);
         }
         //**********************************************************************
     }

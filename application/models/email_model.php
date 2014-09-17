@@ -1,19 +1,25 @@
-<?php
-    /**
-     * email_model.php
-     * 
-     * Arquico que contém a classe email_model
-     * 
-     * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @version     v1.1.0
-     */
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	/**
+	 * Content Manegement System
+	 * 
+	 * Sistema desenvolvido para facilitar a inserção e atualização de dados no
+	 * site do Pentáurea Clube
+	 * 
+	 * @package		CMS
+	 * @author		Masterkey Informática
+	 * @copyright	Copyright (c) 2010 - 2014, Masterkey Informática LTDA
+	 */
     
     /**
-     * email_model
+     * Email_model
      * 
      * Classe desenvolvida para gerenciar as operações com a tabela email
      * 
+     * @package		Models
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+     * @access		Public
+     * @version		v1.1.0
+     * @since		16/09/2014
      */
     class Email_model extends MY_Model
     {
@@ -31,7 +37,6 @@
             
             /** Definição do nome da tabela e da chave primária **/
             $this->_tabela      = 'email';
-            $this->_primaria    = 'id';
         }
         //**********************************************************************
         
@@ -86,18 +91,17 @@
          */
         private function salvar($dados)
         {
-        	//Faz a associação entre os dados e os campos da tabela
-        	$data 	= array(
-        			'smtp_host'		=> $dados['smtp_host'],
-        			'smtp_port'		=> $dados['smtp_port'],
-        			'smtp_userName'	=> $dados['smtp_userName'],
-        			'smtp_password'	=> $dados['smtp_password'],
-        			'smtp_password'	=> $dados['smtp_password'],
-        			'smtp_from'		=> $dados['smtp_from'],
-        			'smtp_fromName'	=> $dados['smtp_fromName'],
+        	$this->_data 	= array(
+        		'smtp_host'		=> $dados['smtp_host'],
+        		'smtp_port'		=> $dados['smtp_port'],
+        		'smtp_userName'	=> $dados['smtp_userName'],
+        		'smtp_password'	=> $dados['smtp_password'],
+        		'smtp_password'	=> $dados['smtp_password'],
+        		'smtp_from'		=> $dados['smtp_from'],
+        		'smtp_fromName'	=> $dados['smtp_fromName'],
         	);
         	
-        	return $this->BD->insert($this->_tabela, $data);
+        	return parent::save();
         }
         //**********************************************************************
         
@@ -114,19 +118,19 @@
          */
         private function atualizar($dados)
         {
-        	//Faz a associação entre os dados e os campos da tabela
-        	$data 	= array(
-        			'smtp_host'		=> $dados['smtp_host'],
-        			'smtp_port'		=> $dados['smtp_port'],
-        			'smtp_userName'	=> $dados['smtp_userName'],
-        			'smtp_password'	=> $dados['smtp_password'],
-        			'smtp_password'	=> $dados['smtp_password'],
-        			'smtp_from'		=> $dados['smtp_from'],
-        			'smtp_fromName'	=> $dados['smtp_fromName'],
+        	$this->_data 	= array(
+        		'smtp_host'		=> $dados['smtp_host'],
+        		'smtp_port'		=> $dados['smtp_port'],
+        		'smtp_userName'	=> $dados['smtp_userName'],
+        		'smtp_password'	=> $dados['smtp_password'],
+        		'smtp_password'	=> $dados['smtp_password'],
+        		'smtp_from'		=> $dados['smtp_from'],
+        		'smtp_fromName'	=> $dados['smtp_fromName'],
         	);
         	
-        	$this->BD->where('id', $dados['id']);
-        	return $this->BD->update($this->_tabela, $data);
+        	$this->_primaria = $dados['id'];
+        	
+        	return parent::update();
         }
     }
     /** End of File email_model.php **/

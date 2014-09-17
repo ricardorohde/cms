@@ -41,13 +41,7 @@
                 {
                     if (sucesso == 1)
                     {
-                        $.smallBox({
-                            title: "<i class='fa fa-check'></i> Sucesso",
-                            content: "Diretoria cadastrado",
-                            iconSmall: "fa fa-thumbs-down bounce animated",
-                            color: "#5CB811",
-                            timeout: 5000
-                        });
+                        msg_sucesso('Diretoria Cadastrada');
                         $('#ano_inicio').val('');
                         $('#ano_final').val('');
                         $('#observacoes').val('');
@@ -56,24 +50,8 @@
                     }
                     else
                     {
-                        $.smallBox({
-                            title: "<i class='glyphicon glyphicon-remove'></i> Erro",
-                            content: "<strong>Erro ao salvar os dados. Tente novamente</strong>",
-                            color: "#FE1A00",
-                            iconSmall: "fa fa-thumbs-down bounce animated",
-                            timeout: 5000
-                        });
+                        msg_sucesso('Erro ao salvar os dados. Tente novamente');
                     }
-                },
-                error: function()
-                {
-                    $.smallBox({
-                        title: "<i class='glyphicon glyphicon-remove'></i> Erro",
-                        content: "<strong>Ocorreu um erro. Tente novamente</strong>",
-                        color: "#FE1A00",
-                        iconSmall: "fa fa-thumbs-down bounce animated",
-                        timeout: 5000
-                    });
                 }
             });
         });
@@ -107,7 +85,7 @@
         </h1>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 pull-right">
-        <a data-toggle="modal" href="#cadastro_diretoria" class="btn btn-primary btn-lg pull-right header-btn">
+        <a data-toggle="modal" href="#cadastro_diretoria" class="btn btn-primary pull-right header-btn">
             <i class="fa fa-plus"></i> Cadastrar diretoria
         </a>
     </div>

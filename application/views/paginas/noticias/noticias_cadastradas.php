@@ -155,28 +155,9 @@
         </h1>
     </div>
 </div>
-<section id="widget-grid" class="">
-    <div class="row">
-        <article class="col-sm-12">
-            <div class="jarviswidget" id="wid-id-0" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
-                <header>
-                    <span class="widget-icon"> 
-                        <i class="fa fa-book txt-color-darken"></i> 
-                    </span>
-                    <h2>Todos os artigos e notícias cadastradas</h2>
-                </header>
-                <div class="no-padding">
-                    <div class="widget-body">
-                        <div id="myTabContent" class="tab-content">
-                            <div class="tab-pane fade active in no-padding-bottom" id="s1">
-                                <!-- Div que receberá as notícias via ajax -->
-                                <div class="row no-space" id="todas_noticias"></div>
-                                <!--*****************************************-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </div>
-</section>
+
+<div class="row">
+	<!-- Div onde serão inseridas as notícias casdastradas via ajax -->
+	<div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12" id="todas_noticias"></div>
+	<!--*********************************************************************-->
+</div>

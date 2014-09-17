@@ -1,22 +1,25 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	/**
+	 * Content Manegement System
+	 * 
+	 * Sistema desenvolvido para facilitar a inserção e atualização de dados no
+	 * site do Pentáurea Clube
+	 * 
+	 * @package		CMS
+	 * @author		Masterkey Informática
+	 * @copyright	Copyright (c) 2010 - 2014, Masterkey Informática LTDA
+	 */
 
     /**
-     * contato_model.php
-     * 
-     * Arquivo que contém a classe contato_model
-     * 
-     * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @version     v0.5.0
-     */
-    
-    /**
-     * contato_model.
+     * Contato_model
      * 
      * Classe desenvolvida para gerenciar as operações com a tabela contato
      * 
-     * @package     CI_Model
-     * @subpackage  MY_Model
+     * @package     Models
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+     * @access		Public
+     * @version		v1.1.0
+     * @since		16/09/2014
      */
     class Contato_Model extends MY_Model
     {
@@ -27,14 +30,12 @@
          * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
          * @access      public
-         * @var         string _tabela  Contém o nome da tabela
-         * @var         string _primary Contém a chave primaria da tabela
          */
         public function __construct()
         {
             parent::__construct();
+            
             $this->_tabela  = 'contato';
-            $this->_primary = 'id';
         }
         //**********************************************************************
 
@@ -55,6 +56,7 @@
             $this->BD->limit($limite, $offset);
             $this->BD->select('*');
             $this->BD->order_by('data', 'desc');
+            
             return $this->BD->get($this->_tabela)->result();
         }
         //**********************************************************************
@@ -70,7 +72,7 @@
          */
         function conta_contatos()
         {
-            return $this->BD->count_all_results($this->_tabela);
+            return parent::count();
         }
         //**********************************************************************
         
@@ -86,10 +88,10 @@
          */
         function marcar_lido($id)
         {
-            $dados['status'] = '0';
-            $this->BD->where(array('id' => $id));
+        	$this->_data		= array('status' => 0);
+            $this->_primaria 	= $id;
             
-            return $this->BD->update($this->_tabela, $dados);
+            return parent::update();
         }
         //**********************************************************************
 
@@ -107,6 +109,7 @@
         function buscar_contato($id)
         {
             $this->BD->where(array("id" => $id));
+            
             return $this->BD->get($this->_tabela)->result();            
         }
         //**********************************************************************
@@ -124,8 +127,9 @@
          */
         function excluir($id)
         {
-            $this->BD->where('id', $id);
-            return $this->BD->delete($this->_tabela);
+            $this->_primaria = $id;
+            
+            return parent::delete();
         }
         //**********************************************************************
     }

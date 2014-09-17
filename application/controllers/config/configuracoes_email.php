@@ -1,11 +1,26 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	/**
+	 * Content Manegement System
+	 * 
+	 * Sistema desenvolvido para facilitar a inserção e atualização de dados no
+	 * site do Pentáurea Clube
+	 * 
+	 * @package		CMS
+	 * @author		Masterkey Informática
+	 * @copyright	Copyright (c) 2010 - 2014, Masterkey Informática LTDA
+	 */
+
     /**
-     * configuracoes_email.php
+     * Configuracoes_email.php
      * 
      * Arquivo que contém a classe configuracoes_email
      * 
+     * @package     Controllers
+     * @subpackage  Config
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @version     v1.1.0
+     * @access		Public
+     * @version     v1.2.0
+     * @since		15/09/2014
      */
     class Configuracoes_email extends MY_Controller
     {
@@ -21,7 +36,8 @@
         {
             parent::__construct(TRUE);
             
-            $this->load->model('email_model');
+            //Realiza o LOAD do model necessário
+            $this->load->model('email_model', 'email');
         }
         //**********************************************************************
         
@@ -49,7 +65,7 @@
          */
         function buscar_config()
         {
-            $this->dados['config'] = $this->email_model->buscar();
+            $this->dados['config'] = $this->email->buscar();
             
             $this->load->view('paginas/paginados/config/config_email', $this->dados);
         }
@@ -71,11 +87,11 @@
         	$dados['smtp_port'] 	= $this->input->post('smtp_port');
         	$dados['smtp_userName'] = $this->input->post('smtp_userName');
         	$dados['smtp_password'] = $this->input->post('smtp_password');
-        	$dados['smtp_password'] = $this->input->post('smtp_secure');
+        	$dados['smtp_secure']	= $this->input->post('smtp_secure');
         	$dados['smtp_from'] 	= $this->input->post('smtp_from');
         	$dados['smtp_fromName'] = $this->input->post('smtp_fromName');
         	
-        	if ($this->email_model->processar($dados) == 1)
+        	if ($this->email->processar($dados) == 1)
         	{
         		echo 1;
         	}

@@ -1,154 +1,188 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	/**
+	 * Content Manegement System
+	 * 
+	 * Sistema desenvolvido para facilitar a inserção e atualização de dados no
+	 * site do Pentáurea Clube
+	 * 
+	 * @package		CMS
+	 * @author		Masterkey Informática
+	 * @copyright	Copyright (c) 2010 - 2014, Masterkey Informática LTDA
+	 */
+
     /**
-     * @name temas.php
-     * @author Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @version 1.0.1
-     * @return mixed
-     * @uses Módulo responsável pelas transações de temas no site, envolvendo a
-     * tabela 'PERSONALIZACAO'
+     * Temas
+     * 
+     * Classe responsável por gerenciar as transações com a tabela 
+     * 'personalizacao'
+     * 
+     * @package		Models
+     * @author 		Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+     * @access		Public
+     * @version 	v1.1.0
+     * @since		16/09/2014
      */
     class Temas_model extends MY_Model
     {
         /**
-         * @name Construção da Classe
-         * @author Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @version 1.0.1
+         * __construct()
+         * 
+         * Realiza a construção da classe
+         * 
+         * @author		Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access		Public
          */
         public function __construct()
         {
             parent::__construct();
+            
             $this->_tabela = 'personalizacao';
-            $this->_primary = 'id';
         }
-        //----------------------------------------------------------------------
+        //**********************************************************************
         
         /**
-         * @name busca_temas()
-         * @author Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @package models/temas_model.php
-         * @uses Função desenvolvida para buscar os temas já salvos. Recebe 
-         * limite e offset para que seja feita uma busca com paginação
-         * @return array - em caso de houver dados no BD
-         *         NULL  - em caso de não houver nada
+         * busca_temas()
+         * 
+         * Função desenvolvida para buscar os temas já salvos
+         * 
+         * @author		Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access		Public
+         * @param		int $limite Recebe o limite da consulta sql
+         * @param		int $offset Recebe o offset da consulta sql
+         * @return 		array Retorna um array de temas cadastrados
          */
         function busca_temas($limite, $offset)
         {
-            $this->BD->select("*");
             $this->BD->limit($limite, $offset);
             $this->BD->order_by('id', 'desc');
-            $query = $this->BD->get($this->_tabela);
-            if($query->num_rows() > 0)
-            {
-                return $query->result();
-            }
-            else
-            {
-                return NULL;
-            }
+            
+            return $this->BD->get($this->_tabela)->result();
         }
-        //----------------------------------------------------------------------
+        //**********************************************************************
         
         /**
-         * @name contar_temas()
-         * @author Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @package models/temas_model.php
-         * @uses Função criada para contar os temas cadastrados no BD
-         * @return integer retorna a contagem dos registros
+         * contar_temas()
+         * 
+         * Função criada para contar os temas cadastrados no BD
+         * 
+         * @author		Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access		Public
+         * @return 		int Retorna a contagem dos registros
          */
         function contar_temas()
         {
-            return $this->BD->count_all_results($this->_tabela);
+            return parent::count();
         }
-        //----------------------------------------------------------------------
+        //**********************************************************************
         
         /**
-         * @name salvar_tema()
-         * @author Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @package models/temas_model.php
-         * @uses Função desenvolvida para salvar um novo tema no banco de dados
-         * @return integer
+         * salvar_tema()
+         * 
+         * Função desenvolvida para salvar um novo tema no banco de dados
+         * 
+         * @author		Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access		Public
+         * @param		array $dados Contém os dados a serem salvos
+         * @return		bool Retorna TRUE se salvar e FALSE se não salvar
          */
         function salvar_tema($dados)
         {
-            $data = array(
-                'imagem_fundo' => $dados['imagem_background'],
+            $this->_data = array(
+                'imagem_fundo' 		=> $dados['imagem_background'],
                 'cor_principal'     => $dados['cor_principal'],
                 'imagem_banner'     => $dados['imagem_banner'],
                 'data_inicio'       => $dados['data_inicio'],
                 'data_expiracao'    => $dados['data_expiracao'],
                 'status'            => 1
             );
-            return $this->BD->insert($this->_tabela, $data);
+            
+            return parent::save();
         }
-        //----------------------------------------------------------------------
+        //**********************************************************************
         
         /**
-         * @name excluir_tema()
-         * @author Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @package models/temas_model.php
-         * @uses A função é utilizada para excluir do banco de dados um tema pre
-         * viamente salvo
-         * @return integer
+         * excluir_tema()
+         * 
+         * A função é utilizada para excluir do banco de dados um tema
+         * previamente salvo
+         * 
+         * @author		Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access		Public
+         * @param		int $id Contém o ID do registro a ser excluido
+         * @return		bool Retorna TRUE se excluir e FALSE se não excluir
          */
         function excluir_tema($id)
         {
-            $this->BD->where('id', $id);
-            return $this->BD->delete($this->_tabela);
+            $this->_primaria = $id;
+            
+            return parent::delete();
         }
-        //----------------------------------------------------------------------
+        //**********************************************************************
         
         /**
-         * @name buscaTemaId()
-         * @author Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @package models/temas_model
-         * @uses A função é utilizada para buscar um tema previamente cadastrado
+         * buscaTemaId()
+         * 
+         * A função é utilizada para buscar um tema previamente cadastrado
          * para que possa ser editado
+         * 
+         * @author		Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access		Public
+         * @param		int $id Contém o ID do tema a ser buscado
+         * @return		array Retorna um array com os dados do tema buscado
          */
         function buscaTemaId($id)
         {
             $this->BD->where('id', $id);
-            $query = $this->BD->get($this->_tabela);
-            return $query->result();
+            
+            return $this->BD->get($this->_tabela)->result();
         }
-        //----------------------------------------------------------------------
+        //**********************************************************************
         
         /**
-         * @name salvar_edicaoTema();
-         * @author Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @package models/temas_model
-         * @uses A função é utilizada para atualizar um tema que já foi 
+         * salvar_edicaoTema()
+         * 
+         * A função é utilizada para atualizar um tema que já foi 
          * previamente salvo
-         * @return integer
+         * 
+         * @author 		Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access		Public
+         * @param		array $dados Contém os dados que serão atualizados
+         * @return		bool Retorna TRUE se atualizar e FALSE se não atualizar
          */
         function salvar_edicaoTema($dados)
         {
-            $data = array(
+            $this->_data = array(
                 'imagem_fundo'      => $dados['imagem_background'],
                 'imagem_banner'     => $dados['imagem_banner'],
                 'cor_principal'     => $dados['cor_principal'],
                 'data_inicio'       => $dados['data_inicio'],
                 'data_expiracao'    => $dados['data_expiracao']
             );
-            $this->BD->where('id', $dados['id']);
-            return $this->BD->update($this->_tabela, $data);
+            
+            $this->_primaria = $dados['id'];
+            
+            return parent::update();
         }
-        //----------------------------------------------------------------------
+        //**********************************************************************
         
         /**
-         * @name marcar()
-         * @author Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @package models/temas_model.php
-         * @uses A função é utilizada para marcar um tema como ativo ou inativo
-         * @return integer
+         * marcar()
+         * 
+         * A função é utilizada para marcar um tema como ativo ou inativo
+         * 
+         * @author		Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+         * @access		Public
+         * @param		array $dados Contém os dados a serem atualizados
+         * @return		bool Retorna TRUE  se atualizar e FALSE se não atualizar
          */
         function marcar($dados)
         {
-            $data = array(
-                'status' => $dados['status']
-            );
-            $this->BD->where('id', $dados['id']);
-            return $this->BD->update($this->_tabela, $data);
+            $this->_data 		= array('status' => $dados['status']);
+            $this->_primaria 	= $dados['id'];
+            
+            return parent::update();
         }
-        //----------------------------------------------------------------------
+        //**********************************************************************
     }
-?>
+	/** End of File temas_model.php **/
+    /** Location ./application/models/temas_model.php **/

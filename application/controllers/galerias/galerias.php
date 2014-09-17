@@ -1,16 +1,28 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	/**
+	 * Content Manegement System
+	 * 
+	 * Sistema desenvolvido para facilitar a inserção e atualização de dados no
+	 * site do Pentáurea Clube
+	 * 
+	 * @package		CMS
+	 * @author		Masterkey Informática
+	 * @copyright	Copyright (c) 2010 - 2014, Masterkey Informática LTDA
+	 */
     
     /**
-     * Galerias.php
+     * Galerias
      * 
      * Esta classe prove a criação de novas galerias fotográficas, sendo que as 
      * aparecerão dinamicamente no site. A intenção deste módulo é promover a 
      * fácil utilização para criação e edição de galerias de fotos.
      * 
-     * @package     CI_Controller
-     * @subpackage  MY_Controller
+     * @package     Controllers
+     * @subpackage  Galerias
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @version     v1.2.0
+     * @access		Public
+     * @version     v1.3.0
+     * @since		15/09/2014
      */
     class Galerias extends MY_Controller
     {
@@ -22,11 +34,11 @@
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
          * @access      public
          */
-        public function __construct($requer_autenticacao = TRUE)
+        public function __construct()
         {
-            parent::__construct($requer_autenticacao);
+            parent::__construct(TRUE);
             
-            /** Carrega model responsável pela galeria **/
+            /** Realiza o LOAD domodel responsável pela galeria **/
             $this->load->model('galerias_model');
         }
         //**********************************************************************
@@ -41,8 +53,8 @@
          */
         function index()
         {
-            $this->view = 'galerias/galerias';
-            $this->titulo = 'Todas as Galerias';
+            $this->view 	= 'galerias/galerias';
+            $this->titulo 	= 'Todas as Galerias';
             
             $this->LoadView();
         }

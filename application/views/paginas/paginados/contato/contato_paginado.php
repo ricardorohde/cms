@@ -1,9 +1,10 @@
 <?php
-    if(!isset($contatos))
+    if(!isset($contatos) || $contatos == NULL)
     {
         ?>
-        <div class="alert alert-success">
-            <strong>Atenção!</strong> Não existem mensagens em aberto
+        <div class="alert alert-block alert-info">
+        	<h4 class="alert-heading"><strong>:)</strong></h4>
+            <p>Não existem mensagens cadastradas</p>
         </div>
         <?php
     }

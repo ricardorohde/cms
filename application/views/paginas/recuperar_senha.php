@@ -1,11 +1,16 @@
 <script>
     $(document).ready(function(){
-        
+
+        //Função que busca o CAPTCHA
         busca_captcha();
-        
+
+        //Adiciona um botão para que o usuário possa voltar a página de login
         $("#login-header-space").html('<a href="<?php echo app_baseurl().'login'?>" class="btn btn-danger">Fazer login</a>');
+        
         $("#recuperacao").submit(function(e){
             e.preventDefault();
+
+            $('#btn-enviar').button('loading');
             
             email   = $("#email").val();
             captcha = $("#resposta-captcha").val();
@@ -18,41 +23,37 @@
                 success: function(sucesso){
                     if(sucesso == 3)
                     {
+                		limpar_campos($("#recuperacao"));
                         msg_sucesso('E-mail enviado. Verifique sua caixa de entrada');
-                        $("#email").val("");
-                        $("#resposta-captcha").val("");
+                        $("#email").focus();
                         busca_captcha();
+                        $('#btn-enviar').button('reset');
                     }
                     else if(sucesso == 0)
                     {
                         msg_erro('Erro no captcha. Digite novamente');
                         $("#resposta-captcha").val("").focus();
                         busca_captcha();
+                        $('#btn-enviar').button('reset');
                     }
                     else if(sucesso == 1)
                     {
                         msg_erro("Não há e-mail correspondente na base de dados. Verifique o endereço de email");
-                        $("#email").val("").focus();
-                        $("#resposta-captcha").val("");
+                        limpar_campos($("#recuperacao"));
+                        $("#email").focus();
                         busca_captcha();
+                        $('#btn-enviar').button('reset');
                     }
                     else if(sucesso == 2)
                     {
                         msg_erro("Não foi possível enviar os dados para o email. Tente novamente mais tarde");
                     }
-                    else
-                    {
-                        msg_erro('Erro desconhecido');
-                        $("#resposta-captcha").val("");
-                        busca_captcha();
-                    }
-                },
-                error: function(){
-                    msg_erro("Ocorreu um erro. Tente mais tarde");
                 }
             });
         });
     });
+
+    //Função que realiza a busca do captcha
     function busca_captcha()
     {
         url = "<?php echo app_baseurl().'recuperar_senha/captcha'?>"
@@ -87,7 +88,7 @@
             </section>
         </fieldset>
         <footer>
-            <button type="submit" class="btn btn-primary">
+            <button id="btn-enviar" type="submit" class="btn btn-primary" data-loading-text="Verificando e enviando...">
                 Recuperar Senha
             </button>
         </footer>

@@ -1,4 +1,6 @@
 <script>
+	//Variável global que receberá o valor da diretoria que será buscada
+	var diretoria = '';
     /**
      * Chamada do Jquery
      */
@@ -15,7 +17,8 @@
         $('#diretorias').change(function() {
             if ($(this).val())
             {
-                busca_diretores($(this).val());
+                diretoria = $(this).val();
+                busca_diretores(diretoria);
             }
         });
 
@@ -208,7 +211,7 @@
                                         <a class="iframe-btn" href="./js/tinymce/plugins/filemanager/dialog.php?type=1&field_id=fotografia&lang=pt_BR&fldr=diretores">
                                             <i class="icon-append fa fa-picture-o"></i>
                                         </a>
-                                        <input id="fotografia" type="text" class="form-control" placeholder="Clique ao lado p/ escolher a fotografia..." required="">
+                                        <input id="fotografia" type="text" class="form-control" placeholder="Clique ao lado p/ escolher a fotografia...">
                                     </label>
                                 </div>
                             </div>

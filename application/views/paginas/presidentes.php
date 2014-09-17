@@ -75,7 +75,7 @@
                     <footer>
                         <button type="submit" class="btn btn-default">
                             <i class="fam-disk"></i> 
-                            Adicionar persidente
+                            Adicionar Presidente
                         </button>
                         <button id="atualizar_depois" type="button" class="btn btn-default" data-dismiss="modal">
                             <i class="fam-cross"></i> 
@@ -153,13 +153,7 @@
             {
                 if (sucesso == 1)
                 {
-                    $.smallBox({
-                        title: "<i class='fa fa-check'></i> Sucesso",
-                        content: "Presidente cadastrado",
-                        iconSmall: "fa fa-thumbs-down bounce animated",
-                        color: "#5CB811",
-                        timeout: 5000
-                    });
+                    msg_sucesso('Presidente Cadastrado');
                     $("#nome_presidente").val("");
                     $("#inicio_mandato").val("");
                     $("#fim_mandato").val("");
@@ -185,25 +179,9 @@
                 }
                 else
                 {
-                    $.smallBox({
-                        title: "<i class='glyphicon glyphicon-remove'></i> Erro",
-                        content: "<strong>Erro ao salvar os dados. Tente novamente</strong>",
-                        color: "#FE1A00",
-                        iconSmall: "fa fa-thumbs-down bounce animated",
-                        timeout: 5000
-                    });
+                    msg_erro('Erro ao salvar os dados. Tente novamente');
                 }
 
-            },
-            error: function()
-            {
-                $.smallBox({
-                    title: "<i class='glyphicon glyphicon-remove'></i> Erro",
-                    content: "<strong>Ocorreu um erro. Tente novamente</strong>",
-                    color: "#FE1A00",
-                    iconSmall: "fa fa-thumbs-down bounce animated",
-                    timeout: 5000
-                });
             }
         });
     });

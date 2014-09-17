@@ -23,7 +23,7 @@
         <section id="widget-grid" class="">
             <div class="row">
                 <article class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="jarviswidget jarviswidget-color-darken" id="wid-id" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                    <div class="jarviswidget jarviswidget-color-darken">
                         <header>
                             <span class="widget-icon">
                                 <i class="fa fa-file-text-o"></i>

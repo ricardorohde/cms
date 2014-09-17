@@ -1,0 +1,1 @@
+ALTER TABLE `ex-presidentes` DROP `status`;

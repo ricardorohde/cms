@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" id="extr-page">
     <head>
         <meta charset="utf-8">
         <title><?php echo $titulo; ?></title>
@@ -32,6 +32,7 @@
                         <br><br>
                         <?php $this->load->view('paginas/' . $view); ?>
                     </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-xs hidden-sm"></div>
                 </div>
             </div>
         </div>
@@ -49,13 +50,7 @@
         	//Configurações do ajax
             $.ajaxSetup({
                 error: function(xhr){
-                    if (xhr.status === 0) {
-                        msg_erro('Não há conexão. verifique sua conexão');
-                    } else if (xhr.status == 404) {
-                        msg_erro('Error 404 (Not Found)');
-                    } else if (xhr.status == 500) {
-                        msg_erro('Error 500 (Internal error server).');
-                    }
+                    msg_erro('Ocorreu um erro. Tente Novamente');
                 }
             });
             //******************************************************************

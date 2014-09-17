@@ -1,37 +1,53 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	/**
+	 * Content Manegement System
+	 * 
+	 * Sistema desenvolvido para facilitar a inserção e atualização de dados no
+	 * site do Pentáurea Clube
+	 * 
+	 * @package		CMS
+	 * @author		Masterkey Informática
+	 * @copyright	Copyright (c) 2010 - 2014, Masterkey Informática LTDA
+	 */
 
     /**
-     * nova_noticia
+     * Nova_noticia
      * 
-     * @package     MY_Controller
-     * @subpackage  Nova_noticia
+     * Classe desenvolvida para a criação de uma nova notícia para o site
+     * 
+     * @package     Controllers
+     * @subpackage  Noticias
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @abstract    Classe desenvolvida para a criação de uma nova notícia para
-     *              o site
+     * @access		Public
+     * @version		v1.2.0
+     * @since		15/09/2014
      */
     class Nova_noticia extends MY_Controller
     {
         /**
          * __construct()
          * 
+         * Realiza a construção da classe
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Construção da classe de login
-         * @param       bool $requer_autenticacao Se esta variável foi setada como
-         *              TRUE, indica que, para acessar esta classe é necessário
-         *              fazer login
+         * @access		Public
          */
-        public function __construct($requer_autenticacao = TRUE)
+        public function __construct()
         {
-            parent::__construct($requer_autenticacao);
-            $this->load->model('noticias_model');
+            parent::__construct(TRUE);
+            
+            //Realiza o LOAD do model necessário
+            $this->load->model('noticias_model', 'noticias');
         }
         //**********************************************************************
 
         /**
          * index()
          * 
+         * Função principal da classe, responsável pela view inicial
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função principal da classe
+         * @access		Public
          */
         function index()
         {
@@ -42,9 +58,11 @@
         /**
          * salva_noticia()
          * 
+         * Função que realiza o SAVE das informações preliminares da noticia
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função que realiza o SAVE das informações preliminares 
-         *              da noticia
+         * @access		Public
+         * @return		array Retorna um array com dódigos de erro
          */
         function salva_noticia()
         {
@@ -94,7 +112,7 @@
             else
             {
                 $dados['imagem_noticia'] = "http://" . $_SERVER['HTTP_HOST'] . $dados['imagem_noticia'];
-                $id_noticia = $this->noticias_model->salva_noticia($dados);
+                $id_noticia = $this->noticias->salva_noticia($dados);
                 if($id_noticia == 0 || $id_noticia == FALSE)
                 {
                     $retorno = array('erro_salvamento' => 0);

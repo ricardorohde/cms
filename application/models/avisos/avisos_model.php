@@ -1,13 +1,26 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	/**
+	 * Content Manegement System
+	 * 
+	 * Sistema desenvolvido para facilitar a inserção e atualização de dados no
+	 * site do Pentáurea Clube
+	 * 
+	 * @package		CMS
+	 * @author		Masterkey Informática
+	 * @copyright	Copyright (c) 2010 - 2014, Masterkey Informática LTDA
+	 */
     
     /**
-     * avisos_model
+     * Avisos_model
      * 
      * Classe desenvolvida para gerenciar as transações com a tabela avisos
      * 
-     * @package     CI_Model
-     * @subpackage  MY_Model
+     * @package     Models
+     * @subpackage  Avisos
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+     * @access		Public
+     * @version		v1.1.0
+     * @since		16/09/2014
      */
     class Avisos_model extends MY_Model
     {
@@ -23,8 +36,7 @@
         {
             parent::__construct();
             
-            $this->_tabela      = 'avisos';
-            $this->_primaria    = 'id';
+            $this->_tabela = 'avisos';
         }
         //**********************************************************************
         
@@ -40,12 +52,12 @@
          */
         function salvar($dados)
         {
-            $data = array(
+            $this->_data = array(
                 'mensagem'          => $dados['mensagem'],
                 'data_expiracao'    => $dados['data_expiracao']
             );
             
-            return $this->BD->insert($this->_tabela, $data);
+            return parent::save();
         }
         //**********************************************************************
         
@@ -80,7 +92,7 @@
          */
         function contar_avisos()
         {
-            return $this->BD->count_all_results($this->_tabela);
+        	return parent::count();
         }
         //**********************************************************************
         
@@ -96,9 +108,9 @@
          */
         function apagar($id)
         {
-            $this->BD->where('id', $id);
+        	$this->_primaria = $id;
             
-            return $this->BD->delete($this->_tabela);
+        	return parent::delete();
         }
         //**********************************************************************
         
@@ -115,11 +127,10 @@
         function inativar($id)
         {
             /** Realiza a associação entre campos da tabela e dados **/
-            $data = array('status' => 0);
+            $this->_data		= array('status' => 0);
+            $this->_primaria 	= $id;
             
-            $this->BD->where('id', $id);
-            
-            return $this->BD->update($this->_tabela, $data);
+            return parent::update();
         }
         //**********************************************************************
         
@@ -136,11 +147,10 @@
         function ativar($id)
         {
             /** Realiza a associação entre campos da tabela e dados **/
-            $data = array('status' => 1);
+            $this->_data		= array('status' => 1);
+            $this->_primaria 	= $id;
             
-            $this->BD->where('id', $id);
-            
-            return $this->BD->update($this->_tabela, $data);
+            return parent::update();
         }
         //**********************************************************************
         
@@ -175,14 +185,13 @@
         function atualizar($dados)
         {
             /** Faz a associação entre os campos e os dados **/
-            $data = array(
+            $this->_data = array(
                 'data_expiracao'    =>$dados['data_expiracao'],
                 'mensagem'          =>$dados['mensagem']
             );
+            $this->_primaria = $dados['id'];
             
-            $this->BD->where('id', $dados['id']);
-            
-            return $this->BD->update($this->_tabela, $data);
+            return parent::update();
         }
         //**********************************************************************
     }

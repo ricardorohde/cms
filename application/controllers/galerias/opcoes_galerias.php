@@ -1,4 +1,14 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	/**
+	 * Content Manegement System
+	 * 
+	 * Sistema desenvolvido para facilitar a inserção e atualização de dados no
+	 * site do Pentáurea Clube
+	 * 
+	 * @package		CMS
+	 * @author		Masterkey Informática
+	 * @copyright	Copyright (c) 2010 - 2014, Masterkey Informática LTDA
+	 */
     
     /**
      * Opcoes_galerias
@@ -6,10 +16,12 @@
      * Classe desenvolvida para aplicar determinadas configurações a uma 
      * determinada galeria.
      * 
-     * @package     CI_Controller
-     * @subpackage  MY_Controller
+     * @package     Controllers
+     * @subpackage  Galerias
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @version     v1.3.0
+     * @access		Public
+     * @version     v1.4.0
+     * @since		15/09/2014
      */
     class Opcoes_galerias extends MY_Controller
     {
@@ -24,7 +36,9 @@
         public function __construct()
         {
             parent::__construct(TRUE);
-            $this->load->model('galerias_model');
+            
+            /** Realiza o LOAD do model correspondente **/
+            $this->load->model('galerias_model', 'galerias');
         }
         //**********************************************************************
 
@@ -35,18 +49,13 @@
          * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
          * @access      public
+         * @param		int $id_galeria Recebe o ID da galeria a ser buscada
          */
-        function index()
+        function index($id_galeria = NULL)
         {
-            $id_galeria     = $this->uri->segment(4);
-            
-            /** Seleciona a visão e o titulo da página **/
-            $this->view     = 'paginas/galerias/opcoes_galerias';
-            $this->titulo   = 'Galerias - Opções';
-
             $this->dados['id_galeria']  = $id_galeria;
 
-            $this->load->view($this->view, $this->dados);
+            $this->load->view('paginas/galerias/opcoes_galerias', $this->dados);
         }
         //**********************************************************************
 
@@ -61,9 +70,9 @@
          *              fotos
          * @return      array   Retorna um array contendo o endereço das fotos
          */
-        function buscar_fotos($id_galeria)
+        function buscar_fotos($id_galeria = NULL)
         {
-            $this->dados['fotos'] = $this->galerias_model->busca_fotos($id_galeria);
+            $this->dados['fotos'] = $this->galerias->busca_fotos($id_galeria);
             
             $this->load->view('paginas/paginados/galerias/fotos_galeria', $this->dados);
         }
@@ -85,7 +94,7 @@
             $id         = $this->input->post('id');
             $id_galeria = $this->input->post('id_galeria');
 
-            $dados['imagem'] = $this->galerias_model->busca_imagem($id);
+            $dados['imagem'] = $this->galerias->busca_imagem($id);
 
             $verifica = $this->galerias_model->excluir($id);
             
@@ -101,7 +110,7 @@
                 }
                 else
                 {
-                    $capa_galeria = $this->galerias_model->nova_capa($id_galeria);
+                    $capa_galeria = $this->galerias->nova_capa($id_galeria);
                     if($capa_galeria == 0)
                     {
                         echo 2;
@@ -130,14 +139,14 @@
             $dados['id_galeria'] = $this->input->post('id_galeria');
 
             //Recebe o nome da galeria e para deletar a pasta
-            $nome_galeria = $this->galerias_model->busca_nomeGaleria($dados['id_galeria']);
+            $nome_galeria = $this->galerias->busca_nomeGaleria($dados['id_galeria']);
             $nome_galeria = str_replace(" ", "_", $nome_galeria);
             $path_galeria = '../img/galerias/'.$nome_galeria;
 
-            $fotos = $this->galerias_model->excluir_todasFotos($dados);
+            $fotos = $this->galerias->excluir_todasFotos($dados);
             if($fotos > 0)
             {
-                $galeria = $this->galerias_model->exclui_galeria($dados);
+                $galeria = $this->galerias->exclui_galeria($dados);
                 if($galeria > 0)
                 {
                     if(is_dir($path_galeria))
@@ -209,7 +218,7 @@
             $dados['id_galeria'] = $this->input->post('id_galeria');
 
             /** Recebe o nome da galeria e cria um diretório para o upload **/
-            $nome_galeria = $this->galerias_model->busca_nomeGaleria($dados['id_galeria']);
+            $nome_galeria = $this->galerias->busca_nomeGaleria($dados['id_galeria']);
             $nome_galeria = str_replace(" ", "_", $nome_galeria);
 
             $upload_path = '../img/galerias/'.$nome_galeria.'/';
@@ -255,10 +264,10 @@
                     if($i == 0)
                     {
                         $dados['capa_galeria'] = $dados['caminho_foto'];
-                        $capa_galeria = $this->galerias_model->salva_imagemCapa($dados);
+                        $capa_galeria = $this->galerias->salva_imagemCapa($dados);
                     }
                     
-                    $galeria = $this->galerias_model->salvar_imagens($dados);
+                    $galeria = $this->galerias->salvar_imagens($dados);
                     if($galeria == FALSE)
                     {
                         echo 'Não foi possível salvar a imagem';
@@ -279,8 +288,8 @@
          * Função para redimensionar a imagem que foi feita o upload
          * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @param       string $dados Contém o endereço da imagem a ser redimencionada
          * @access      private
+         * @param       string $dados Contém o endereço da imagem a ser redimencionada
          */
         private function redimensionar_imagem($dados)
         {

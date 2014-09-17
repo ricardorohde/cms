@@ -60,7 +60,7 @@
                                                 </td>
                                                 <td>
                                                     <div align="center">
-                                                        <a class="editar" href="#" rel="tooltip" title="Editar" data-id="<?php echo $row->id; ?>">
+                                                        <a class="editar" href="<?php echo app_baseurl().'diretoria/diretores/alterar/'.$row->id;?>" rel="tooltip" title="Editar" onclick="return abrirPopup(this.href, 640, 480)">
                                                             <i class="fam-user-edit"></i>
                                                         </a>
                                                         <a class="excluir" href="#" rel="tooltip" title="Excluir" data-id="<?php echo $row->id; ?>">
@@ -83,3 +83,39 @@
         <?php
     }
 ?>
+<script>
+	//Função desenvolvida para excluir um diretor cadastrado
+	$('.excluir').click(function(e){
+		e.preventDefault();
+
+		var id = $(this).data('id');
+
+		$.SmartMessageBox({
+			title: 'Atenção',
+			content: 'Você deseja excluir este diretor?',
+			buttons: '[Sim][Não]'
+		}, function(e){
+			if(e == 'Não')
+			{
+				return false;
+			}
+			else
+			{
+				$.post('<?php echo app_baseurl().'diretoria/diretores/excluirDiretor'?>', {id: id}, function(e){
+					if(e == 1)
+					{
+						msg_sucesso('O Diretor foi excluido');
+					    busca_diretores(diretoria);
+					}
+					else
+					{
+						msg_erro('Erro ao excluir o diretor. Tente novamente');
+					}
+				});
+			}
+		});
+	});
+	//**************************************************************************
+
+	//Função desenvolvida para alterar um diretor cadastrado
+</script>

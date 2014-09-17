@@ -1,14 +1,25 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	/**
+	 * Content Manegement System
+	 * 
+	 * Sistema desenvolvido para facilitar a inserção e atualização de dados no
+	 * site do Pentáurea Clube
+	 * 
+	 * @package		CMS
+	 * @author		Masterkey Informática
+	 * @copyright	Copyright (c) 2010 - 2014, Masterkey Informática LTDA
+	 */
     
     /**
-     * temas
+     * Temas
      * 
      * Classe desenvolvida para criar temas para o site
      * 
-     * @package     CI_Controller
-     * @subpackage  MY_Controller
-     * @author Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @version 1.0.1
+     * @package		Controllers
+	 * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
+	 * @access		Public
+	 * @version     v1.2.0
+	 * @since		15/09/2014
      */
     class Temas extends MY_Controller
     {
@@ -21,11 +32,12 @@
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
          * @access      public
          */
-        public function __construct($requer_autenticacao = TRUE)
+        public function __construct()
         {
-            parent::__construct($requer_autenticacao);
+            parent::__construct(TRUE);
             
-            $this->load->model('temas_model');
+            /** Realiza o LOAD do model correspondente **/
+            $this->load->model('temas_model', 'temas');
         }
         //**********************************************************************
 
@@ -55,14 +67,14 @@
          */
         function busca_temas($offset = 0)
         {
-            
+            //Recebe o limite da consulta sql
             $limite = 10;
-            $this->dados['temas']   = $this->temas_model->busca_temas($limite, $offset);
+            $this->dados['temas']   = $this->temas->busca_temas($limite, $offset);
             
-            
+            //Configurações da paginação
             $config['base_url']     = app_baseurl().'temas/busca_temas';
             $config['per_page']     = $limite;
-            $config['total_rows']   = $this->temas_model->contar_temas();
+            $config['total_rows']   = $this->temas->contar_temas();
             
             $this->pagination->initialize($config);
             
@@ -90,7 +102,7 @@
             $dados['data_inicio']       = $this->input->post('data_inicio');
             $dados['data_expiracao']    = $this->input->post('data_expiracao');
             
-            echo $this->temas_model->salvar_tema($dados);
+            echo $this->temas->salvar_tema($dados);
         }
         //**********************************************************************
         
@@ -107,7 +119,7 @@
         {
             $id = $this->input->post('id');
             
-            echo $this->temas_model->excluir_tema($id);
+            echo $this->temas->excluir_tema($id);
         }
         //**********************************************************************
         
@@ -148,7 +160,7 @@
             $dados['data_expiracao']        = $this->input->post('data_expiracao');
             $dados['id']                    = $this->input->post('id');
             
-            echo $this->temas_model->salvar_edicaoTema($dados);
+            echo $this->temas->salvar_edicaoTema($dados);
         }
         //**********************************************************************
         
@@ -175,7 +187,7 @@
                 $dados['status'] = 1;
             }
             
-            echo $this->temas_model->marcar($dados);
+            echo $this->temas->marcar($dados);
         }
         //**********************************************************************
     }

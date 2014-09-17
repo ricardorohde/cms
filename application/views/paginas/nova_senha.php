@@ -1,62 +1,63 @@
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#login-header-space").html('<h4 class="hidden-mobile">Já é registrado?</h4><a href="<?php echo app_baseurl().'login'?>" class="btn btn-danger">Fazer login</a>');
+        $("#login-header-space").html('<a href="<?php echo app_baseurl().'login'?>" class="btn btn-danger">Fazer login</a>');
         
         $("#verificador").blur(function(){
             if($("#senha").val() != $("#verificador").val())
             {
-                alertify.error('As duas senhas não coincidem.');
+                msg_erro('As duas senhas não coincidem.');
             }
         });
         
         $("#nova-senha").submit(function(e){
             e.preventDefault();
-            id_usuario = $("#id_usuario").val();
-            senha = $("#senha").val();
-            resposta_captcha = $("#resposta_captcha").val();
+
+            $('#btn-salvar').button('loading');
+            
+            id_usuario			= $("#id_usuario").val();
+            email				= $('#email').val();
+            senha 				= $("#senha").val();
+            resposta_captcha	= $("#resposta_captcha").val();
+            
             $.ajax({
                 url: "<?php echo app_baseurl().'recuperar_senha/altera_senha'?>",
                 type: "POST",
-                data: {id_usuario: id_usuario, senha: senha, captcha: resposta_captcha},
+                data: {id_usuario: id_usuario, email: email, senha: senha, captcha: resposta_captcha},
                 dataType: "html",
                 success: function(sucesso)
                 {
                     if(sucesso == 0)
                     {
-                        alertify.error("<strong>Erro no captcha. Digite novamente</strong>");
+                        msg_erro("Erro no captcha. Digite novamente");
                         $("#resposta_captcha").val("").focus();
                         busca_captcha();
+                        $('#btn-salvar').button('reset');
                     }
                     if(sucesso == 1)
                     {
-                        alertify.error('<strong>Não foi possível redefinir a senha</strong>');
-                        $("#senha").val();
-                        $("#verificador").val();
-                        $("#resposta_captcha").val("");
+                        msg_erro('Não foi possível redefinir a senha');
+                        limpar_campos($("#nova-senha"));
                         busca_captcha();
+                        $('#btn-salvar').button('reset');
                     }
                     if(sucesso == 2)
                     {
-                        alertify.alert('Não foi possível fazer o login automático. Voçê será redirecionado à pagina de login');
-                        location.href = "<?php app_baseurl().'login'?>";
+                        msg_erro('Não foi possível fazer o login automático. Voçê será redirecionado à pagina de login');
+                        $('#btn-salvar').button('reset');
+                        setTimeout(function(){location.href = "<?php app_baseurl().'login'?>";},1000);
                     }
                     if(sucesso == 3)
                     {
-                        alertify.alert('A sua senha foi alterada.', function(e){
-                            if(e)
-                            {
-                                location.href = "<?php echo app_baseUrl().'permissoes'; ?>";
-                            }
-                        });
+                        msg_sucesso('A sua senha foi alterada');
+                        limpar_campos($("#nova-senha"));
+                        $('#btn-salvar').button('reset');
+                        setTimeout(function(){location.href = "<?php echo app_baseUrl().'painel'; ?>";},1000);
                     }
-                },
-                error: function(erro)
-                {
-                    alertify.log('Ocorreu um erro. Tente novamente mais tarde');
                 }
             });
         });
     });
+    
     function busca_captcha()
     {
         $.get("<?php echo app_baseurl().'recuperar_senha/captcha'?>", function(e){
@@ -114,7 +115,7 @@
             </section>
         </fieldset>
         <footer>
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" id="btn-salvar" class="btn btn-primary" data-loading-text="Salvando a nova senha...">
                 Alterar senha
             </button>
         </footer>

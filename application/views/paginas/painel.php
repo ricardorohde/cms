@@ -6,13 +6,22 @@
         </span>
     </div>
     <div class="pull-right">
-        <div class="btn-header transparent pull-right btn-logout">
-            <span>
-                <a class="logout" href="<?php echo app_baseurl() . 'login/logout' ?>" rel="tooltip" data-placement="left" title="Fazer Logoff">
-                    <i class="fam-house-go"></i>
-                </a>
-            </span>
-        </div>
+    	<!-- Botão Para Esconder/ Mostrar Menu -->
+		<div id="hide-menu" class="btn-header pull-right">
+			<span>
+				<a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-align-justify"></i></a>
+			</span>
+		</div>
+		<!--*****************************************************************-->
+        
+        <!-- Exibe o nome e a foto do associado -->
+		<ul id="mobile-profile-img" class="header-dropdown-list padding-5">
+			<li class="">
+				<a href="#" class="no-margin">
+					Olá <span id="nome_usuario"><?php echo $_SESSION['user']->nome_completo; ?></span>
+				</a>
+			</li>
+		</ul>
     </div>
 </header>
 <!--*************************************************************************-->
@@ -24,14 +33,13 @@
             <li>
                 <a href="index.php?/contato/contato" title="Mensagens">
                     <i class="fa fa-lg fa-fw fa-inbox"></i>  
-                    <span class="menu-item-parent">Mensagens</span>
-                    <span class="badge pull-right inbox-badge">14</span>
+                    <span>Mensagens</span>
                 </a>
             </li>
             <li id="noticias">
                 <a href="#" title="Notícias">
                     <i class="fa fa-lg fa-fw fa-book"></i> 
-                    <span class="menu-item-parent">Notícias</span>
+                    <span>Notícias</span>
                 </a>
                 <ul>
                     <li id="noticias_cadastradas">
@@ -49,45 +57,43 @@
             <li>    
                 <a href="index.php?/avisos/avisos_cadastrados" title="Avisos">
                     <i class="fa fa-lg fa-fw fa-clipboard"></i> 
-                    <span class="menu-item-parent">Avisos</span>
+                    <span>Avisos</span>
                 </a>
             </li>
             <li id="galerias">
                 <a href="index.php?/galerias/galerias" title="Galerias">
                     <i class="fa fa-lg fa-fw fa-picture-o"></i> 
-                    <span class="menu-item-parent">Galerias</span>
+                    <span>Galerias</span>
                 </a>
             </li>
             <li id="calendario">
                 <a href="index.php?/calendario" title="Calendário de Eventos">
                     <i class="fa fa-lg fa-fw fa-calendar-o"></i> 
-                    <span class="menu-item-parent">Calendário</span>
+                    <span>Calendário</span>
                 </a>
             </li>
             <li id="temas">
                 <a href="index.php?/temas" title="Temas do Site">
                     <i class="fa fa-lg fa-fw fa-desktop"></i> 
-                    <span class="menu-item-parent">Temas do Site</span>
+                    <span>Temas do Site</span>
                 </a>
             </li>
             <li id="mensagem_dia">
                 <a href="index.php?/mensagem_diaria" title="Mensagem do dia">
                     <i class="fa fa-lg fa-fw fa-file-text-o"></i> 
-                    <span class="menu-item-parent">Mensagem do Dia</span>
+                    <span>Mensagem do Dia</span>
                 </a>
             </li>
             <li>
                 <a href="index.php?/presidentes" title="Ex-presidentes">
                     <i class="fa fa-lg fa-fw fa-users"></i> 
-                    <span class="menu-item-parent">
-                        Ex-presidentes
-                    </span>
+                    <span>Ex-presidentes</span>
                 </a>
             </li>
             <li>
                 <a href="#" title="Diretorias">
                     <i class="fa fa-lg fa-fw fa-users"></i> 
-                    <span class="menu-item-parent">Diretorias</span>
+                    <span>Diretorias</span>
                 </a>
                 <ul>
                     <li id="noticias_cadastradas">
@@ -97,48 +103,57 @@
                     </li>
                     <li>
                         <a href="index.php?/diretoria/diretores" title="Cadastrar Diretores">
-                            <i class="fam-user-add"></i> Cadastrar Diretores</a>
+                            <i class="fam-user-add"></i> Cadastrar Diretores
+                        </a>
                     </li>
                 </ul>
             </li>
             <li>
                 <a href="#">
-                    <i class="fa fa-lg fa-fw fa-user"></i> 
-                    <span class="menu-item-parent">Meu Perfil</span>
+                    <i class="fa fa-lg fa-fw fa-home"></i> 
+                    <span>Instalações e Barracas</span>
                 </a>
+                <ul>
+                	<li>
+                		<a href="index.php?/barracas/barracas" title="Barracas">
+                			<i class="fam fam-house"></i> Barracas
+                		</a>
+                	</li>
+                	<li>
+                		<a href="index.php?/barracas/descricao_barracas" title="Descrição das Barracas">
+                			<i class="fam fam-page-white-text"></i> Descrição de barracas
+                		</a>
+                	</li>
+                	<li>
+                		<a href="index.php?/barracas/valor_barracas" title="Valor das Barracas">
+                			<i class="fam fam-money"></i> Valor das Barracas
+                		</a>
+                	</li>
+                </ul>
             </li>
             <li>
                 <a href="#">
                     <i class="fa fa-lg fa-fw fa-cogs"></i> 
-                    <span class="menu-item-parent">Configurações</span>
+                    <span>Configurações</span>
                 </a>
                 <ul>
                     <li>
-                        <a href="#">
+                        <a href="index.php?/config/cadastroUsuarios" title="Cadastro de Usuários">
                             <i class="fam-user"></i> Cadastro de Usuários
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fam-group"></i> Grupos de Usuários
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fam-page-white-gear"></i> Gerenciador de Arquivos
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.php?/config/configuracoes_email">
+                        <a href="index.php?/config/configuracoes_email" title="Envio de E-mail">
                             <i class="fam-email-edit"></i> Envio de Email
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="fam-vcard"></i> Permissões de Acesso
-                        </a>
-                    </li>
                 </ul>
+            </li>
+            <li>
+                <a class="logout" href="#">
+                    <i class="fa fa-lg fa-fw fa-sign-out"></i> 
+                    <span>Fazer Logoff</span>
+                </a>
             </li>
         </ul>
     </nav>

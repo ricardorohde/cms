@@ -1,37 +1,52 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	/**
+	 * Content Manegement System
+	 * 
+	 * Sistema desenvolvido para facilitar a inserção e atualização de dados no
+	 * site do Pentáurea Clube
+	 * 
+	 * @package		CMS
+	 * @author		Masterkey Informática
+	 * @copyright	Copyright (c) 2010 - 2014, Masterkey Informática LTDA
+	 */
 
     /**
-     * noticias_cadastradas
+     * Noticias_cadastradas
      * 
-     * @package     MY_Controller
-     * @subpackage  Noticias_cadastradas
+     * Classe desenvolvida para gerenciar as noticias cadastradas
+     * 
+     * @package     Controllers
+     * @subpackage  Noticias
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @abstract    Classe desenvolvida para gerenciar as noticias cadastradas
+     * @access		Public
+     * @version		1.2.0
+     * @since		15/09/2014
      */
     class Noticias_cadastradas extends MY_Controller
     {
         /**
          * __contruct()
          * 
+         * Realiza a construção da classe
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Construção da classe
-         * @param       bool $requer_autenticacao Se esta variável estiver setada
-         *              como TRUE, mostra que, para acessar este controller é 
-         *              necessário fazer login no sistema
          * @access      public
          */
-        public function __construct($requer_autenticacao = TRUE)
+        public function __construct()
         {
-            parent::__construct($requer_autenticacao);
-            $this->load->model('noticias_model');
+            parent::__construct(TRUE);
+            
+            $this->load->model('noticias_model', 'noticias');
         }
         //**********************************************************************
 
         /**
          * index()
          * 
+         * Função Principal da classe
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função Principal da classe
+         * @access		Public
          */
         function index()
         {
@@ -40,14 +55,16 @@
 
             $this->LoadView();
         }
-        //----------------------------------------------------------------------
+        //**********************************************************************
 
         /**
          * busca_noticias()
          * 
+         * Função que realiza a busca das notícias cadastradas e realiza a 
+         * paginação para a visão do usuário;
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função que realiza a busca das notícias cadastradas e 
-         *              realiza a paginação para a visão do usuário;
+         * @access		Public
          * @param       int $offset Indica o offset da pesquisa sql
          */
         function busca_noticias($offset = 0)
@@ -56,19 +73,19 @@
             $limite = 20;
             
             /** Recebe as notícias cadastradas no BD **/
-            $this->dados['noticias'] = $this->noticias_model->lista_noticias($limite, $offset);
+            $this->dados['noticias'] = $this->noticias->lista_noticias($limite, $offset);
             
             if (!$this->dados['noticias'] and $offset > 0)
             {
                 $offset = $offset - 20;
-                $this->dados['noticias'] = $this->noticias_model->lista_noticias($limite, $offset);
+                $this->dados['noticias'] = $this->noticias->lista_noticias($limite, $offset);
             }
 
             /** Configurações da paginação **/
             $config['uri_segment']  = 4;
             $config['base_url']     = app_baseUrl() . 'noticias/noticias_cadastradas/busca_noticias';
             $config['per_page']     = $limite;
-            $config['total_rows']   = $this->noticias_model->conta_noticias();
+            $config['total_rows']   = $this->noticias->conta_noticias();
 
             $this->pagination->initialize($config);
             
@@ -83,14 +100,17 @@
         /**
          * inativar()
          * 
+         * Função desenvolvida para inativar uma noticia
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função desenvolvida para inativar uma noticia
+         * @access		Public
+         * @return		string Retorna uma mensagem de erro para o usuário
          */
         function inativar()
         {
             $id = $this->input->post('id');
             
-            $marcado = $this->noticias_model->inativar_noticia($id);
+            $marcado = $this->noticias->inativar_noticia($id);
             if ($marcado == 1)
             {
                 echo "Notícia Marcada como Inativa";
@@ -105,13 +125,16 @@
         /**
          * ativar()
          * 
+         * Função desenvolvida para inativar uma noticia
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função desenvolvida para inativar uma noticia
+         * @access		Public
+         * @return		string Retorna Uma mensagem de erro para o usuário
          */
         function ativar()
         {
             $id = $this->input->post('id');
-            $marcado = $this->noticias_model->ativar_noticia($id);
+            $marcado = $this->noticias->ativar_noticia($id);
             if ($marcado == 1)
             {
                 echo "Notícia Marcada como Ativa";
@@ -126,13 +149,16 @@
         /**
          * excluir()
          * 
+         * Função desenvolvida para excluir uma noticia
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função desenvolvida para excluir uma noticia
+         * @access		Public
+         * @return		string Retorna uma mensagem de erro para o usuário
          */
         function excluir()
         {
             $id = $this->input->post('id');
-            $marcado = $this->noticias_model->excluir_noticia($id);
+            $marcado = $this->noticias->excluir_noticia($id);
             if ($marcado == 1)
             {
                 echo "Notícia excluída";
@@ -147,17 +173,18 @@
         /**
          * editar()
          * 
+         * Função desenvolvida para editar uma determinada notícia
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função desenvolvida para editar uma determinada notícia
+         * @access		Public
+         * @param		int $id_noticia Recebe o ID da notícia a ser editada
          */
-        function editar()
-        {   
-            /** Recebe o ID da notícia, passado no url **/
-            $id_noticia = $this->uri->segment(4);
+        function editar($id_noticia = NULL)
+        {
+            $this->dados['noticia'] = $this->noticias->busca_noticiaId($id_noticia);
+            $this->view 			= 'paginas/editores/noticias/noticia_edicao';
+            $this->titulo 			= 'Edição de Notícia';
             
-            $this->dados['noticia'] = $this->noticias_model->busca_noticiaId($id_noticia);
-            $this->view = 'paginas/editores/noticias/noticia_edicao';
-            $this->titulo = 'Edição de Notícia';
             $this->load->view($this->view, $this->dados);
         }
         //**********************************************************************
@@ -165,8 +192,11 @@
         /**
          * atualiza_noticia()
          * 
+         * Função desenvolvida para salvar alterações no corpo da Notícia
+         * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-         * @abstract    Função desenvolvida para salvar alterações no corpo da Notícia
+         * @access		Public
+         * @return		array Retorna um array Json com códigos de erro
          */
         function atualiza_noticia()
         {
@@ -221,7 +251,7 @@
                 $erro_imagem = 2;
             }
                 $dados['imagem_noticia'] = "http://" . $_SERVER['HTTP_HOST'] . $dados['imagem_noticia'];
-                $id_noticia = $this->noticias_model->atualiza_noticia($dados);
+                $id_noticia = $this->noticias->atualiza_noticia($dados);
                 if ($id_noticia == 0 || $id_noticia == FALSE)
                 {
                     $erro_salvamento = 0;

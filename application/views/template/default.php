@@ -6,6 +6,7 @@
         <title>CMS - Pentáurea Clube</title>
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
+        
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link rel="stylesheet" type="text/css" media="screen" href="./css/bootstrap.css">
         <link rel="stylesheet" type="text/css" media="screen" href="./css/font-awesome.min.css">
@@ -22,11 +23,6 @@
         <link rel="stylesheet" type="text/css" media="all" href="./css/pentaurea.css" />
         <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
         <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
-        <style>
-            .btn-logout > :first-child > a {
-                padding-top: 5px;
-            }
-        </style>
     </head>
     <body class="smart-style-2 menu-on-top">
         <?php $this->load->view('/paginas/' . $view); ?>
@@ -56,7 +52,8 @@
             
             $('body').popover({
                 selector: '[rel="popover"]',
-                placement: 'top'
+                placement: 'top',
+                trigger: 'hover'
             });
             //******************************************************************
             
@@ -70,14 +67,8 @@
             });
             
             $.ajaxSetup({
-                error: function(xhr){
-                    if (xhr.status === 0) {
-                        msg_erro('Não há conexão. verifique sua conexão');
-                    } else if (xhr.status == 404) {
-                        msg_erro('Error 404 (Not Found)');
-                    } else if (xhr.status == 500) {
-                        msg_erro('Error 500 (Internal error server).');
-                    }
+                error: function(){
+                    msg_erro('Ocorreu um erro. Tente novamente');
                 }
             });
             //******************************************************************
@@ -97,7 +88,7 @@
              */
             $('.logout').click(function(e) {
                 //Recebe o link da página de logoff
-                $.loginURL = $(this).attr('href');
+                $.loginURL = '<?php echo app_baseurl().'login/logout' ?>';
 
                 // Realiza o questionamento se o usuário deseja sair
                 $.SmartMessageBox({

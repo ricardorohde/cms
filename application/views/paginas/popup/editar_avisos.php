@@ -23,7 +23,7 @@
         <section id="widget-grid" class="">
             <div class="row">
                 <article class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="jarviswidget jarviswidget-color-darken" id="wid-id" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                    <div class="jarviswidget jarviswidget-color-darken">
                         <header>
                             <span class="widget-icon">
                                 <i class="fa fa-clipboard"></i>
@@ -61,9 +61,7 @@
                                                 <section class="col col-12">
                                                     <label class="label"><strong>Aviso:</strong></label>
                                                     <label class="textarea"> 
-                                                        <textarea class="edit" id="mensagem">
-                                                            <?php echo $row->mensagem?>
-                                                        </textarea>
+                                                        <textarea class="edit" id="mensagem"><?php echo $row->mensagem?></textarea>
                                                     </label>
                                                 </section>
                                             </div>
