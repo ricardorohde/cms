@@ -36,6 +36,12 @@
                     <span>Mensagens</span>
                 </a>
             </li>
+            <li>
+            	<a href="index.php?/depoimentos" title="Depoimentos">
+            		<i class="fa fa-lg fa-fw fa-comments"></i>
+            		<span>Depoimentos</span>
+            	</a>
+            </li>
             <li id="noticias">
                 <a href="#" title="Notícias">
                     <i class="fa fa-lg fa-fw fa-book"></i> 
