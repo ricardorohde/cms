@@ -65,7 +65,7 @@
     }
 ?>
 <script>
-    offset = <?php echo $verificador; ?>
+    offset = '<?php echo $verificador; ?>';
 
     $("#inbox-table input[type='checkbox']").change(function() {
         $(this).closest('tr').toggleClass("highlight", this.checked);
@@ -73,15 +73,21 @@
 
     $(".deletebutton").click(function() {
         var valor = Array();
+        
         $(":checked").each(function() {
             valor.push($(this).val());
         });
+        
         $.SmartMessageBox({
             title: "<i class='fa fa-times txt-color-red'></i> Atenção",
             content: "Deseja excluir estas mensagens? <small>(a ação não pode ser desfeita)</small>",
             buttons: "[Sim][Não]"
         }, function(e) {
-            if (e == "Sim")
+            if (e == "Não")
+            {
+                return false;
+            }
+            else
             {
                 $.ajax({
                     url: "<?php echo app_baseurl().'contato/contato/excluir_mensagem' ?>",
@@ -92,27 +98,22 @@
                     success: function(sucesso) {
                         if(sucesso == 1)
                         {
+                        	SmartUnLoading();
                             msg_sucesso('Mensagens excluidas');
                             buscar();
                             contarMarcados();
                         }
                         else
                         {
+                        	SmartUnLoading();
                             msg_erro('Não foi possível excluir');
                         }
-                    },
-                    error: function()
-                    {
-                        msg_erro('Ocorreu um erro. tente novamente');
                     }
                 });
             }
-            else
-            {
-                return false;
-            }
         });
     });
+    //**************************************************************************
 
     /** Função desenvolvida para verificar se existem checkbox marcadas **/
     function contarMarcados() {

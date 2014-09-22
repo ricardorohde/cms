@@ -8,10 +8,8 @@
     /** Define a url da leitura da mensagem **/
     var url_lerMensagem = '';
 
-    /** Load do jQuery **/
-    $(document).ready(function(){
-        buscar();
-    });
+    /** Chama a Função de busca de mensagens cadastradas **/
+    buscar();
     
     $("#entrada, #lidas, #excluidas").click(function() {
         $(".inbox-menu-lg > li").each(function() {
@@ -116,10 +114,6 @@
                         {
                             msg_erro('Não foi possível excluir');
                         }
-                    },
-                    error: function()
-                    {
-                        msg_erro('Ocorreu um erro. Tente novamente');
                     }
                 });
             }

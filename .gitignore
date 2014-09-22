@@ -36,3 +36,9 @@ Icon
 .Trashes
 # Ignora as configurações do Zend Studio
 .settings/*
+
+js/tinymce/plugins/thumbs/ex-presidentes/webcam-toy-foto1.jpg
+js/tinymce/plugins/thumbs/diretores/altamiro.jpg
+js/tinymce/plugins/thumbs/diretores/salesio.jpg
+js/tinymce/plugins/thumbs/diretores/13 - Valerio Ubiray Ferreira da Silva 01-03.jpg
+img/captcha/*
