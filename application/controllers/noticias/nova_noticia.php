@@ -74,55 +74,39 @@
             $dados['corpo_noticia']     = $this->input->post('corpo_noticia');
             $dados['usuario']           = $this->input->post('usuario');
 
-            /** Trocando a barra, caso venha padrão do windows **/
-            $exclude = array("\\");
-            $dados['imagem_noticia'] = str_replace($exclude, "/", $dados['imagem_noticia']);
+            /**
+             * Realiza a troca da barra padrão do windows e retira o host do 
+             * endereço da imagem 
+             **/
+            $exclude	= array("\\", "http://".$_SERVER['HTTP_HOST']);
+            $replace	= array("/", "");
+            $dados['imagem_noticia'] = str_replace($exclude, $replace, $dados['imagem_noticia']);
 
-            /** Exclui o HOST, para que a imagem de capa possa ser redimencionada **/
-            $exclude = array("http://".$_SERVER['HTTP_HOST']);
-            $dados['imagem_noticia'] = str_replace($exclude, "", $dados['imagem_noticia']);
-
-            /** Carrega a library para manipulação de imagem e seta as configurações para esta manipulação **/
-            $this->load->library('image_lib');
-            
-            $config['image_library']    = 'GD2';
-            $config['maintain_ratio']   = FALSE;
-            $config['create_thumb']     = FALSE;
-            
+            // Define o tamanho da imagem paseado no posicionamento da mesma
             if($dados['posicionamento'] == 1)
             {
-                $config['width']    = 640;
-                $config['height']   = 480;
+                $width	= 640;
+                $height = 480;
             }
             elseif($dados['posicionamento'] == 2)
             {
-                $config['width']    = 200;
-                $config['height']   = 100;
+                $width	= 200;
+                $height	= 100;
             }
             
-            $config['quality']         = "75%";
-            $config['source_image']    = ".." . $dados['imagem_noticia'];
-
-            $this->image_lib->initialize($config);
+            // Realiza o redimensionamento da imagem
+            $this->load->library('redimensiona_imagem_library');
+            $retorno_imagem = $this->redimensiona_imagem_library->redimensionar($dados['imagem_noticia'], $width, $height);
             
-            if(!$this->image_lib->resize())
-            {
-                $retorno = array('erro_imagem' => 2);
-            }
-            else
-            {
-                $dados['imagem_noticia'] = "http://" . $_SERVER['HTTP_HOST'] . $dados['imagem_noticia'];
-                $id_noticia = $this->noticias->salva_noticia($dados);
-                if($id_noticia == 0 || $id_noticia == FALSE)
-                {
-                    $retorno = array('erro_salvamento' => 0);
-                }
-                else
-                {
-                    $retorno = array('sucesso' => 1);
-                }
-            }
-            echo json_encode($retorno);
+            // Retorna com o host para a string original do endereço da imagem
+            $dados['imagem_noticia'] = "http://" . $_SERVER['HTTP_HOST'] . $dados['imagem_noticia'];
+            
+            // Realiza o save da notícia e verifica se a mesma foi salva
+			$resultado = $this->noticias->salva_noticia($dados);
+            ($resultado == 0 || $resultado == FALSE) ? $retorno_salvar = 0 : $retorno_salvar = 1;
+            
+            // Imprime o valor em formato JSON
+            echo json_encode(array('r_imagem' => $retorno_imagem, 'r_salvar' => $retorno_salvar));
         }
         //**********************************************************************
     }

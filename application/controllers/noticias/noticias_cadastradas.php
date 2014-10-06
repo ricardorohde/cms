@@ -110,15 +110,7 @@
         {
             $id = $this->input->post('id');
             
-            $marcado = $this->noticias->inativar_noticia($id);
-            if ($marcado == 1)
-            {
-                echo "Notícia Marcada como Inativa";
-            }
-            else
-            {
-                echo "Não Foi possível realizar esta ação. Tente novamente";
-            }
+            echo ($this->noticias->inativar_noticia($id)) ? "Notícia Marcada como Inativa" : "Não Foi possível realizar esta ação. Tente novamente";
         }
         //**********************************************************************
 
@@ -134,15 +126,8 @@
         function ativar()
         {
             $id = $this->input->post('id');
-            $marcado = $this->noticias->ativar_noticia($id);
-            if ($marcado == 1)
-            {
-                echo "Notícia Marcada como Ativa";
-            }
-            else
-            {
-                echo "Não Foi possível realizar esta ação. Tente novamente";
-            }
+			
+            echo ($this->noticias->ativar_noticia($id)) ? "Notícia Marcada como Ativa" : "Não Foi possível realizar esta ação. Tente novamente";;
         }
         //**********************************************************************
 
@@ -158,15 +143,8 @@
         function excluir()
         {
             $id = $this->input->post('id');
-            $marcado = $this->noticias->excluir_noticia($id);
-            if ($marcado == 1)
-            {
-                echo "Notícia excluída";
-            }
-            else
-            {
-                echo "Não Foi possível realizar esta ação. Tente novamente";
-            }
+            
+			echo ($this->noticias->excluir_noticia($id)) ? "Notícia excluída" : "Não Foi possível realizar esta ação. Tente novamente";
         }
         //**********************************************************************
 
@@ -200,11 +178,6 @@
          */
         function atualiza_noticia()
         {
-            /** Inicialização das variáveis que receberão as mensagens de erro **/
-            $erro_imagem        = '';
-            $erro_salvamento    = '';
-            $sucesso            = '';
-            
             /** Dados da notícia **/
             $dados['id']                = $this->input->post('id');
             $dados['titulo_noticia']    = $this->input->post('titulo_noticia');
@@ -215,60 +188,39 @@
             $dados['corpo_noticia']     = $this->input->post('corpo_noticia');
             $dados['usuario']           = $this->input->post('usuario');
 
-            /** Trocando a barra, caso venha padrão do windows **/
-            $exclude = array("\\");
-            $dados['imagem_noticia'] = str_replace($exclude, "/", $dados['imagem_noticia']);
+            /**
+             * Realiza a troca da barra padrão do windows e retira o host do 
+             * endereço da imagem 
+             **/
+            $exclude	= array("\\", "http://".$_SERVER['HTTP_HOST']);
+            $replace	= array("/", "");
+            $dados['imagem_noticia'] = str_replace($exclude, $replace, $dados['imagem_noticia']);
 
-            /** Exclui o HOST, para que a imagem de capa possa ser redimencionada **/
-            $exclude = array("http://".$_SERVER['HTTP_HOST']);
-            $dados['imagem_noticia'] = str_replace($exclude, "", $dados['imagem_noticia']);
-
-            /** Carrega a library para manipulação de imagem e seta as configurações para esta manipulação **/
-            $this->load->library('image_lib');
-            
-            $config['image_library']    = 'GD2';
-            $config['maintain_ratio']   = FALSE;
-            $config['create_thumb']     = FALSE;
-            
+            // Define o tamanho da imagem paseado no posicionamento da mesma
             if($dados['posicionamento'] == 1)
             {
-                $config['width']    = 640;
-                $config['height']   = 480;
+                $width	= 640;
+                $height = 480;
             }
             elseif($dados['posicionamento'] == 2)
             {
-                $config['width']    = 200;
-                $config['height']   = 100;
+                $width	= 200;
+                $height	= 100;
             }
-            
-            $config['quality']         = "75%";
-            $config['source_image']    = ".." . $dados['imagem_noticia'];
-
-            $this->image_lib->initialize($config);
-            
-            if (!$this->image_lib->resize())
-            {
-                $erro_imagem = 2;
-            }
-                $dados['imagem_noticia'] = "http://" . $_SERVER['HTTP_HOST'] . $dados['imagem_noticia'];
-                $id_noticia = $this->noticias->atualiza_noticia($dados);
-                if ($id_noticia == 0 || $id_noticia == FALSE)
-                {
-                    $erro_salvamento = 0;
-                    
-                }
-                else
-                {
-                    $sucesso = 1;
-                }
-            
-            $retorno = array(
-                'erro_imagem'       => $erro_imagem,
-                'erro_salvamento'   => $erro_salvamento,
-                'sucesso'           => $sucesso
-            );
-            
-            echo json_encode($retorno);
+			
+			// Realiza o redimensionamento da imagem
+            $this->load->library('redimensiona_imagem_library');
+            $retorno_imagem = $this->redimensiona_imagem_library->redimensionar($dados['imagem_noticia'], $width, $height);
+			
+			// Retorna com o host para a string original do endereço da imagem
+            $dados['imagem_noticia'] = "http://" . $_SERVER['HTTP_HOST'] . $dados['imagem_noticia'];
+			
+			// Realiza o save da notícia e verifica se a mesma foi salva
+			$resultado = $this->noticias->atualiza_noticia($dados);
+            ($resultado == 0 || $resultado == FALSE) ? $retorno_salvar = 0 : $retorno_salvar = 1;
+			
+			// Imprime o valor em formato JSON
+            echo json_encode(array('r_imagem' => $retorno_imagem, 'r_salvar' => $retorno_salvar));
         }
         //**********************************************************************
     }

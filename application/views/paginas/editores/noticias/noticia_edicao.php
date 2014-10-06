@@ -14,43 +14,25 @@
         $("#editor_noticia").submit(function(e) {
             tinyMCE.triggerSave();
             e.preventDefault();
-            titulo_noticia = $("#titulo_noticia").val();
-            resumo_noticia = $("#resumo_noticia").val();
-            imagem_noticia = $("#foto").val();
-            tipo_noticia = $("#tipo_noticia").val();
-            posicionamento = $("#posicionamento").val();
-            corpo_noticia = $("#corpo_noticia").val();
-            id_noticia = $("#id_noticia").val();
-            usuario = $("#usuario").val();
+			
+			//Recebe os valores da notícia por meio do `serialize()` do jQuery
+			var noticia = $("#editor_noticia").serialize();
+			
             $.ajax({
                 url: "<?php echo app_baseurl() . 'noticias/noticias_cadastradas/atualiza_noticia'; ?>",
                 type: "POST",
-                data: {titulo_noticia: titulo_noticia, resumo_noticia: resumo_noticia, imagem_noticia: imagem_noticia, tipo_noticia: tipo_noticia, posicionamento: posicionamento, corpo_noticia: corpo_noticia, id: id_noticia, usuario: usuario},
-                dataType: "html",
-                success: function(sucesso) {
-                    if (sucesso.erro_imagem !== "" || sucesso.erro_imagem == 2)
-                    {
-                        $.smallBox({
-                            title: "<i class='glyphicon glyphicon-remove'></i> Atenção",
-                            content: "<strong>A mensagem foi salva mas a imagem não foi redimensionada</strong>",
-                            color: "#d8c74e",
-                            iconSmall: "fa fa-thumbs-down bounce animated",
-                            timeout: 5000
-                        });
-                        location.href = "<?php echo app_baseurl() . 'painel#index.php?/noticias/noticias_cadastradas' ?>";
-                    }
-                    else if (sucesso.erro_salvamento !== "" && sucesso.erro_salvamento === 0)
-                    {
-                        msg_erro('A notícia não foi salva no banco de dados');
-                    }
-                    else if (sucesso.sucesso !== "" && sucesso.sucesso === 1)
-                    {
-                        msg_sucesso('A noticia foi atualizada');
-                        location.href = "<?php echo app_baseurl() . 'painel#index.php?/noticias/noticias_cadastradas' ?>";
-                    }
-                },
-                error: function() {
-                    msg_erro('Ocorreu um erro. Tente mais tarde');
+                data: noticia,
+                dataType: "json",
+                success: function(e) {
+					if(e.r_salvar == 0)
+					{
+						msg_erro('A notícia não foi atualizada');
+					}
+					else
+					{
+						msg_sucesso('A notícia foi atualizada. ' + e.r_imagem);
+						location.href = "<?php echo app_baseurl() . 'painel#index.php?/noticias/noticias_cadastradas' ?>";
+					}
                 }
             });
         });
@@ -124,19 +106,19 @@
                                             <section>
                                                 <label class="label"><strong>Título da notícia</strong></label>
                                                 <label class="input">
-                                                    <input type="text" id="titulo_noticia" value="<?php echo $row->titulo_noticia ?>" maxlength="100">
+                                                    <input type="text" id="titulo_noticia" name="titulo_noticia" value="<?php echo $row->titulo_noticia ?>" maxlength="100">
                                                 </label>
                                             </section>
                                             <section>
                                                 <label class="label"><strong>Resumo da notícia</strong></label>
                                                 <label class="textarea">
-                                                    <textarea id="resumo_noticia" maxlength="250" rows="7" required><?php echo $row->resumo_noticia ?></textarea>
+                                                    <textarea id="resumo_noticia" name="resumo_noticia" maxlength="250" rows="7" required><?php echo $row->resumo_noticia ?></textarea>
                                                 </label>
                                             </section>
                                             <section>
                                                 <label class="label"><strong>Imagem da capa</strong></label>
                                                 <label class="input">
-                                                    <input type="text" id="foto" name="foto" value="<?php echo $row->imagem_noticia ?>">
+                                                    <input type="text" id="foto" name="imagem_noticia" value="<?php echo $row->imagem_noticia ?>">
                                                     <a id="busca_imagem" href="./js/tinymce/plugins/filemanager/dialog.php?type=1&editor=mce_0&field_id=foto&lang=pt_BR" class="botao iframe-btn">
                                                         <i class="fam-image-add"></i> Selecionar a Imagem
                                                     </a>
@@ -145,7 +127,7 @@
                                             <section>
                                                 <label class="label"><strong>Tipo de notícia</strong></label>
                                                 <label class="select">
-                                                    <select id="tipo_noticia">
+                                                    <select id="tipo_noticia" name="tipo_noticia">
                                                         <option value="Esportes" <?php
                                                         if($row->tipo_noticia == "Esportes")
                                                         {
@@ -170,7 +152,7 @@
                                             <section>
                                                 <label class="label"><strong>Posicionamento</strong></label>
                                                 <label class="select">
-                                                    <select id="posicionamento">
+                                                    <select id="posicionamento" name="posicionamento">
                                                         <option value="1" <?php
                                                         if($row->posicionamento == 1)
                                                         {
@@ -189,10 +171,10 @@
                                             <section>
                                                 <label class="label"><strong>Corpo da notícia</strong></label>
                                                 <label class="textarea">
-                                                    <textarea class="edit span12" id="corpo_noticia"><?php echo $row->corpo_noticia; ?></textarea>
+                                                    <textarea class="edit span12" id="corpo_noticia" name="corpo_noticia"><?php echo $row->corpo_noticia; ?></textarea>
                                                 </label>
-                                                <input type="hidden" id="id_noticia" value="<?php echo $row->id ?>">
-                                                <input type="hidden" id="usuario" value="<?php echo $_SESSION['user']->nome_usuario ?>">
+                                                <input type="hidden" id="id_noticia" name="id" value="<?php echo $row->id ?>">
+                                                <input type="hidden" id="usuario" name="usuario" value="<?php echo $_SESSION['user']->nome_usuario ?>">
                                             </section>
                                         </fieldset>
                                         <footer>
