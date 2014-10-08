@@ -60,11 +60,23 @@
                     </li>
                 </ul>
             </li>
-            <li>    
-                <a href="index.php?/avisos/avisos_cadastrados" title="Avisos">
+            <li>
+                <a href="#" title="Avisos">
                     <i class="fa fa-lg fa-fw fa-clipboard"></i> 
                     <span>Avisos</span>
                 </a>
+				<ul>
+					<li>
+						<a href="index.php?/avisos/avisos_cadastrados" title="Avisos Comuns">
+							<i class="fam-application-xp"></i> Avisos Comuns
+						</a>
+					</li>
+					<li>
+						<a href="index.php?/avisos/avisos_imagens" title="Avisos em Imagens">
+							<i class="fam-image"></i> Avisos em Imagens
+						</a>
+					</li>
+				</ul>
             </li>
             <li id="galerias">
                 <a href="index.php?/galerias/galerias" title="Galerias">
