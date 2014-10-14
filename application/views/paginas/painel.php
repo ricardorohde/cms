@@ -96,12 +96,6 @@
                     <span>Temas do Site</span>
                 </a>
             </li>
-            <li id="mensagem_dia">
-                <a href="index.php?/mensagem_diaria" title="Mensagem do dia">
-                    <i class="fa fa-lg fa-fw fa-file-text-o"></i> 
-                    <span>Mensagem do Dia</span>
-                </a>
-            </li>
             <li>
                 <a href="index.php?/presidentes" title="Ex-presidentes">
                     <i class="fa fa-lg fa-fw fa-users"></i> 

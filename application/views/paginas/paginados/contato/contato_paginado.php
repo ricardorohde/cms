@@ -77,41 +77,29 @@
         $(":checked").each(function() {
             valor.push($(this).val());
         });
-        
-        $.SmartMessageBox({
-            title: "<i class='fa fa-times txt-color-red'></i> Atenção",
-            content: "Deseja excluir estas mensagens? <small>(a ação não pode ser desfeita)</small>",
-            buttons: "[Sim][Não]"
-        }, function(e) {
-            if (e == "Não")
-            {
-                return false;
-            }
-            else
-            {
-                $.ajax({
-                    url: "<?php echo app_baseurl().'contato/contato/excluir_mensagem' ?>",
-                    type: "POST",
-                    cache: false,
-                    data: {id: valor},
-                    dataType: "html",
-                    success: function(sucesso) {
-                        if(sucesso == 1)
-                        {
-                        	SmartUnLoading();
-                            msg_sucesso('Mensagens excluidas');
-                            buscar();
-                            contarMarcados();
-                        }
-                        else
-                        {
-                        	SmartUnLoading();
-                            msg_erro('Não foi possível excluir');
-                        }
+
+        if(confirm('Deseja excluir estas mensagens?') == true)
+        {
+        	$.ajax({
+                url: "<?php echo app_baseurl().'contato/contato/excluir_mensagem' ?>",
+                type: "POST",
+                cache: false,
+                data: {id: valor},
+                dataType: "html",
+                success: function(sucesso) {
+                    if(sucesso == 1)
+                    {
+                        msg_sucesso('Mensagens excluidas');
+                        buscar();
+                        contarMarcados();
                     }
-                });
-            }
-        });
+                    else
+                    {
+                        msg_erro('Não foi possível excluir');
+                    }
+                }
+            });
+        }
     });
     //**************************************************************************
 

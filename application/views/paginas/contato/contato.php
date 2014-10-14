@@ -55,12 +55,6 @@
         elemento.printElement();
     }
     //**************************************************************************
-
-    /** Define um intervalo para busca de mensagens **/
-    setInterval(function() {
-        buscar();
-    }, 300000);
-    //**************************************************************************
     
     /** As funções abaixo são relativas ao tamanho do viewport **/
     tableHeightSize();
@@ -72,52 +66,6 @@
     function tableHeightSize() {
         var tableHeight = $(window).height() - 212;
         $('.table-wrap').css('height', tableHeight + 'px');
-    }
-    //**************************************************************************
-    
-    /**
-     * excluir_mensagem()
-     * 
-     * Função desenvolvida para exclusão de uma mensagem
-     * 
-     * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
-     * @return      {bool} Retorna 1 se tiver excluido e 0 se não excluir
-     */
-    function excluir_mensagem()
-    {
-        var id_mensagem = $('#id_mensagem').val();
-        
-        $.SmartMessageBox({
-            title: "<i class='fa fa-times txt-color-red'></i> Atenção",
-            content: "Deseja excluir esta mensagem? <small>(a ação não pode ser desfeita)</small>",
-            buttons: "[Sim][Não]"
-        },function(e){
-            if(e == "Não")
-            {
-                return false;
-            }
-            else
-            {
-                $.ajax({
-                    url: "<?php echo app_baseurl().'contato/contato/excluir_mensagem' ?>",
-                    type: "POST",
-                    data: {id: id_mensagem},
-                    dataType: "html",
-                    success:function(sucesso)
-                    {
-                        if(sucesso == 1)
-                        {
-                            msg_sucesso('A mensagem foi excluida');
-                            buscar();
-                        }
-                        else
-                        {
-                            msg_erro('Não foi possível excluir');
-                        }
-                    }
-                });
-            }
-        });
     }
     //**************************************************************************
     
