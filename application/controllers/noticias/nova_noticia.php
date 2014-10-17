@@ -19,8 +19,8 @@
      * @subpackage  Noticias
      * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
      * @access		Public
-     * @version		v1.2.0
-     * @since		15/09/2014
+     * @version		v1.2.1
+     * @since		16/10/2014
      */
     class Nova_noticia extends MY_Controller
     {
@@ -78,7 +78,7 @@
              * Realiza a troca da barra padrão do windows e retira o host do 
              * endereço da imagem 
              **/
-            $exclude	= array("\\", "http://".$_SERVER['HTTP_HOST']);
+            $exclude	= array("\\", "//".$_SERVER['HTTP_HOST']);
             $replace	= array("/", "");
             $dados['imagem_noticia'] = str_replace($exclude, $replace, $dados['imagem_noticia']);
 
@@ -99,7 +99,7 @@
             $retorno_imagem = $this->redimensiona_imagem_library->redimensionar($dados['imagem_noticia'], $width, $height);
             
             // Retorna com o host para a string original do endereço da imagem
-            $dados['imagem_noticia'] = "http://" . $_SERVER['HTTP_HOST'] . $dados['imagem_noticia'];
+            $dados['imagem_noticia'] = "//" . $_SERVER['HTTP_HOST'] . $dados['imagem_noticia'];
             
             // Realiza o save da notícia e verifica se a mesma foi salva
 			$resultado = $this->noticias->salva_noticia($dados);

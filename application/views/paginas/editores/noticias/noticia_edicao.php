@@ -14,6 +14,9 @@
         $("#editor_noticia").submit(function(e) {
             tinyMCE.triggerSave();
             e.preventDefault();
+
+            /** Mostra status de carregando ao clicar no botão **/
+            $('#salvar').button('loading');
 			
 			//Recebe os valores da notícia por meio do `serialize()` do jQuery
 			var noticia = $("#editor_noticia").serialize();
@@ -27,10 +30,12 @@
 					if(e.r_salvar == 0)
 					{
 						msg_erro('A notícia não foi atualizada');
+						$('#salvar').button('reset');
 					}
 					else
 					{
 						msg_sucesso('A notícia foi atualizada. ' + e.r_imagem);
+						$('#salvar').button('reset');
 						location.href = "<?php echo app_baseurl() . 'painel#index.php?/noticias/noticias_cadastradas' ?>";
 					}
                 }
@@ -54,7 +59,7 @@
         plugins: ["advlist autolink link image lists charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code insertdatetime media nonbreaking", "table contextmenu directionality emoticons paste textcolor filemanager"],
         image_advtab: true,
         toolbar: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect forecolor backcolor | link unlink anchor | image media | print preview code",
-        external_filemanager_path: "js/tinymce/plugins/filemanager/"
+        external_filemanager_path: "js/filemanager/filemanager/"
     });
 </script>
 
@@ -119,7 +124,7 @@
                                                 <label class="label"><strong>Imagem da capa</strong></label>
                                                 <label class="input">
                                                     <input type="text" id="foto" name="imagem_noticia" value="<?php echo $row->imagem_noticia ?>">
-                                                    <a id="busca_imagem" href="./js/tinymce/plugins/filemanager/dialog.php?type=1&editor=mce_0&field_id=foto&lang=pt_BR" class="botao iframe-btn">
+                                                    <a id="busca_imagem" href="./js/filemanager/filemanager/dialog.php?type=1&editor=mce_0&field_id=foto&lang=pt_BR" class="botao iframe-btn">
                                                         <i class="fam-image-add"></i> Selecionar a Imagem
                                                     </a>
                                                 </label>
@@ -153,18 +158,8 @@
                                                 <label class="label"><strong>Posicionamento</strong></label>
                                                 <label class="select">
                                                     <select id="posicionamento" name="posicionamento">
-                                                        <option value="1" <?php
-                                                        if($row->posicionamento == 1)
-                                                        {
-                                                            echo 'selected';
-                                                        }
-                                                        ?>>Banner</option>
-                                                        <option value="2" <?php
-                                                        if($row->posicionamento == 2)
-                                                        {
-                                                            echo 'selected';
-                                                        }
-                                                        ?>>Notícia secundária</option>
+                                                        <option value="1" <?php echo $row->posicionamento == 1 ? 'selected' : '';?>>>Banner</option>
+                                                        <option value="2" <?php echo $row->posicionamento == 2 ? 'selected' : '';?>>Notícia secundária</option>
                                                     </select>
                                                 </label>
                                             </section>
@@ -178,7 +173,7 @@
                                             </section>
                                         </fieldset>
                                         <footer>
-                                            <button id="salvar" class="btn btn-primary" type="submit">
+                                            <button id="salvar" class="btn btn-primary" type="submit" data-loading-text="Atualizando notícia">
                                                 <i class="fam-disk"></i> Salvar Alterações
                                             </button>
                                         </footer>

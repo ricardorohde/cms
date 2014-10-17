@@ -83,6 +83,42 @@
              console.log('Ocorreu um erro ao acessar o recurso');
          });
      }
+     //*************************************************************************
+
+     $("#excluir_definitivo").click(function(e) {
+         e.preventDefault();
+
+         var valor = Array();
+         
+         $(":checked").each(function() {
+             valor.push($(this).val());
+         });
+
+         alertify.confirm('Deseja excluir estas mensagens?', function(e){
+             if(e)
+             {
+            	 $.ajax({
+                     url: "<?php echo app_baseurl().'contato/contato/excluir_mensagem' ?>",
+                     type: "POST",
+                     data: {id: valor},
+                     dataType: "html",
+                     success: function(sucesso)
+                     {
+                         if(sucesso == 1)
+                         {
+                             msg_sucesso('Mensagens excluidas');
+                             buscar();
+                             contarMarcados();
+                         }
+                         else
+                         {
+                             msg_erro('Não foi possível excluir');
+                         }
+                     }
+                 });
+             }
+         });
+     });
 </script>
 <div class="inbox-nav-bar no-content-padding">
     <h1 class="page-title txt-color-blueDark hidden-tablet">
@@ -90,7 +126,7 @@
     </h1>
     <div class="inbox-checkbox-triggered">
         <div class="btn-group">
-            <a id="excluir_definitivo" href="javascript:void(0);" rel="tooltip" data-placement="bottom" data-original-title="Apagar Definitivamente" class="deletebutton btn btn-default">
+            <a id="excluir_definitivo" href="javascript:void(0);" rel="tooltip" data-placement="bottom" data-original-title="Apagar Definitivamente" class="btn btn-default">
                 <strong><i class="fa fa-ban fa-lg"></i></strong>
             </a>
         </div>
