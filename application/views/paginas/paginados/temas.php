@@ -43,7 +43,7 @@
                                 	<?php echo date('d/m/Y', strtotime($row->data_expiracao)); ?>
                                 </td>
                                 <td>
-                                	<a href="#" rel="tooltip" data-original-title="<img width='180' src='<?php echo $row->imagem_banner; ?>'>" data-html="true">
+                                	<a href="<?php echo $row->imagem_banner; ?>" rel="fancybox">
                                 		<?php echo $row->imagem_banner; ?>
                                     </a>
                                 </td>
@@ -93,7 +93,9 @@
      */
     $(".excluir").click(function(e) {
         e.preventDefault();
+        
         var id = $(this).data('id');
+        
         alertify.confirm("Deseja excluir este tema? Esta ação não pode ser desfeita", function(click) {
             if (click)
             {
@@ -106,35 +108,13 @@
                     {
                         if (sucesso == 1)
                         {
-                            $.smallBox({
-                                title: "<i class='fa fa-check'></i> Sucesso",
-                                content: "<strong>O tema foi excluído.</strong>",
-                                iconSmall: "fa fa-thumbs-up bounce animated",
-                                color: "#5CB811",
-                                timeout: 5000
-                            });
+                            msg_sucesso('O tema foi excluído');
                             buscar_temas();
                         }
                         else
                         {
-                            $.smallBox({
-                                title: "<i class='glyphicon glyphicon-remove'></i> Erro",
-                                content: "<strong>Não foi possível remover o novo tema.</strong>",
-                                color: "#FE1A00",
-                                iconSmall: "fa fa-thumbs-down bounce animated",
-                                timeout: 5000
-                            });
+                            msg_erro('Não foi possível remover o novo tema.');                            
                         }
-                    },
-                    error: function()
-                    {
-                        $.smallBox({
-                            title: "<i class='glyphicon glyphicon-remove'></i> Erro",
-                            content: "<strong>Ocorreu um erro. Tente novamente</strong>",
-                            color: "#FE1A00",
-                            iconSmall: "fa fa-thumbs-down bounce animated",
-                            timeout: 5000
-                        });
                     }
                 });
             }
@@ -147,8 +127,10 @@
      */
     $(".marcar").click(function(e) {
         e.preventDefault();
-        tipo = $(this).data('status');
-        id = $(this).data('id');
+        
+        tipo    = $(this).data('status');
+        id      = $(this).data('id');
+        
         $.ajax({
             url: "<?php echo app_baseurl() . 'temas/marcar' ?>",
             type: "POST",
@@ -158,35 +140,13 @@
             {
                 if (sucesso == 1)
                 {
-                    $.smallBox({
-                        title: "<i class='fa fa-check'></i> Sucesso",
-                        content: "<strong>Modificação de status realizada.</strong>",
-                        iconSmall: "fa fa-thumbs-up bounce animated",
-                        color: "#5CB811",
-                        timeout: 5000
-                    });
+                    msg_sucesso('Modificação de status realizada.');
                     buscar_temas();
                 }
                 else
                 {
-                    $.smallBox({
-                        title: "<i class='glyphicon glyphicon-remove'></i> Erro",
-                        content: "<strong>Não foi possível modificar o status.</strong>",
-                        color: "#FE1A00",
-                        iconSmall: "fa fa-thumbs-down bounce animated",
-                        timeout: 5000
-                    });
+                    msg_erro('Não foi possível modificar o status.');
                 }
-            },
-            error: function()
-            {
-                $.smallBox({
-                    title: "<i class='glyphicon glyphicon-remove'></i> Erro",
-                    content: "<strong>Ocorreu um erro. Tente novamente</strong>",
-                    color: "#FE1A00",
-                    iconSmall: "fa fa-thumbs-down bounce animated",
-                    timeout: 5000
-                });
             }
         });
     });

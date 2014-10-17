@@ -111,9 +111,7 @@
     /*
      * Chama a função que busca os temas
      */
-    $(document).ready(function() {
-        buscar_temas();
-    });
+    buscar_temas();
     //**************************************************************************
 
     /*
@@ -149,34 +147,33 @@
     });
     //**************************************************************************
 
-    /*
-     * Função desenvolvida para setar o fancybox para abrir o gerenciador de arquivos
-     */
-    $('.iframe-btn').fancybox({
-        'height': 800,
-        'width': 900,
-        'type': 'iframe',
-        'autoScale': false,
-        'autoSize': false
-    });
-    //**************************************************************************
+    /** Configuração para o Gerenciador de arquivos **/
+	$('.iframe-btn').fancybox({
+	    'width': '900px',
+	    'height': '600px',
+	    'type': 'iframe',
+	    'autoSize': false,
+	    'autoScale': false
+	});
+	//**************************************************************************
 
-    /*
-     * Função utilizada para unicializar o colorPicker
-     */
+	/** Configuração para visualização da imagem **/
+	$('a[rel="fancybox"]').fancybox();
+	//**************************************************************************
+
+    /** Função utilizada para unicializar o colorPicker **/
     $('#cor').colorpicker();
     //**************************************************************************
 
-    /*
-     * Função desenvolvida para salvar um novo tema no site
-     */
+    /** Função desenvolvida para salvar um novo tema no site **/
     $("#salvar_tema").submit(function(e) {
         e.preventDefault();
-        imagem_background = $('#imagem_background').val();
-        imagem_capa = $("#imagem_capa").val();
-        cor = $("#cor").val();
-        data_inicio = $("#from").val();
-        data_expiracao = $("#to").val();
+        
+        imagem_background   = $('#imagem_background').val();
+        imagem_capa         = $("#imagem_capa").val();
+        cor                 = $("#cor").val();
+        data_inicio         = $("#from").val();
+        data_expiracao      = $("#to").val();
 
         $.ajax({
             url: "<?php echo app_baseurl().'temas/salvar_tema' ?>",
@@ -193,36 +190,14 @@
             {
                 if (sucesso == 1)
                 {
-                    $.smallBox({
-                        title: "<i class='fa fa-check'></i> Sucesso",
-                        content: "<strong>Tema salvo com sucesso.</strong>",
-                        iconSmall: "fa fa-thumbs-up bounce animated",
-                        color: "#5CB811",
-                        timeout: 5000
-                    });
-                    $("#salvar_tema").find('input').val('');
+                    msg_sucesso('Tema salvo com sucesso.');
+                    limpar_campos($("#salvar_tema"));
                     buscar_temas();
                 }
                 else
                 {
-                    $.smallBox({
-                        title: "<i class='glyphicon glyphicon-remove'></i> Erro",
-                        content: "<strong>Não foi possível salvar o novo tema.</strong>",
-                        color: "#FE1A00",
-                        iconSmall: "fa fa-thumbs-down bounce animated",
-                        timeout: 5000
-                    });
+                    msg_erro('Não foi possível salvar o novo tema.');
                 }
-            },
-            error: function()
-            {
-                $.smallBox({
-                    title: "<i class='glyphicon glyphicon-remove'></i> Erro",
-                    content: "<strong>Ocorreu um erro. Tente novamente</strong>",
-                    color: "#FE1A00",
-                    iconSmall: "fa fa-thumbs-down bounce animated",
-                    timeout: 5000
-                });
             }
         });
     });

@@ -18,8 +18,8 @@
      * @package		Controllers
 	 * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
 	 * @access		Public
-	 * @version     v1.2.0
-	 * @since		15/09/2014
+	 * @version     v1.2.1
+	 * @since		17/10/2014
      */
     class Temas extends MY_Controller
     {
@@ -131,10 +131,11 @@
          * 
          * @author      Matheus Lopes Santos <fale_com_lopez@hotmail.com>
          * @access      public
+         * @param       int $id Contém o ID do tema a ser buscado
          */
-        function editar_tema()
+        function editar_tema($id)
         {   
-            $this->dados['tema'] = $this->temas_model->buscaTemaId($this->uri->segment(3)); 
+            $this->dados['tema'] = $this->temas->buscaTemaId($id); 
             $this->view          = 'popup/editar_temas';
             $this->template      = 'template/popup';
             
